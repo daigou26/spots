@@ -1,8 +1,5 @@
 //
-//  SpotsTests.swift
-//  SpotsTests
-//
-//  Created by Daigo Uenuma on 2021/11/08.
+//  Created on 2021/11/08
 //
 
 import XCTest
