@@ -5,22 +5,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         Group {
             switch viewModel.state {
-            case .signedIn: VStack {
-                Text("Hello, world!")
-                    .padding()
-                Button("Sign out") {
-                    viewModel.signOut()
-                }
-            }
-            case .signedOut: LoginScreen()
+            case .signedIn: ProfileView()
+            case .signedOut: LoginView()
             }
         }.onAppear {
-            viewModel.restorePreviousSignIn()
+            Task.init {
+                await viewModel.restorePreviousSignIn()
+            }   
         }
         
     }

@@ -7,7 +7,8 @@ import Firebase
 import GoogleSignIn
 import Combine
 
-class AuthenticationViewModel: NSObject, ObservableObject {
+@MainActor
+class AuthViewModel: NSObject, ObservableObject {
     enum AuthState {
         case signedIn
         case signedOut
@@ -16,11 +17,15 @@ class AuthenticationViewModel: NSObject, ObservableObject {
     @Published var state: AuthState = .signedOut
     @Published var errorMessage: String = ""
     
-    private var authUseCaseImpl = AuthUseCaseImpl()
+    private var authUseCase: AuthUseCase
     var cancellables = [AnyCancellable]()
     
-    func signIn() {
-        authUseCaseImpl.signIn().sink { completion in
+    init(_ authUseCase: AuthUseCase = AuthUseCaseImpl()) {
+        self.authUseCase = authUseCase
+    }
+    
+    func signIn() async {
+        await authUseCase.signIn().sink { completion in
             switch completion {
             case .finished: break
             case .failure(let error):
@@ -37,8 +42,8 @@ class AuthenticationViewModel: NSObject, ObservableObject {
         }.store(in: &cancellables)
     }
     
-    func restorePreviousSignIn() {
-        authUseCaseImpl.restorePreviousSignIn().sink(receiveCompletion: { completion in
+    func restorePreviousSignIn() async {
+        await authUseCase.restorePreviousSignIn().sink(receiveCompletion: { completion in
             switch completion {
             case .finished:
                 break
@@ -57,7 +62,7 @@ class AuthenticationViewModel: NSObject, ObservableObject {
     }
     
     func signOut() {
-        authUseCaseImpl.signOut().sink { completion in
+        authUseCase.signOut().sink { completion in
             switch completion {
             case .finished: break
             case .failure(let error):

@@ -4,8 +4,8 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
-    @EnvironmentObject var viewModel: AuthenticationViewModel
+struct LoginView: View {
+    @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         VStack {
             Spacer()
@@ -30,7 +30,9 @@ struct LoginScreen: View {
             
             Text(viewModel.errorMessage).foregroundColor(Color.red).frame(height: 50)
             Button("Sign in with Google") {
-                viewModel.signIn()
+                Task.init {
+                    await viewModel.signIn()
+                }
             }
             .buttonStyle(AuthenticationButtonStyle())
         }.background(Color.base)
@@ -51,6 +53,6 @@ struct AuthenticationButtonStyle: ButtonStyle {
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen()
+        LoginView()
     }
 }
