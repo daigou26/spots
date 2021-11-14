@@ -9,8 +9,12 @@ class UserRepositoryImpl: UserRepository {
     let dbRef = Firestore.firestore().collection("users")
     func getUser(_ uid: String) async throws -> User? {
         let document = try await dbRef.document(uid).getDocument()
-        if document.exists, let data = document.data() {
-            return try User(data)
+        if document.exists, let data = document.data(), let name: String = data["name"] as? String, let email: String = data["email"] as? String {
+            let imageUrl = data["imageUrl"] as? String
+            let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
+            let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
+            
+            return User(name: name, email: email, imageUrl: imageUrl, createdAt: createdAt, updatedAt: updatedAt)
         } else {
             return nil
         }

@@ -7,6 +7,6 @@ import Combine
 
 protocol AuthUseCase {
     func signIn() async -> AnyPublisher<Bool, Error>
-    func restorePreviousSignIn() -> AnyPublisher<Bool, Error>
+    func restorePreviousSignIn() async -> AnyPublisher<Bool, Error>
     func signOut() -> AnyPublisher<Bool, Error>
 }

@@ -42,8 +42,8 @@ class AuthViewModel: NSObject, ObservableObject {
         }.store(in: &cancellables)
     }
     
-    func restorePreviousSignIn() {
-        authUseCase.restorePreviousSignIn().sink(receiveCompletion: { completion in
+    func restorePreviousSignIn() async {
+        await authUseCase.restorePreviousSignIn().sink(receiveCompletion: { completion in
             switch completion {
             case .finished:
                 break

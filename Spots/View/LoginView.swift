@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-struct LoginScreen: View {
+struct LoginView: View {
     @EnvironmentObject var viewModel: AuthViewModel
     var body: some View {
         VStack {
@@ -53,6 +53,6 @@ struct AuthenticationButtonStyle: ButtonStyle {
 
 struct LoginScreen_Previews: PreviewProvider {
     static var previews: some View {
-        LoginScreen()
+        LoginView()
     }
 }

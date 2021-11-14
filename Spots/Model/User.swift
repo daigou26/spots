@@ -11,11 +11,22 @@ struct User: Identifiable {
     var name: String
     var email: String
     var imageUrl: String?
+    var createdAt: Date?
+    var updatedAt: Date?
+    
+    init(name: String, email: String, imageUrl: String? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {
+        self.name = name
+        self.email = email
+        self.imageUrl = imageUrl
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+    }
 }
 extension User: Codable {
-    init(_ dictionary: [String: Any]) throws {
-        self = try JSONDecoder().decode(User.self, from: JSONSerialization.data(withJSONObject: dictionary))
-    }
+    // TODO: Fix decord func(Because of the Date type, this occurred a error)
+//    init(_ dictionary: [String: Any]) throws {
+//        self = try JSONDecoder().decode(User.self, from: JSONSerialization.data(withJSONObject: dictionary))
+//    }
     
     func toDict() -> [String: Any] {
         var data: [String: Any] = ["name": self.name, "email": self.email]

@@ -10,17 +10,13 @@ struct ContentView: View {
     var body: some View {
         Group {
             switch viewModel.state {
-            case .signedIn: VStack {
-                Text("Hello, world!")
-                    .padding()
-                Button("Sign out") {
-                    viewModel.signOut()
-                }
-            }
-            case .signedOut: LoginScreen()
+            case .signedIn: ProfileView()
+            case .signedOut: LoginView()
             }
         }.onAppear {
-            viewModel.restorePreviousSignIn()
+            Task.init {
+                await viewModel.restorePreviousSignIn()
+            }   
         }
         
     }
