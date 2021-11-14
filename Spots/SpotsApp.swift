@@ -8,7 +8,7 @@ import GoogleSignIn
 
 @main
 struct SpotsApp: App {
-    @StateObject var viewModel = AuthenticationViewModel()
+    @StateObject var viewModel = AuthViewModel()
     
     init() {
         FirebaseApp.configure()

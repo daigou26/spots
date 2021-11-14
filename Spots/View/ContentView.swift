@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var viewModel: AuthenticationViewModel
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         Group {

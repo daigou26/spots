@@ -5,11 +5,19 @@
 import Foundation
 import Combine
 import Firebase
+import FirebaseFirestore
 import GoogleSignIn
 
 // Now only implemented GoogleSignIn
 class AuthUseCaseImpl: AuthUseCase {
-    func signIn() -> AnyPublisher<Bool, Error> {
+    let userRepository: UserRepository
+    
+    init(userRepository: UserRepository = UserRepositoryImpl()) {
+        self.userRepository = userRepository
+    }
+    
+    @MainActor
+    func signIn() async -> AnyPublisher<Bool, Error> {
         return Deferred {
             Future { promise in
                 let signInConfig = GIDConfiguration.init(clientID: FirebaseApp.app()?.options.clientID ?? "")
@@ -28,11 +36,26 @@ class AuthUseCaseImpl: AuthUseCase {
                             
                             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                                            accessToken: authentication.accessToken)
-                            Auth.auth().signIn(with: credential) { (_, error) in
-                                if let error = error {
-                                    promise(.failure(error))
-                                } else {
-                                    promise(.success(true))
+                            Auth.auth().signIn(with: credential) { (authRes, error) in
+                                Task.init {
+                                    if let error = error {
+                                        promise(.failure(error))
+                                    } else if let user = authRes?.user, let name = user.displayName, let email = user.email {
+                                        do {
+                                            // Check user document
+                                            let res = try await self.userRepository.getUser(user.uid)
+                                            // Create user data
+                                            if res == nil {
+                                                let userData: User = User(name: name, email: email, imageUrl: user.photoURL?.absoluteString)
+                                                try await self.userRepository.createUser(userData, uid: user.uid)
+                                            }
+                                            promise(.success(true))
+                                        } catch {
+                                            promise(.failure(AuthError.unknown))
+                                        }
+                                    } else {
+                                        promise(.failure(AuthError.notFoundUser))
+                                    }
                                 }
                             }
                         }
