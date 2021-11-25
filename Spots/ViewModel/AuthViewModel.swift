@@ -25,7 +25,7 @@ class AuthViewModel: NSObject, ObservableObject {
     }
     
     func signIn() async {
-        await authUseCase.signIn().sink { completion in
+        await authUseCase.signIn().receive(on: DispatchQueue.main).sink { completion in
             switch completion {
             case .finished: break
             case .failure(let error):
@@ -43,7 +43,7 @@ class AuthViewModel: NSObject, ObservableObject {
     }
     
     func restorePreviousSignIn() async {
-        await authUseCase.restorePreviousSignIn().sink(receiveCompletion: { completion in
+        await authUseCase.restorePreviousSignIn().receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished:
                 break
