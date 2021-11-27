@@ -30,7 +30,7 @@ struct LoginView: View {
             
             Text(viewModel.errorMessage).foregroundColor(Color.red).frame(height: 50)
             Button("Sign in with Google") {
-                Task.init {
+                Task {
                     await viewModel.signIn()
                 }
             }

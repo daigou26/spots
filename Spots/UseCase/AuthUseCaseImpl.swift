@@ -37,7 +37,7 @@ class AuthUseCaseImpl: AuthUseCase {
                             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                                            accessToken: authentication.accessToken)
                             Auth.auth().signIn(with: credential) { (authRes, error) in
-                                Task.init {
+                                Task {
                                     if let error = error {
                                         promise(.failure(error))
                                     } else if let user = authRes?.user, let name = user.displayName, let email = user.email {
@@ -87,7 +87,7 @@ class AuthUseCaseImpl: AuthUseCase {
                     let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                                    accessToken: authentication.accessToken)
                     Auth.auth().signIn(with: credential) { (authRes, error) in
-                        Task.init {
+                        Task {
                             if error == nil, let user = authRes?.user {
                                 do {
                                     // Get user document

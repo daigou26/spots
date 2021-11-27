@@ -46,29 +46,27 @@ class AuthViewModelTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    @MainActor func testSignIn() async throws {
+    func testSignIn() async throws {
+        let expectation = self.expectation(description: #function)
         let authViewModel = AuthViewModel(AuthUseCaseMock())
         await authViewModel.signIn()
+        expectation.fulfill()
+        await waitForExpectations(timeout: 1)
         XCTAssertEqual(authViewModel.state, .signedIn)
     }
     
-    @MainActor func testRestorePreviousSignIn() async throws {
+    func testRestorePreviousSignIn() async throws {
+        let expectation = self.expectation(description: #function)
         let authViewModel = AuthViewModel(AuthUseCaseMock())
         await authViewModel.restorePreviousSignIn()
+        expectation.fulfill()
+        await waitForExpectations(timeout: 1)
         XCTAssertEqual(authViewModel.errorMessage, AuthError.invalid.localizedDescription)
     }
     
-    @MainActor func testSignOut() throws {
+    func testSignOut() throws {
         let authViewModel = AuthViewModel(AuthUseCaseMock())
         authViewModel.signOut()
         XCTAssertEqual(authViewModel.state, .signedOut)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
