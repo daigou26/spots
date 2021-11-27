@@ -11,13 +11,17 @@ struct SpotCard: View {
         VStack(alignment: .leading) {
             Text(spot.title).font(.system(size: 20, weight: .bold)).padding(.bottom, 1)
             Text(spot.address).padding(.bottom, 1)
-            Image(spot.imageUrl).resizable().aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
+            AsyncImage(url: URL(string: spot.imageUrl)) { image in
+                image.resizable()
+            } placeholder: {
+                ProgressView()
+            }.aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
         }
     }
 }
 
 struct SpotCard_Previews: PreviewProvider {
     static var previews: some View {
-        SpotCard(spot: Spot(id: "1", title: "日比谷公園", address: "東京都", imageUrl: "Sample", favorite: false, star:false,  latitude: 35.68000, longitude: 139.752000))
+        SpotCard(spot: Spot(id: "1", title: "日比谷公園", imageUrl: "Sample", address: "東京都", latitude: 35.68000, longitude: 139.752000, favorite: false, star:false))
     }
 }

@@ -23,7 +23,7 @@ struct ContentView: View {
             case .signedOut: LoginView()
             }
         }.onAppear {
-            Task.init {
+            Task {
                 await viewModel.restorePreviousSignIn()
             }   
         }

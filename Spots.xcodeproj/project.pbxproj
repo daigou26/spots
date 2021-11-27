@@ -24,6 +24,15 @@
 		C05DD370274F2A860071C163 /* HalfModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD36F274F2A860071C163 /* HalfModal.swift */; };
 		C05DD373274F74FB0071C163 /* SpotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD372274F74FB0071C163 /* SpotsView.swift */; };
 		C05DD375274F86BA0071C163 /* SpotCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD374274F86BA0071C163 /* SpotCard.swift */; };
+		C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD377274FBDE20071C163 /* CustomAnnotation.swift */; };
+		C05DD37A274FC3150071C163 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD379274FC3150071C163 /* CustomAnnotationView.swift */; };
+		C05DD37E274FC5860071C163 /* SpotsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD37D274FC5860071C163 /* SpotsViewModel.swift */; };
+		C05DD380274FC65D0071C163 /* SpotRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD37F274FC65D0071C163 /* SpotRepository.swift */; };
+		C05DD382274FC6BC0071C163 /* SpotRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD381274FC6BC0071C163 /* SpotRepositoryImpl.swift */; };
+		C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD383274FD8FD0071C163 /* SpotUseCase.swift */; };
+		C05DD386274FD9270071C163 /* SpotUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD385274FD9270071C163 /* SpotUseCaseImpl.swift */; };
+		C05DD38827515EF50071C163 /* SpotsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD38727515EF50071C163 /* SpotsViewModelTests.swift */; };
+		C05DD38B275173DF0071C163 /* SpotUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD38A275173DF0071C163 /* SpotUseCaseTests.swift */; };
 		C07CCA77273D948700C32FE9 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA76273D948700C32FE9 /* AuthUseCase.swift */; };
 		C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */; };
 		C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */; };
@@ -80,6 +89,15 @@
 		C05DD36F274F2A860071C163 /* HalfModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModal.swift; sourceTree = "<group>"; };
 		C05DD372274F74FB0071C163 /* SpotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsView.swift; sourceTree = "<group>"; };
 		C05DD374274F86BA0071C163 /* SpotCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCard.swift; sourceTree = "<group>"; };
+		C05DD377274FBDE20071C163 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		C05DD379274FC3150071C163 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		C05DD37D274FC5860071C163 /* SpotsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsViewModel.swift; sourceTree = "<group>"; };
+		C05DD37F274FC65D0071C163 /* SpotRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRepository.swift; sourceTree = "<group>"; };
+		C05DD381274FC6BC0071C163 /* SpotRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRepositoryImpl.swift; sourceTree = "<group>"; };
+		C05DD383274FD8FD0071C163 /* SpotUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUseCase.swift; sourceTree = "<group>"; };
+		C05DD385274FD9270071C163 /* SpotUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUseCaseImpl.swift; sourceTree = "<group>"; };
+		C05DD38727515EF50071C163 /* SpotsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsViewModelTests.swift; sourceTree = "<group>"; };
+		C05DD38A275173DF0071C163 /* SpotUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUseCaseTests.swift; sourceTree = "<group>"; };
 		C07CCA76273D948700C32FE9 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCaseImpl.swift; sourceTree = "<group>"; };
 		C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
@@ -134,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				C04837362740429A0087AAFC /* AuthViewModelTests.swift */,
+				C05DD38727515EF50071C163 /* SpotsViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -146,11 +165,40 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		C05DD376274FBDCB0071C163 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD36B2741798C0071C163 /* MapView.swift */,
+				C05DD377274FBDE20071C163 /* CustomAnnotation.swift */,
+				C05DD379274FC3150071C163 /* CustomAnnotationView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		C05DD37B274FC40E0071C163 /* Spots */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD376274FBDCB0071C163 /* Map */,
+				C05DD372274F74FB0071C163 /* SpotsView.swift */,
+				C05DD374274F86BA0071C163 /* SpotCard.swift */,
+			);
+			path = Spots;
+			sourceTree = "<group>";
+		};
+		C05DD389275173CA0071C163 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD38A275173DF0071C163 /* SpotUseCaseTests.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		C07CCA6C273BF43C00C32FE9 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				C003D3C3273BA702009C790F /* AuthViewModel.swift */,
 				C05DD369274157700071C163 /* ProfileViewModel.swift */,
+				C05DD37D274FC5860071C163 /* SpotsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -158,12 +206,10 @@
 		C07CCA6D273BF45200C32FE9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C05DD37B274FC40E0071C163 /* Spots */,
 				C0FE76D327386D61000E4566 /* ContentView.swift */,
 				C0FE77102739144D000E4566 /* LoginView.swift */,
 				C05DD3652740C1CC0071C163 /* ProfileView.swift */,
-				C05DD36B2741798C0071C163 /* MapView.swift */,
-				C05DD372274F74FB0071C163 /* SpotsView.swift */,
-				C05DD374274F86BA0071C163 /* SpotCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -173,6 +219,8 @@
 			children = (
 				C048372D273F076B0087AAFC /* UserRepository.swift */,
 				C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */,
+				C05DD37F274FC65D0071C163 /* SpotRepository.swift */,
+				C05DD381274FC6BC0071C163 /* SpotRepositoryImpl.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -193,6 +241,8 @@
 			children = (
 				C07CCA76273D948700C32FE9 /* AuthUseCase.swift */,
 				C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */,
+				C05DD383274FD8FD0071C163 /* SpotUseCase.swift */,
+				C05DD385274FD9270071C163 /* SpotUseCaseImpl.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -248,6 +298,7 @@
 		C0FE76E127386D63000E4566 /* SpotsTests */ = {
 			isa = PBXGroup;
 			children = (
+				C05DD389275173CA0071C163 /* UseCase */,
 				C04837352740427E0087AAFC /* ViewModel */,
 				C0FE76E227386D63000E4566 /* SpotsTests.swift */,
 			);
@@ -413,21 +464,28 @@
 				C05DD375274F86BA0071C163 /* SpotCard.swift in Sources */,
 				C003D3C4273BA702009C790F /* AuthViewModel.swift in Sources */,
 				C05DD3682740CA140071C163 /* Account.swift in Sources */,
+				C05DD382274FC6BC0071C163 /* SpotRepositoryImpl.swift in Sources */,
 				C07CCA77273D948700C32FE9 /* AuthUseCase.swift in Sources */,
+				C05DD37E274FC5860071C163 /* SpotsViewModel.swift in Sources */,
 				C048372E273F076B0087AAFC /* UserRepository.swift in Sources */,
 				C0FE76D427386D61000E4566 /* ContentView.swift in Sources */,
 				C05DD3662740C1CC0071C163 /* ProfileView.swift in Sources */,
+				C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */,
 				C05DD370274F2A860071C163 /* HalfModal.swift in Sources */,
 				C05DD36A274157700071C163 /* ProfileViewModel.swift in Sources */,
 				C05DD36C2741798C0071C163 /* MapView.swift in Sources */,
 				C0FE76D227386D61000E4566 /* SpotsApp.swift in Sources */,
 				C05DD373274F74FB0071C163 /* SpotsView.swift in Sources */,
+				C05DD386274FD9270071C163 /* SpotUseCaseImpl.swift in Sources */,
 				C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */,
 				C0483730273F0E710087AAFC /* UserRepositoryImpl.swift in Sources */,
+				C05DD380274FC65D0071C163 /* SpotRepository.swift in Sources */,
+				C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */,
 				C05DD36E27417E0C0071C163 /* Spot.swift in Sources */,
 				C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */,
 				C0FE77112739144D000E4566 /* LoginView.swift in Sources */,
 				C003D3CC273BEA23009C790F /* ColorExtention.swift in Sources */,
+				C05DD37A274FC3150071C163 /* CustomAnnotationView.swift in Sources */,
 				C0483732273F0F700087AAFC /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,8 +494,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05DD38827515EF50071C163 /* SpotsViewModelTests.swift in Sources */,
 				C04837372740429A0087AAFC /* AuthViewModelTests.swift in Sources */,
 				C0FE76E327386D63000E4566 /* SpotsTests.swift in Sources */,
+				C05DD38B275173DF0071C163 /* SpotUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

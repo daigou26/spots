@@ -9,16 +9,16 @@ import CoreLocation
 struct Spot: Hashable {
     @DocumentID var id: String?
     var title: String
-    var address: String
-    var category: [String]?
-    var memo: String?
     var imageUrl: String
-    var favorite: Bool
-    var star: Bool
-    var createdAt: Date?
-    var updatedAt: Date?
+    var address: String
     let latitude: Double
     let longitude: Double
+    var favorite: Bool
+    var star: Bool
+    var category: [String]?
+    var memo: String?
+    var createdAt: Date?
+    var updatedAt: Date?
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }

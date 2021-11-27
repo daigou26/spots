@@ -7,7 +7,6 @@ import Firebase
 import GoogleSignIn
 import Combine
 
-@MainActor
 class AuthViewModel: NSObject, ObservableObject {
     enum AuthState {
         case signedIn
@@ -33,7 +32,6 @@ class AuthViewModel: NSObject, ObservableObject {
                 switch error {
                 case let error as AuthError:
                     self.errorMessage = error.localizedDescription
-                    print(error.localizedDescription)
                 default: break
                 }
             }
@@ -52,7 +50,6 @@ class AuthViewModel: NSObject, ObservableObject {
                 switch error {
                 case let error as AuthError:
                     self.errorMessage = error.localizedDescription
-                    print(error.localizedDescription)
                 default: break
                 }
             }
@@ -70,7 +67,6 @@ class AuthViewModel: NSObject, ObservableObject {
                 switch error {
                 case let error as AuthError:
                     self.errorMessage = error.localizedDescription
-                    print(error.localizedDescription)
                 default: break
                 }
             }
