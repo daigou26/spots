@@ -7,12 +7,7 @@ import Firebase
 import GoogleSignIn
 import Combine
 
-class AuthViewModel: NSObject, ObservableObject {
-    enum AuthState {
-        case signedIn
-        case signedOut
-    }
-    
+class AuthViewModel: ObservableObject {
     @Published var state: AuthState = .signedOut
     @Published var errorMessage: String = ""
     

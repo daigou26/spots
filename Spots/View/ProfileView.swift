@@ -44,7 +44,7 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             HStack {
-                Image("Person").frame(width: 80, height: 80)
+                Image(systemName: "person").frame(width: 80, height: 80)
                     .overlay {
                         Circle().stroke(.white, lineWidth: 4)
                     }

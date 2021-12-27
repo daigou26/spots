@@ -6,6 +6,6 @@ import Foundation
 import Firebase
 import Combine
 
-class ProfileViewModel: NSObject, ObservableObject {
+class ProfileViewModel: ObservableObject {
     @Published var account = Account.shared
 }

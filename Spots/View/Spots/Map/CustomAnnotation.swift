@@ -21,7 +21,7 @@ struct CustomAnnotation: View {
                 AsyncImage(url: URL(string: imageUrl)){ image in
                     image.resizable().scaledToFill()
                 } placeholder: {
-                    ProgressView()
+                    Rectangle().fill(Color.background)
                 }.frame(width: imageSize, height: imageSize)
                     .clipShape(Circle())
                     .overlay {

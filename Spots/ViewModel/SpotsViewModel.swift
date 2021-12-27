@@ -4,11 +4,15 @@
 
 import Foundation
 import Combine
+import SwiftUI
+import UIKit
 
-class SpotsViewModel: NSObject, ObservableObject {
+class SpotsViewModel: ObservableObject {
     @Published var spots: [Spot] = []
+    @Published var selectedSpots: [Spot] = []
+    @Published var showAddSpotSheet: Bool = false
     @Published var isQueried: Bool = false
-    
+    @Published var goSpotsView: Bool = false
     
     private var spotUseCase: SpotUseCase
     var cancellables = [AnyCancellable]()
@@ -17,8 +21,12 @@ class SpotsViewModel: NSObject, ObservableObject {
         self.spotUseCase = spotUseCase
     }
     
-    func getSpots() async {
-        await spotUseCase.getSpots(uid: Account.shared.uid).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+    func setShowAddSpotSheet(_ value: Bool) {
+        self.showAddSpotSheet = value
+    }
+    
+    func getSpots() {
+        spotUseCase.getSpots(uid: Account.shared.uid).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: do {
                 self.isQueried = true
@@ -30,8 +38,21 @@ class SpotsViewModel: NSObject, ObservableObject {
         }).store(in: &cancellables)
     }
     
-    func refreshSpots() async {
+    func refreshSpots() {
         self.spots = []
-        await getSpots()
+        getSpots()
+    }
+    
+    func postSpot(mainImage: UIImage?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) {
+        spotUseCase.postSpot(uid: Account.shared.uid, mainImage: mainImage?.jpegData(compressionQuality: 0), images: images, title: title, address: address, favorite: favorite, star: star, memo: memo).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished: do {
+                self.showAddSpotSheet = false
+            }
+            case .failure: break
+            }
+        }, receiveValue: { spot in
+            self.spots.append(spot)
+        }).store(in: &cancellables)
     }
 }

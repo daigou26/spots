@@ -38,10 +38,10 @@ final class CustomAnnotationView: MKAnnotationView {
                 }
                 return nil
             }).compactMap{$0}
-            vc = UIHostingController(rootView: CustomAnnotation(count: clusterAnnotation.memberAnnotations.count, imageUrl: spots[0].imageUrl))
+            vc = UIHostingController(rootView: CustomAnnotation(count: clusterAnnotation.memberAnnotations.count, imageUrl: spots[0].imageUrl ?? ""))
         } else {
             if let customAnnotation = annotation as? CustomPointAnnotation {
-                vc = UIHostingController(rootView: CustomAnnotation(count: 0, imageUrl: customAnnotation.spot.imageUrl))
+                vc = UIHostingController(rootView: CustomAnnotation(count: 0, imageUrl: customAnnotation.spot.imageUrl ?? ""))
             } else {
                 return
             }
