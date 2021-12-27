@@ -10,7 +10,7 @@ struct MapView: UIViewRepresentable {
     @State var spots: [Spot]
     @State var centerCoordinate: CLLocationCoordinate2D
     @Binding var selectedSpots: [Spot]
-    @Binding var showModal: Bool
+    @Binding var showSpotListSheet: Bool
     
     @State private var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498),
@@ -19,7 +19,7 @@ struct MapView: UIViewRepresentable {
     
     var annotations = [MKAnnotation]()
     
-    init(spots: [Spot], showModal: Binding<Bool>, selectedSpots: Binding<[Spot]>) {
+    init(spots: [Spot], showSpotListSheet: Binding<Bool>, selectedSpots: Binding<[Spot]>) {
         self.centerCoordinate = CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498)
         for spot in spots {
             let newLocation = CustomPointAnnotation(spot: spot)
@@ -28,7 +28,7 @@ struct MapView: UIViewRepresentable {
         }
         
         self.spots = spots
-        self._showModal = showModal
+        self._showSpotListSheet = showSpotListSheet
         self._selectedSpots = selectedSpots
         //        self._category = category
     }
@@ -100,7 +100,7 @@ struct MapView: UIViewRepresentable {
                 }
             }
             
-            self.parent.showModal = true
+            self.parent.showSpotListSheet = true
         }
         
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {

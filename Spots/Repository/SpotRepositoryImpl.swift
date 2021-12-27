@@ -24,4 +24,29 @@ class SpotRepositoryImpl: SpotRepository {
         }
         return spots
     }
+    
+    func getNewDocumentId() -> String {
+        return dbRef.document().documentID
+    }
+    
+    func postSpot(uid: String, spot: Spot, assets: [Data]?) async throws {
+        let semaphore = DispatchSemaphore(value: 0)
+        var error: Error? = nil
+        var data = spot.asDictionary
+        data["id"] = spot.id
+        data["createdAt"] = Timestamp(date: Date())
+        data["uid"] = uid
+        
+        dbRef.addDocument(data: data) { err in
+            if let err = err {
+                error = err
+            }
+            semaphore.signal()
+        }
+        semaphore.wait()
+        if let error = error {
+            throw error
+        }
+        return
+    }
 }

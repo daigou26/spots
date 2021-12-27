@@ -13,11 +13,11 @@ struct ContentView: View {
         Group {
             switch viewModel.state {
             case .signedIn: TabView {
-                SpotsView().tabItem {
-                    Image("Map")
+                SpotsView().environmentObject(SpotsViewModel()).tabItem {
+                    Image(systemName: "mappin.and.ellipse")
                 }
                 ProfileView().tabItem {
-                    Image("Person")
+                    Image(systemName: "person")
                 }
             }
             case .signedOut: LoginView()

@@ -11,11 +11,23 @@ struct SpotCard: View {
         VStack(alignment: .leading) {
             Text(spot.title).font(.system(size: 20, weight: .bold)).padding(.bottom, 1)
             Text(spot.address).padding(.bottom, 1)
-            AsyncImage(url: URL(string: spot.imageUrl)) { image in
-                image.resizable()
-            } placeholder: {
-                ProgressView()
-            }.aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
+            if let imageUrl = spot.imageUrl, imageUrl != "" {
+                AsyncImage(url: URL(string: imageUrl)) { image in
+                    image.resizable()
+                } placeholder: {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }.aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
+            } else {
+                Rectangle().fill(Color.background).aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
+            }
         }
     }
 }

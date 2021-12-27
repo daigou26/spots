@@ -5,7 +5,7 @@
 import SwiftUI
 
 extension View {
-    func halfModal<Sheet: View>(
+    func partialSheet<Sheet: View>(
         isPresented: Binding<Bool>,
         @ViewBuilder sheet: @escaping () -> Sheet,
         onEnd: @escaping () -> ()
@@ -13,7 +13,7 @@ extension View {
         // Use background to avoid whiteout
         return self
             .background(
-                HalfModalSheetViewController(
+                PartialSheetSheetViewController(
                     sheet: sheet(),
                     isPresented: isPresented,
                     onClose: onEnd
@@ -22,7 +22,7 @@ extension View {
     }
 }
 
-private struct HalfModalSheetViewController<Sheet: View>: UIViewControllerRepresentable {
+private struct PartialSheetSheetViewController<Sheet: View>: UIViewControllerRepresentable {
     var sheet: Sheet
     @Binding var isPresented: Bool
     var onClose: () -> Void
@@ -49,9 +49,9 @@ private struct HalfModalSheetViewController<Sheet: View>: UIViewControllerRepres
     }
     
     class Coordinator: NSObject, UISheetPresentationControllerDelegate {
-        var parent: HalfModalSheetViewController
+        var parent: PartialSheetSheetViewController
         
-        init(parent: HalfModalSheetViewController) {
+        init(parent: PartialSheetSheetViewController) {
             self.parent = parent
         }
         

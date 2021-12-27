@@ -5,39 +5,42 @@
 import SwiftUI
 
 struct SpotsView: View {
-    @ObservedObject var viewModel: SpotsViewModel
-    @State var selectedSpots: [Spot] = [Spot]()
-    @State var showModal: Bool = false
-    
-    init() {
-        viewModel = SpotsViewModel()
-    }
+    @EnvironmentObject var viewModel: SpotsViewModel
+    @State var showSpotListSheet: Bool = false
     
     var body: some View {
         ZStack(alignment: .top) {
-            Button("Refresh") {
-                Task {
-                    await self.viewModel.refreshSpots()
+            VStack {
+                Button("Refresh") {
+                    viewModel.refreshSpots()
+                }.buttonStyle(RefreshButtonStyle())
+                Spacer()
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        viewModel.setShowAddSpotSheet(true)
+                    }) {
+                        Image(systemName: "mappin.and.ellipse")
+                    }.buttonStyle(AddSpotButtonStyle()).sheet(isPresented: $viewModel.showAddSpotSheet) {
+                        SelectMainImageView().environmentObject(AddSpotViewModel()).environmentObject(ImagePickerViewModel())
+                    }
                 }
-            }.buttonStyle(RefreshButtonStyle()).zIndex(1)
-            MapView(spots: viewModel.spots, showModal: $showModal, selectedSpots: $selectedSpots).edgesIgnoringSafeArea(.top)
-        }.halfModal(isPresented: $showModal, sheet: {
+            }.zIndex(1)
+            
+            MapView(spots: viewModel.spots, showSpotListSheet: $showSpotListSheet, selectedSpots: $viewModel.selectedSpots).edgesIgnoringSafeArea(.top)
+        }.partialSheet(isPresented: $showSpotListSheet, sheet: {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .leading) {
-                    Text("スポット\(selectedSpots.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
-                    ForEach(selectedSpots, id: \.self) { spot in
+                    Text("スポット\(viewModel.selectedSpots.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
+                    ForEach(viewModel.selectedSpots, id: \.self) { spot in
                         SpotCard(spot: spot).padding(.bottom, 28)
                     }
                 }.frame(maxWidth: .infinity, alignment: .leading)
             }.frame(maxWidth: .infinity).padding(EdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20))
-        }, onEnd: {
-            showModal = false
-        }).onAppear {
-            // Can query only one time
+        }, onEnd: {}).onAppear {
+            // To query only one time
             if !viewModel.isQueried {
-                Task {
-                    await self.viewModel.getSpots()
-                }
+                self.viewModel.getSpots()
             }
         }
     }
@@ -56,8 +59,21 @@ struct RefreshButtonStyle: ButtonStyle {
     }
 }
 
+struct AddSpotButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .foregroundColor(.white)
+            .frame(maxWidth: 50, maxHeight: 50)
+            .background(Color.main)
+            .cornerRadius(25)
+            .padding(.trailing, 20)
+            .padding(.bottom, 20)
+            .shadow(radius: 7)
+    }
+}
+
 struct SpotsView_Previews: PreviewProvider {
     static var previews: some View {
-        SpotsView()
+        SpotsView().environmentObject(SpotsViewModel())
     }
 }

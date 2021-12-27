@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>アプリ使用中に位置情報を取得します</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>写真を表示するために利用します</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

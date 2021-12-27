@@ -7,4 +7,6 @@ import SwiftUI
 extension Color {
     static let main = Color("main")
     static let base = Color("base")
+    static let lightGray = Color("lightGray")
+    static let background = Color("background")
 }

@@ -12,16 +12,28 @@
 		C003D3C8273BC8E8009C790F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C003D3C7273BC8E8009C790F /* GoogleService-Info.plist */; };
 		C003D3CA273BE83A009C790F /* ColorSet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C003D3C9273BE83A009C790F /* ColorSet.xcassets */; };
 		C003D3CC273BEA23009C790F /* ColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003D3CB273BEA23009C790F /* ColorExtention.swift */; };
+		C00AD64C2756A8B5006B575A /* ImagePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64B2756A8B5006B575A /* ImagePickerViewModel.swift */; };
+		C00AD64E2756AA41006B575A /* AuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64D2756AA41006B575A /* AuthStatus.swift */; };
+		C00AD6502756AA7E006B575A /* PhotoAuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64F2756AA7E006B575A /* PhotoAuthStatus.swift */; };
+		C00AD6522756BAD0006B575A /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD6512756BAD0006B575A /* Asset.swift */; };
+		C00AD6542756C23A006B575A /* ThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD6532756C23A006B575A /* ThumbnailView.swift */; };
+		C03CC9B72756622F00FB79FB /* SelectMainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03CC9B62756622F00FB79FB /* SelectMainImageView.swift */; };
+		C03F77E12760FF5900634036 /* LocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F77E02760FF5900634036 /* LocationUseCase.swift */; };
+		C03F77E32760FFE600634036 /* LocationUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F77E22760FFE600634036 /* LocationUseCaseImpl.swift */; };
+		C03F77E627620AB000634036 /* SpotStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F77E527620AB000634036 /* SpotStorageRepository.swift */; };
+		C03F77E827620AFE00634036 /* SpotStorageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F77E727620AFE00634036 /* SpotStorageRepositoryImpl.swift */; };
 		C048372E273F076B0087AAFC /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048372D273F076B0087AAFC /* UserRepository.swift */; };
 		C0483730273F0E710087AAFC /* UserRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */; };
 		C0483732273F0F700087AAFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0483731273F0F700087AAFC /* User.swift */; };
 		C04837372740429A0087AAFC /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04837362740429A0087AAFC /* AuthViewModelTests.swift */; };
+		C058DAFB275CE77A0068AF66 /* InputLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058DAFA275CE77A0068AF66 /* InputLocationView.swift */; };
+		C058DAFD275CF0C20068AF66 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */; };
 		C05DD3662740C1CC0071C163 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD3652740C1CC0071C163 /* ProfileView.swift */; };
 		C05DD3682740CA140071C163 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD3672740CA140071C163 /* Account.swift */; };
 		C05DD36A274157700071C163 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD369274157700071C163 /* ProfileViewModel.swift */; };
 		C05DD36C2741798C0071C163 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD36B2741798C0071C163 /* MapView.swift */; };
 		C05DD36E27417E0C0071C163 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD36D27417E0C0071C163 /* Spot.swift */; };
-		C05DD370274F2A860071C163 /* HalfModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD36F274F2A860071C163 /* HalfModal.swift */; };
+		C05DD370274F2A860071C163 /* PartialSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD36F274F2A860071C163 /* PartialSheet.swift */; };
 		C05DD373274F74FB0071C163 /* SpotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD372274F74FB0071C163 /* SpotsView.swift */; };
 		C05DD375274F86BA0071C163 /* SpotCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD374274F86BA0071C163 /* SpotCard.swift */; };
 		C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD377274FBDE20071C163 /* CustomAnnotation.swift */; };
@@ -36,6 +48,13 @@
 		C07CCA77273D948700C32FE9 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA76273D948700C32FE9 /* AuthUseCase.swift */; };
 		C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */; };
 		C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */; };
+		C0B4CFEF276A3E2C008F1394 /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */; };
+		C0B4CFF1276A3E82008F1394 /* ImageUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */; };
+		C0B4CFF52779F751008F1394 /* AddSpotViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */; };
+		C0B4CFF72779FAF2008F1394 /* LocationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF62779FAF2008F1394 /* LocationUseCaseTests.swift */; };
+		C0D9C06A275773800052A5C0 /* AddSpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */; };
+		C0D9C06C275776FE0052A5C0 /* SelectImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */; };
+		C0D9C06E275A49980052A5C0 /* InputSpotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */; };
 		C0FE76D227386D61000E4566 /* SpotsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE76D127386D61000E4566 /* SpotsApp.swift */; };
 		C0FE76D427386D61000E4566 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE76D327386D61000E4566 /* ContentView.swift */; };
 		C0FE76D627386D63000E4566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0FE76D527386D63000E4566 /* Assets.xcassets */; };
@@ -77,16 +96,28 @@
 		C003D3C7273BC8E8009C790F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C003D3C9273BE83A009C790F /* ColorSet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorSet.xcassets; sourceTree = "<group>"; };
 		C003D3CB273BEA23009C790F /* ColorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtention.swift; sourceTree = "<group>"; };
+		C00AD64B2756A8B5006B575A /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
+		C00AD64D2756AA41006B575A /* AuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStatus.swift; sourceTree = "<group>"; };
+		C00AD64F2756AA7E006B575A /* PhotoAuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthStatus.swift; sourceTree = "<group>"; };
+		C00AD6512756BAD0006B575A /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		C00AD6532756C23A006B575A /* ThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailView.swift; sourceTree = "<group>"; };
+		C03CC9B62756622F00FB79FB /* SelectMainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMainImageView.swift; sourceTree = "<group>"; };
+		C03F77E02760FF5900634036 /* LocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCase.swift; sourceTree = "<group>"; };
+		C03F77E22760FFE600634036 /* LocationUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCaseImpl.swift; sourceTree = "<group>"; };
+		C03F77E527620AB000634036 /* SpotStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotStorageRepository.swift; sourceTree = "<group>"; };
+		C03F77E727620AFE00634036 /* SpotStorageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotStorageRepositoryImpl.swift; sourceTree = "<group>"; };
 		C048372D273F076B0087AAFC /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryImpl.swift; sourceTree = "<group>"; };
 		C0483731273F0F700087AAFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C04837362740429A0087AAFC /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
+		C058DAFA275CE77A0068AF66 /* InputLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputLocationView.swift; sourceTree = "<group>"; };
+		C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		C05DD3652740C1CC0071C163 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C05DD3672740CA140071C163 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		C05DD369274157700071C163 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		C05DD36B2741798C0071C163 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		C05DD36D27417E0C0071C163 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
-		C05DD36F274F2A860071C163 /* HalfModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModal.swift; sourceTree = "<group>"; };
+		C05DD36F274F2A860071C163 /* PartialSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialSheet.swift; sourceTree = "<group>"; };
 		C05DD372274F74FB0071C163 /* SpotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsView.swift; sourceTree = "<group>"; };
 		C05DD374274F86BA0071C163 /* SpotCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCard.swift; sourceTree = "<group>"; };
 		C05DD377274FBDE20071C163 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
@@ -101,6 +132,13 @@
 		C07CCA76273D948700C32FE9 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCaseImpl.swift; sourceTree = "<group>"; };
 		C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
+		C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCaseImpl.swift; sourceTree = "<group>"; };
+		C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewModelTests.swift; sourceTree = "<group>"; };
+		C0B4CFF62779FAF2008F1394 /* LocationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCaseTests.swift; sourceTree = "<group>"; };
+		C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewModel.swift; sourceTree = "<group>"; };
+		C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImagesView.swift; sourceTree = "<group>"; };
+		C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSpotInfoView.swift; sourceTree = "<group>"; };
 		C0FE76CE27386D61000E4566 /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0FE76D127386D61000E4566 /* SpotsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsApp.swift; sourceTree = "<group>"; };
 		C0FE76D327386D61000E4566 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -148,11 +186,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C03F77E427620A8900634036 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C03F77E527620AB000634036 /* SpotStorageRepository.swift */,
+				C03F77E727620AFE00634036 /* SpotStorageRepositoryImpl.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		C04837352740427E0087AAFC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				C04837362740429A0087AAFC /* AuthViewModelTests.swift */,
 				C05DD38727515EF50071C163 /* SpotsViewModelTests.swift */,
+				C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -160,7 +208,7 @@
 		C05DD371274F73770071C163 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				C05DD36F274F2A860071C163 /* HalfModal.swift */,
+				C05DD36F274F2A860071C163 /* PartialSheet.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -181,6 +229,10 @@
 				C05DD376274FBDCB0071C163 /* Map */,
 				C05DD372274F74FB0071C163 /* SpotsView.swift */,
 				C05DD374274F86BA0071C163 /* SpotCard.swift */,
+				C03CC9B62756622F00FB79FB /* SelectMainImageView.swift */,
+				C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */,
+				C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */,
+				C058DAFA275CE77A0068AF66 /* InputLocationView.swift */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -189,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				C05DD38A275173DF0071C163 /* SpotUseCaseTests.swift */,
+				C0B4CFF62779FAF2008F1394 /* LocationUseCaseTests.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -199,6 +252,9 @@
 				C003D3C3273BA702009C790F /* AuthViewModel.swift */,
 				C05DD369274157700071C163 /* ProfileViewModel.swift */,
 				C05DD37D274FC5860071C163 /* SpotsViewModel.swift */,
+				C00AD64B2756A8B5006B575A /* ImagePickerViewModel.swift */,
+				C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */,
+				C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -210,6 +266,7 @@
 				C0FE76D327386D61000E4566 /* ContentView.swift */,
 				C0FE77102739144D000E4566 /* LoginView.swift */,
 				C05DD3652740C1CC0071C163 /* ProfileView.swift */,
+				C00AD6532756C23A006B575A /* ThumbnailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,6 +274,7 @@
 		C07CCA71273D88A800C32FE9 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				C03F77E427620A8900634036 /* Storage */,
 				C048372D273F076B0087AAFC /* UserRepository.swift */,
 				C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */,
 				C05DD37F274FC65D0071C163 /* SpotRepository.swift */,
@@ -232,6 +290,9 @@
 				C0483731273F0F700087AAFC /* User.swift */,
 				C05DD3672740CA140071C163 /* Account.swift */,
 				C05DD36D27417E0C0071C163 /* Spot.swift */,
+				C00AD64D2756AA41006B575A /* AuthStatus.swift */,
+				C00AD64F2756AA7E006B575A /* PhotoAuthStatus.swift */,
+				C00AD6512756BAD0006B575A /* Asset.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -243,6 +304,10 @@
 				C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */,
 				C05DD383274FD8FD0071C163 /* SpotUseCase.swift */,
 				C05DD385274FD9270071C163 /* SpotUseCaseImpl.swift */,
+				C03F77E02760FF5900634036 /* LocationUseCase.swift */,
+				C03F77E22760FFE600634036 /* LocationUseCaseImpl.swift */,
+				C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */,
+				C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -462,30 +527,47 @@
 			buildActionMask = 2147483647;
 			files = (
 				C05DD375274F86BA0071C163 /* SpotCard.swift in Sources */,
+				C03F77E627620AB000634036 /* SpotStorageRepository.swift in Sources */,
 				C003D3C4273BA702009C790F /* AuthViewModel.swift in Sources */,
+				C058DAFD275CF0C20068AF66 /* LocationViewModel.swift in Sources */,
 				C05DD3682740CA140071C163 /* Account.swift in Sources */,
 				C05DD382274FC6BC0071C163 /* SpotRepositoryImpl.swift in Sources */,
+				C00AD64E2756AA41006B575A /* AuthStatus.swift in Sources */,
+				C03CC9B72756622F00FB79FB /* SelectMainImageView.swift in Sources */,
 				C07CCA77273D948700C32FE9 /* AuthUseCase.swift in Sources */,
 				C05DD37E274FC5860071C163 /* SpotsViewModel.swift in Sources */,
+				C00AD6522756BAD0006B575A /* Asset.swift in Sources */,
+				C0D9C06E275A49980052A5C0 /* InputSpotInfoView.swift in Sources */,
+				C058DAFB275CE77A0068AF66 /* InputLocationView.swift in Sources */,
+				C03F77E827620AFE00634036 /* SpotStorageRepositoryImpl.swift in Sources */,
+				C03F77E12760FF5900634036 /* LocationUseCase.swift in Sources */,
+				C00AD6502756AA7E006B575A /* PhotoAuthStatus.swift in Sources */,
 				C048372E273F076B0087AAFC /* UserRepository.swift in Sources */,
 				C0FE76D427386D61000E4566 /* ContentView.swift in Sources */,
+				C0D9C06A275773800052A5C0 /* AddSpotViewModel.swift in Sources */,
 				C05DD3662740C1CC0071C163 /* ProfileView.swift in Sources */,
+				C00AD6542756C23A006B575A /* ThumbnailView.swift in Sources */,
 				C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */,
-				C05DD370274F2A860071C163 /* HalfModal.swift in Sources */,
+				C05DD370274F2A860071C163 /* PartialSheet.swift in Sources */,
 				C05DD36A274157700071C163 /* ProfileViewModel.swift in Sources */,
 				C05DD36C2741798C0071C163 /* MapView.swift in Sources */,
+				C00AD64C2756A8B5006B575A /* ImagePickerViewModel.swift in Sources */,
 				C0FE76D227386D61000E4566 /* SpotsApp.swift in Sources */,
 				C05DD373274F74FB0071C163 /* SpotsView.swift in Sources */,
 				C05DD386274FD9270071C163 /* SpotUseCaseImpl.swift in Sources */,
 				C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */,
 				C0483730273F0E710087AAFC /* UserRepositoryImpl.swift in Sources */,
+				C03F77E32760FFE600634036 /* LocationUseCaseImpl.swift in Sources */,
 				C05DD380274FC65D0071C163 /* SpotRepository.swift in Sources */,
 				C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */,
 				C05DD36E27417E0C0071C163 /* Spot.swift in Sources */,
 				C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */,
 				C0FE77112739144D000E4566 /* LoginView.swift in Sources */,
 				C003D3CC273BEA23009C790F /* ColorExtention.swift in Sources */,
+				C0B4CFF1276A3E82008F1394 /* ImageUseCaseImpl.swift in Sources */,
 				C05DD37A274FC3150071C163 /* CustomAnnotationView.swift in Sources */,
+				C0B4CFEF276A3E2C008F1394 /* ImageUseCase.swift in Sources */,
+				C0D9C06C275776FE0052A5C0 /* SelectImagesView.swift in Sources */,
 				C0483732273F0F700087AAFC /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,6 +579,8 @@
 				C05DD38827515EF50071C163 /* SpotsViewModelTests.swift in Sources */,
 				C04837372740429A0087AAFC /* AuthViewModelTests.swift in Sources */,
 				C0FE76E327386D63000E4566 /* SpotsTests.swift in Sources */,
+				C0B4CFF52779F751008F1394 /* AddSpotViewModelTests.swift in Sources */,
+				C0B4CFF72779FAF2008F1394 /* LocationUseCaseTests.swift in Sources */,
 				C05DD38B275173DF0071C163 /* SpotUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

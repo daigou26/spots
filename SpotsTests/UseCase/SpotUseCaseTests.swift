@@ -7,6 +7,14 @@ import Combine
 @testable import Spots
 
 class SpotRepositoryMock: SpotRepository {
+    func getNewDocumentId() -> String {
+        return ""
+    }
+    
+    func postSpot(uid: String, spot: Spot, assets: [Data]?) async throws {
+        return
+    }
+    
     func getSpots(uid: String) async throws -> [Spot]? {
         return []
     }
@@ -22,8 +30,8 @@ class SpotsUseCaseTests: XCTestCase {
     }
 
     func testGetSpots() async throws {
-        let spotUseCase = SpotUseCaseImpl(SpotRepositoryMock())
-        let _ = await spotUseCase.getSpots(uid: "").sink(receiveCompletion: { completion in
+        let spotUseCase = SpotUseCaseImpl(spotRepository: SpotRepositoryMock())
+        let _ = spotUseCase.getSpots(uid: "").sink(receiveCompletion: { completion in
             switch completion {
             case .finished: break
             case .failure: break
