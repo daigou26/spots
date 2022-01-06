@@ -43,8 +43,8 @@ class SpotsViewModel: ObservableObject {
         getSpots()
     }
     
-    func postSpot(mainImage: UIImage?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) {
-        spotUseCase.postSpot(uid: Account.shared.uid, mainImage: mainImage?.jpegData(compressionQuality: 0), images: images, title: title, address: address, favorite: favorite, star: star, memo: memo).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) {
+        spotUseCase.postSpot(uid: Account.shared.uid, mainImage: mainImage, images: images, title: title, address: address, favorite: favorite, star: star, memo: memo).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: do {
                 self.showAddSpotSheet = false

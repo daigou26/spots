@@ -15,7 +15,3 @@ class LocationUseCaseImpl: LocationUseCase {
         return location.coordinate
     }
 }
-
-enum LocationError: Error {
-    case NotFound
-}

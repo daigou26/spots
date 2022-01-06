@@ -12,7 +12,7 @@ struct ContentView: View {
     var body: some View {
         Group {
             switch viewModel.state {
-            case .signedIn: TabView {
+            case .SignedIn: TabView {
                 SpotsView().environmentObject(SpotsViewModel()).tabItem {
                     Image(systemName: "mappin.and.ellipse")
                 }
@@ -20,7 +20,7 @@ struct ContentView: View {
                     Image(systemName: "person")
                 }
             }
-            case .signedOut: LoginView()
+            case .SignedOut: LoginView()
             }
         }.onAppear {
             Task {

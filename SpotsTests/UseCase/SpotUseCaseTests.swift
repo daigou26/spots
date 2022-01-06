@@ -7,6 +7,18 @@ import Combine
 @testable import Spots
 
 class SpotRepositoryMock: SpotRepository {
+    func getSpot(spotId: String) async throws -> Spot {
+        return Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true)
+    }
+    
+    func getSpotByAddress(uid: String, address: String) async throws -> [Spot] {
+        return []
+    }
+    
+    func getPhotos(spotId: String) async throws -> [Photo] {
+        return []
+    }
+    
     func getNewDocumentId() -> String {
         return ""
     }

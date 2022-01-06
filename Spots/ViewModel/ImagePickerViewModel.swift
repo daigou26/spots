@@ -7,7 +7,7 @@ import Photos
 import UIKit
 
 class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObserver {
-    @Published var libraryStatus = PhotoAuthStatus.denied
+    @Published var libraryStatus = PhotoAuthStatus.Denied
     @Published var photos: [Asset] = []
     @Published var selectedImagePreview: UIImage? = nil
     @Published var selectedImages: [Asset] = []
@@ -24,14 +24,14 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
         PHPhotoLibrary.requestAuthorization(for: .readWrite) {[self] status in
             DispatchQueue.main.async {
                 switch status {
-                case .denied: libraryStatus = .denied
+                case .denied: libraryStatus = .Denied
                 case .authorized:
-                    libraryStatus = .approved
+                    libraryStatus = .Approved
                     fetchPhotos()
                 case .limited:
-                    libraryStatus = .limited
+                    libraryStatus = .Limited
                     fetchPhotos()
-                default: libraryStatus = .denied
+                default: libraryStatus = .Denied
                 }
             }
         }

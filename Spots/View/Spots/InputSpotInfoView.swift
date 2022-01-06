@@ -50,7 +50,29 @@ struct InputSpotInfoView: View {
                         Spacer()
                     }
                     TextEditor(text: $memo).frame(height: 200).background(Color.red)
-                }
+                }.alert("スポットが重複しています", isPresented: $addSpotViewModel.duplicatedTitleAndAddress, actions:{
+                    Button(action: {
+                        addSpotViewModel.setLoading(value: false)
+                        addSpotViewModel.setDuplicatedTitleAndAddress(value: false)
+                    }, label: {
+                        Text("OK")
+                    })
+                }) {
+                    Text("タイトルまたは住所を変更してください")
+                }.alert("すでに同一住所のスポットが存在しています。\n登録を続けますか？", isPresented: $addSpotViewModel.duplicatedAddress, actions:{
+                    Button(action: {
+                        addSpotViewModel.setLoading(value: false)
+                        addSpotViewModel.setDuplicatedTitleAndAddress(value: false)
+                    }, label: {
+                        Text("キャンセル")
+                    })
+                    Button(action: {
+                        addSpotViewModel.setDuplicatedTitleAndAddress(value: false)
+                        spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage?.jpegData(compressionQuality: 0), images: addSpotViewModel.images, title: title, address: addSpotViewModel.address, favorite: favorite, star: star, memo: memo)
+                    }, label: {
+                        Text("はい")
+                    })
+                })
             }.padding(.horizontal, 20).padding(.vertical, 30)
             
             NavigationLink(destination: InputLocationView(goInputLocationView: $goInputLocationView), isActive: $goInputLocationView) {
@@ -63,8 +85,13 @@ struct InputSpotInfoView: View {
             }
         }.navigationBarBackButtonHidden(addSpotViewModel.loading)
             .navigationBarItems(trailing: Button(action: {
+                addSpotViewModel.setTitle(title)
                 addSpotViewModel.setLoading(value: true)
-                spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage, images: addSpotViewModel.images, title: title, address: addSpotViewModel.address, favorite: favorite, star: star, memo: memo)
+                
+                // If this spot address is duplicated, show an alert. If not, post this spot.
+                addSpotViewModel.checkToExistsSameAddressSpot {
+                    spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage?.jpegData(compressionQuality: 0), images: addSpotViewModel.images, title: title, address: addSpotViewModel.address, favorite: favorite, star: star, memo: memo)
+                }
             }) {
                 Text("登録")
             }.disabled(title == "" || addSpotViewModel.address == ""))

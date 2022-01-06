@@ -18,7 +18,7 @@ class AuthUseCaseMock: AuthUseCase {
     func restorePreviousSignIn() async -> AnyPublisher<Bool, Error> {
         return Deferred {
             Future { promise in
-                return promise(.failure(AuthError.invalid))
+                return promise(.failure(AuthError.Invalid))
             }
         }.eraseToAnyPublisher()
     }
@@ -52,7 +52,7 @@ class AuthViewModelTests: XCTestCase {
         await authViewModel.signIn()
         expectation.fulfill()
         await waitForExpectations(timeout: 1)
-        XCTAssertEqual(authViewModel.state, .signedIn)
+        XCTAssertEqual(authViewModel.state, .SignedIn)
     }
     
     func testRestorePreviousSignIn() async throws {
@@ -61,12 +61,12 @@ class AuthViewModelTests: XCTestCase {
         await authViewModel.restorePreviousSignIn()
         expectation.fulfill()
         await waitForExpectations(timeout: 1)
-        XCTAssertEqual(authViewModel.errorMessage, AuthError.invalid.localizedDescription)
+        XCTAssertEqual(authViewModel.errorMessage, AuthError.Invalid.localizedDescription)
     }
     
     func testSignOut() throws {
         let authViewModel = AuthViewModel(AuthUseCaseMock())
         authViewModel.signOut()
-        XCTAssertEqual(authViewModel.state, .signedOut)
+        XCTAssertEqual(authViewModel.state, .SignedOut)
     }
 }

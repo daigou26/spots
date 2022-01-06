@@ -5,7 +5,7 @@
 import Foundation
 
 enum PhotoAuthStatus {
-    case denied
-    case approved
-    case limited
+    case Denied
+    case Approved
+    case Limited
 }

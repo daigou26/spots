@@ -8,7 +8,7 @@ import GoogleSignIn
 import Combine
 
 class AuthViewModel: ObservableObject {
-    @Published var state: AuthState = .signedOut
+    @Published var state: AuthState = .SignedOut
     @Published var errorMessage: String = ""
     
     private var authUseCase: AuthUseCase
@@ -23,7 +23,7 @@ class AuthViewModel: ObservableObject {
             switch completion {
             case .finished: break
             case .failure(let error):
-                self.state = .signedOut
+                self.state = .SignedOut
                 switch error {
                 case let error as AuthError:
                     self.errorMessage = error.localizedDescription
@@ -31,7 +31,7 @@ class AuthViewModel: ObservableObject {
                 }
             }
         } receiveValue: { signedIn in
-            self.state = signedIn ? .signedIn : .signedOut
+            self.state = signedIn ? .SignedIn : .SignedOut
         }.store(in: &cancellables)
     }
     
@@ -41,7 +41,7 @@ class AuthViewModel: ObservableObject {
             case .finished:
                 break
             case .failure(let error):
-                self.state = .signedOut
+                self.state = .SignedOut
                 switch error {
                 case let error as AuthError:
                     self.errorMessage = error.localizedDescription
@@ -49,7 +49,7 @@ class AuthViewModel: ObservableObject {
                 }
             }
         }, receiveValue: { signedIn in
-            self.state = signedIn ? .signedIn : .signedOut
+            self.state = signedIn ? .SignedIn : .SignedOut
         }).store(in: &cancellables)
     }
     
@@ -58,7 +58,7 @@ class AuthViewModel: ObservableObject {
             switch completion {
             case .finished: break
             case .failure(let error):
-                self.state = .signedOut
+                self.state = .SignedOut
                 switch error {
                 case let error as AuthError:
                     self.errorMessage = error.localizedDescription
@@ -66,7 +66,7 @@ class AuthViewModel: ObservableObject {
                 }
             }
         } receiveValue: { signedIn in
-            self.state = signedIn ? .signedIn : .signedOut
+            self.state = signedIn ? .SignedIn : .SignedOut
         }.store(in: &cancellables)
     }
 }

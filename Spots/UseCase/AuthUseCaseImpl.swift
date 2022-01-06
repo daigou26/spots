@@ -22,7 +22,7 @@ class AuthUseCaseImpl: AuthUseCase {
             Future { promise in
                 let signInConfig = GIDConfiguration.init(clientID: FirebaseApp.app()?.options.clientID ?? "")
                 guard let presentingViewController = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {
-                    return promise(.failure(AuthError.unknown))
+                    return promise(.failure(AuthError.Unknown))
                 }
                 GIDSignIn.sharedInstance.signIn(
                     with: signInConfig,
@@ -31,7 +31,7 @@ class AuthUseCaseImpl: AuthUseCase {
                         if let user = user {
                             let authentication = user.authentication
                             guard let idToken = authentication.idToken else {
-                                return promise(.failure(AuthError.invalid))
+                                return promise(.failure(AuthError.Invalid))
                             }
                             
                             let credential = GoogleAuthProvider.credential(withIDToken: idToken,
@@ -55,10 +55,10 @@ class AuthUseCaseImpl: AuthUseCase {
                                             
                                             promise(.success(true))
                                         } catch {
-                                            promise(.failure(AuthError.unknown))
+                                            promise(.failure(AuthError.Unknown))
                                         }
                                     } else {
-                                        promise(.failure(AuthError.notFoundUser))
+                                        promise(.failure(AuthError.NotFoundUser))
                                     }
                                 }
                             }
@@ -67,7 +67,7 @@ class AuthUseCaseImpl: AuthUseCase {
                             if let error = error {
                                 promise(.failure(error))
                             } else {
-                                promise(.failure(AuthError.notFoundUser))
+                                promise(.failure(AuthError.NotFoundUser))
                             }
                         }
                     })
@@ -81,7 +81,7 @@ class AuthUseCaseImpl: AuthUseCase {
                 if let user = user {
                     let authentication = user.authentication
                     guard let idToken = authentication.idToken else {
-                        return promise(.failure(AuthError.invalid))
+                        return promise(.failure(AuthError.Invalid))
                     }
                     
                     let credential = GoogleAuthProvider.credential(withIDToken: idToken,

@@ -41,28 +41,30 @@ class SpotStorageRepositoryImpl: SpotStorageRepository {
         return imageUrl
     }
     
-    func uploadImages(spotId: String, images: [Data]) async -> [String] {
+    func uploadImages(spotId: String, images: [Data]) async -> [Photo] {
         let timestamp = Int(Date().timeIntervalSince1970)
-        var imageUrls: [String] = []
+        var photos: [Photo] = []
+        let date = Date()
 
-        await withTaskGroup(of: (String?).self) { group in
+        await withTaskGroup(of: (Photo?).self) { group in
             for (index, image) in images.enumerated() {
-                let path = "spots/\(spotId)/images/\(timestamp)_\(index)"
+                let name = "\(timestamp)_\(index)"
+                let path = "spots/\(spotId)/images/\(name)"
                 group.addTask {
-                    return await self.upload(index: index, path: path, image: image)
+                    return await self.upload(index: index, path: path, name: name, image: image, date: date)
                 }
             }
             
-            for await imageUrl in group {
-                if let imageUrl = imageUrl {
-                    imageUrls.append(imageUrl)
+            for await photo in group {
+                if let photo = photo {
+                    photos.append(photo)
                 }
             }
         }
-        return imageUrls
+        return photos
     }
     
-    func upload(index: Int, path: String, image: Data) async -> String? {
+    func upload(index: Int, path: String, name: String, image: Data, date: Date) async -> Photo? {
         let newRef = ref.child(path)
         let semaphore = DispatchSemaphore(value: 0)
         let uploadTask = newRef.putData(image)
@@ -78,6 +80,9 @@ class SpotStorageRepositoryImpl: SpotStorageRepository {
         }
         semaphore.wait()
 
-        return imageUrl
+        if let imageUrl = imageUrl {
+            return Photo(imageUrl: imageUrl, name: name, timestamp: date)
+        }
+        return nil
     }
 }
