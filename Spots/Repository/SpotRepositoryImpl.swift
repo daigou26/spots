@@ -25,7 +25,7 @@ class SpotRepositoryImpl: SpotRepository {
     
     func getSpotByAddress(uid: String, address: String) async throws -> [Spot] {
         var spots: [Spot] = []
-        let snapshot = try await dbRef.whereField("uid", isEqualTo: uid).getDocuments()
+        let snapshot = try await dbRef.whereField("uid", isEqualTo: uid).whereField("address", isEqualTo: address).getDocuments()
         
         if !snapshot.isEmpty {
             for doc in snapshot.documents {
@@ -38,9 +38,8 @@ class SpotRepositoryImpl: SpotRepository {
                     spots.append(Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, createdAt: createdAt, updatedAt: updatedAt))
                 }
             }
-            return spots
         }
-        throw QueryError.NotFound
+        return spots
     }
     
     func getPhotos(spotId: String) async throws -> [Photo] {
@@ -81,15 +80,20 @@ class SpotRepositoryImpl: SpotRepository {
         return dbRef.document().documentID
     }
     
-    func postSpot(uid: String, spot: Spot, assets: [Data]?) async throws {
+    func postSpot(uid: String, spot: Spot) async throws {
         let semaphore = DispatchSemaphore(value: 0)
         var error: Error? = nil
         var data = spot.asDictionary
-        data["id"] = spot.id
+        
         data["createdAt"] = Timestamp(date: Date())
         data["uid"] = uid
-        
-        dbRef.addDocument(data: data) { err in
+        if let imageUploadingStatus = spot.imageUploadingStatus?.first {
+            var imageUploadingStatusData = imageUploadingStatus.asDictionary
+            imageUploadingStatusData["startedAt"] = Timestamp(date: imageUploadingStatus.startedAt)
+            data["imageUploadingStatus"] = FieldValue.arrayUnion([imageUploadingStatusData])
+        }
+
+        let _ = dbRef.document(spot.id ?? "").setData(data) { err in
             if let err = err {
                 error = err
             }
@@ -102,23 +106,34 @@ class SpotRepositoryImpl: SpotRepository {
         return
     }
     
-    func postPhotos(uid: String, spot: Spot, assets: [Data]?) async throws {
-        let semaphore = DispatchSemaphore(value: 0)
-        var error: Error? = nil
-        var data = spot.asDictionary
-        data["id"] = spot.id
-        data["createdAt"] = Timestamp(date: Date())
-        data["uid"] = uid
-        
-        dbRef.addDocument(data: data) { err in
+    func updateImageUploadingStatus(uid: String, spotId: String, imageUploadingStatus: ImageUploadingStatus) async {
+        var data: [String: Any] = [:]
+        var imageUploadingStatusData = imageUploadingStatus.asDictionary
+        imageUploadingStatusData["startedAt"] = Timestamp(date: imageUploadingStatus.startedAt)
+        data["imageUploadingStatus"] = FieldValue.arrayRemove([imageUploadingStatusData])
+
+        let _ = dbRef.document(spotId).updateData(data) { err in
             if let err = err {
-                error = err
+                //
             }
-            semaphore.signal()
         }
-        semaphore.wait()
-        if let error = error {
-            throw error
+        return
+    }
+    
+    func postPhotos(uid: String, spotId: String, photos: [Photo]) async {
+        let batch = Firestore.firestore().batch()
+        
+        for photo in photos {
+            var data = photo.asDictionary
+            data["timestamp"] = Timestamp(date: photo.timestamp)
+            data["createdAt"] = Timestamp(date: photo.createdAt ?? photo.timestamp)
+            dbRef.document(spotId).collection("photos").addDocument(data: data)
+        }
+
+        let _ = batch.commit() { err in
+            if let err = err {
+                //
+            }
         }
         return
     }

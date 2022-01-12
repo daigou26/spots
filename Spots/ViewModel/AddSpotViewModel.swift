@@ -66,7 +66,7 @@ class AddSpotViewModel: ObservableObject {
     }
     
     func checkToExistsSameAddressSpot(postSpot: @escaping () -> Void) {
-        spotUseCase.checkSpotDuplication(uid: Account.shared.uid, title: title, address: address).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+        spotUseCase.checkSpotDuplication(title: title, address: address).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: break
             case .failure: break

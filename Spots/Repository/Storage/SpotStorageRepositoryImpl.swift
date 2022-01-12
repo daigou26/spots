@@ -81,7 +81,7 @@ class SpotStorageRepositoryImpl: SpotStorageRepository {
         semaphore.wait()
 
         if let imageUrl = imageUrl {
-            return Photo(imageUrl: imageUrl, name: name, timestamp: date)
+            return Photo(imageUrl: imageUrl, name: name, timestamp: date, createdAt: date)
         }
         return nil
     }
