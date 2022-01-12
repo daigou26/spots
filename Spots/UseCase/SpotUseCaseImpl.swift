@@ -11,6 +11,7 @@ class SpotUseCaseImpl: SpotUseCase {
     let spotStorageRepository: SpotStorageRepository
     let locationUseCase: LocationUseCase
     let imageUseCase: ImageUseCase
+    let uid = Account.shared.uid
     
     init(spotRepository: SpotRepository = SpotRepositoryImpl(), spotStorageRepository: SpotStorageRepository = SpotStorageRepositoryImpl(), locationUseCase: LocationUseCase = LocationUseCaseImpl(), imageUseCase: ImageUseCase = ImageUseCaseImpl()) {
         self.spotRepository = spotRepository
@@ -19,12 +20,12 @@ class SpotUseCaseImpl: SpotUseCase {
         self.imageUseCase = imageUseCase
     }
     
-    func getSpots(uid: String) -> AnyPublisher<[Spot]?, Error> {
+    func getSpot(spotId: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
                 Task {
                     do {
-                        let res: [Spot]? = try await self.spotRepository.getSpots(uid: uid)
+                        let res: Spot = try await self.spotRepository.getSpot(spotId: spotId)
                         promise(.success(res))
                     } catch {
                         promise(.failure(error))
@@ -34,7 +35,45 @@ class SpotUseCaseImpl: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func postSpot(uid: String, mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) -> AnyPublisher<Spot, Error> {
+    func checkSpotDuplication(title: String, address: String) -> AnyPublisher<CheckSpotDuplicationResponse, Error> {
+        return Deferred {
+            Future { promise in
+                Task {
+                    do {
+                        let spots = try await self.spotRepository.getSpotByAddress(uid: self.uid, address: address)
+                        if !spots.isEmpty {
+                            for spot in spots {
+                                if title == spot.title {
+                                    promise(.success(.TitleAndAddress))
+                                }
+                            }
+                            promise(.success(.Address))
+                        }
+                        promise(.success(.NotDuplicated))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func getSpots() -> AnyPublisher<[Spot]?, Error> {
+        return Deferred {
+            Future { promise in
+                Task {
+                    do {
+                        let res: [Spot]? = try await self.spotRepository.getSpots(uid: self.uid)
+                        promise(.success(res))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
                 Task {
@@ -45,16 +84,21 @@ class SpotUseCaseImpl: SpotUseCase {
                             imageUrl = try await self.spotStorageRepository.uploadMainImage(spotId: spotId, image: mainImage)
                         }
                         let coordinate = try await self.locationUseCase.geocode(address: address)
-                        let spot: Spot = Spot(id: spotId, title: title, imageUrl: imageUrl, address: address, latitude: coordinate.latitude, longitude: coordinate.longitude, favorite: favorite, star: star, memo: memo)
-                        try await self.spotRepository.postSpot(uid: uid, spot: spot, assets: nil)
-                        if let images = images {
-                            let imagesData = await self.imageUseCase.extractImagesData(assets: images.map({ image in
-                                return image.asset
-                            }))
-                            let _ = await self.spotStorageRepository.uploadImages(spotId: spotId, images: imagesData)
+                        let imageUploadingStatus = ImageUploadingStatus(count: images?.count ?? 0, userName: Account.shared.name, startedAt: Date())
+                        let spot: Spot = Spot(id: spotId, title: title, imageUrl: imageUrl, address: address, latitude: coordinate.latitude, longitude: coordinate.longitude, favorite: favorite, star: star, imageUploadingStatus: [imageUploadingStatus], memo: memo)
+                        
+                        try await self.spotRepository.postSpot(uid: self.uid, spot: spot)
+                        
+                        if let images = images, images.count > 0 {
+                            Task {
+                                let imagesData = await self.imageUseCase.extractImagesData(assets: images.map({ image in
+                                    return image.asset
+                                }))
+                                let photos = await self.spotStorageRepository.uploadImages(spotId: spotId, images: imagesData)
+                                await self.spotRepository.postPhotos(uid: self.uid, spotId: spotId, photos: photos)
+                                await self.spotRepository.updateImageUploadingStatus(uid: self.uid, spotId: spotId, imageUploadingStatus: imageUploadingStatus)
+                            }
                         }
-                        
-                        
                         promise(.success((spot)))
                     } catch {
                         promise(.failure(error))

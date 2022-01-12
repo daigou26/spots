@@ -5,6 +5,6 @@
 import Foundation
 
 enum AuthState {
-    case signedIn
-    case signedOut
+    case SignedIn
+    case SignedOut
 }

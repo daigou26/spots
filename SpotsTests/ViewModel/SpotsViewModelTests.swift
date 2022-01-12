@@ -7,6 +7,22 @@ import Combine
 @testable import Spots
 
 class SpotUseCaseMock: SpotUseCase {
+    func getSpot(spotId: String) -> AnyPublisher<Spot, Error> {
+        return Deferred {
+            Future { promise in
+                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true)))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func checkSpotDuplication(uid: String, title: String, address: String) -> AnyPublisher<CheckSpotDuplicationResponse, Error> {
+        return Deferred {
+            Future { promise in
+                return promise(.success(.TitleAndAddress))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     func getSpots(uid: String) -> AnyPublisher<[Spot]?, Error> {
         return Deferred {
             Future { promise in
@@ -41,5 +57,15 @@ class SpotsViewModelTests: XCTestCase {
         await waitForExpectations(timeout: 1)
         XCTAssertEqual(spotsViewModel.spots, [])
         XCTAssertEqual(spotsViewModel.isQueried, true)
+    }
+    
+    func testpostSpot() async throws {
+        let expectation = self.expectation(description: #function)
+        let spotsViewModel = SpotsViewModel(SpotUseCaseMock())
+        XCTAssertEqual(spotsViewModel.spots.count, 0)
+        spotsViewModel.postSpot(mainImage: nil, images: nil, title: "", address: "", favorite: false, star: false, memo: "")
+        expectation.fulfill()
+        await waitForExpectations(timeout: 1)
+        XCTAssertEqual(spotsViewModel.spots.count, 1)
     }
 }

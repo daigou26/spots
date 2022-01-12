@@ -1,27 +1,16 @@
 //
-//  Created on 2021/11/15
+//  Created on 2021/12/28
 //
 
 import Foundation
 import FirebaseFirestoreSwift
-import CoreLocation
 
-struct Spot: Hashable {
+struct Photo: Hashable {
     @DocumentID var id: String?
-    var title: String
-    var imageUrl: String?
-    var address: String
-    let latitude: Double
-    let longitude: Double
-    var favorite: Bool
-    var star: Bool
-    var category: [String]?
-    var memo: String?
+    var imageUrl: String
+    var name: String
+    let timestamp: Date
     var createdAt: Date?
-    var updatedAt: Date?
-    var coordinate: CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    }
     
     var asDictionary : [String:Any] {
         let mirror = Mirror(reflecting: self)

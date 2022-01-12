@@ -31,7 +31,7 @@ struct SelectImagesView: View {
                         }
                     }
                     
-                    if imagePickerViewModel.libraryStatus == .limited {
+                    if imagePickerViewModel.libraryStatus == .Limited {
                         Text("追加で写真を選択する").foregroundColor(.gray).padding(.top, 20)
                         Button(action: {
                             // Go to settings

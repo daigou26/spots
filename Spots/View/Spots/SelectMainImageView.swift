@@ -21,7 +21,7 @@ struct SelectMainImageView: View {
                         Color.lightGray.frame(width: width, height: width * 0.625).padding(.bottom, 15)
                     }
                     
-                    if imagePickerViewModel.libraryStatus == .denied {
+                    if imagePickerViewModel.libraryStatus == .Denied {
                         Spacer()
                         Text("写真へのアクセスを許可してください").foregroundColor(.gray)
                         Button(action: {
@@ -42,7 +42,7 @@ struct SelectMainImageView: View {
                                     }
                                 }
                                 
-                                if imagePickerViewModel.libraryStatus == .limited {
+                                if imagePickerViewModel.libraryStatus == .Limited {
                                     Text("追加で写真を選択する").foregroundColor(.gray).padding(.top, 20)
                                     Button(action: {
                                         // Go to settings
@@ -77,7 +77,7 @@ struct SelectMainImageView: View {
                     }
                 }
             }.onAppear {
-                if imagePickerViewModel.libraryStatus == .denied {
+                if imagePickerViewModel.libraryStatus == .Denied {
                     imagePickerViewModel.setUp()
                 }
             }

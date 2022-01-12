@@ -4,6 +4,7 @@
 
 import XCTest
 import MapKit
+import Combine
 @testable import Spots
 
 class LocationUseCaseMock: LocationUseCase {
@@ -23,8 +24,17 @@ class AddSpotViewModelTests: XCTestCase {
     }
 
     func testValidateAddress() async throws {
-        let addSpotViewModel = AddSpotViewModel(LocationUseCaseMock())
+        let addSpotViewModel = AddSpotViewModel(spotUseCase: SpotUseCaseMock(), locationUseCase: LocationUseCaseMock())
         await addSpotViewModel.validateAddress(address: "TOKYO")
         XCTAssertEqual(addSpotViewModel.addressErrorMessage, "")
+    }
+
+    func testCheckToExistsSameAddressSpot() async throws {
+        let expectation = self.expectation(description: #function)
+        let addSpotViewModel = AddSpotViewModel(spotUseCase: SpotUseCaseMock())
+        addSpotViewModel.checkToExistsSameAddressSpot(postSpot: {})
+        expectation.fulfill()
+        await waitForExpectations(timeout: 1)
+        XCTAssertEqual(addSpotViewModel.duplicatedTitleAndAddress, true)
     }
 }
