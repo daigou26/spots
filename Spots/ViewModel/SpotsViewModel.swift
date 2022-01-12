@@ -6,13 +6,19 @@ import Foundation
 import Combine
 import SwiftUI
 import UIKit
+import MapKit
 
 class SpotsViewModel: ObservableObject {
+    let generator = UINotificationFeedbackGenerator()
     @Published var spots: [Spot] = []
     @Published var selectedSpots: [Spot] = []
     @Published var showAddSpotSheet: Bool = false
     @Published var isQueried: Bool = false
     @Published var goSpotsView: Bool = false
+    @Published var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498),
+        span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
+    )
     
     private var spotUseCase: SpotUseCase
     var cancellables = [AnyCancellable]()
@@ -53,6 +59,11 @@ class SpotsViewModel: ObservableObject {
             }
         }, receiveValue: { spot in
             self.spots.append(spot)
+            self.region = MKCoordinateRegion(
+                center: CLLocationCoordinate2D(latitude: spot.latitude, longitude: spot.longitude),
+                span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+            )
+            self.generator.notificationOccurred(.success)
         }).store(in: &cancellables)
     }
 }

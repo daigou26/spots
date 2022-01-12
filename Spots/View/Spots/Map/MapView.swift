@@ -6,16 +6,13 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewRepresentable {
+    @EnvironmentObject var spotsViewModel: SpotsViewModel
     //    @Binding var category: [String]
     @State var spots: [Spot]
     @State var centerCoordinate: CLLocationCoordinate2D
     @Binding var selectedSpots: [Spot]
     @Binding var showSpotListSheet: Bool
     
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498),
-        span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
-    )
     
     var annotations = [MKAnnotation]()
     
@@ -39,7 +36,7 @@ struct MapView: UIViewRepresentable {
         view.delegate = context.coordinator
         view.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: "cluster")
         view.mapType = .mutedStandard
-        view.setRegion(region, animated: true)
+        view.setRegion(spotsViewModel.region, animated: true)
         return view
     }
     
@@ -50,6 +47,9 @@ struct MapView: UIViewRepresentable {
         }
 
         if (viewAnnotations.count != annotations.count) {
+            if (viewAnnotations.count < annotations.count) {
+                view.setRegion(spotsViewModel.region, animated: true)
+            }
             view.removeAnnotations(view.annotations)
             view.addAnnotations(annotations.filter({ annotation in
                 guard let annotation = annotation as? CustomPointAnnotation else {return false}
