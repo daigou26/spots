@@ -15,6 +15,7 @@ class SpotsViewModel: ObservableObject {
     @Published var showAddSpotSheet: Bool = false
     @Published var isQueried: Bool = false
     @Published var goSpotsView: Bool = false
+    @Published var goSpotDetailView: Bool = false
     @Published var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498),
         span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)

@@ -11,6 +11,10 @@ class SpotRepositoryMock: SpotRepository {
         return Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true)
     }
     
+    func getSpots(uid: String) async throws -> [Spot]? {
+        return []
+    }
+    
     func getSpotByAddress(uid: String, address: String) async throws -> [Spot] {
         return []
     }
@@ -23,12 +27,16 @@ class SpotRepositoryMock: SpotRepository {
         return ""
     }
     
-    func postSpot(uid: String, spot: Spot, assets: [Data]?) async throws {
+    func postSpot(uid: String, spot: Spot) async throws {
         return
     }
     
-    func getSpots(uid: String) async throws -> [Spot]? {
-        return []
+    func postPhotos(uid: String, spotId: String, photos: [Photo]) async {
+        return
+    }
+    
+    func updateImageUploadingStatus(uid: String, spotId: String, imageUploadingStatus: ImageUploadingStatus) async {
+        return
     }
 }
 
@@ -43,7 +51,7 @@ class SpotsUseCaseTests: XCTestCase {
 
     func testGetSpots() async throws {
         let spotUseCase = SpotUseCaseImpl(spotRepository: SpotRepositoryMock())
-        let _ = spotUseCase.getSpots(uid: "").sink(receiveCompletion: { completion in
+        let _ = spotUseCase.getSpots().receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: break
             case .failure: break

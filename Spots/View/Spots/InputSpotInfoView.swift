@@ -49,7 +49,7 @@ struct InputSpotInfoView: View {
                         Text("メモ")
                         Spacer()
                     }
-                    TextEditor(text: $memo).frame(height: 200).background(Color.red)
+                    TextEditor(text: $memo).frame(height: 200)
                 }.alert("スポットが重複しています", isPresented: $addSpotViewModel.duplicatedTitleAndAddress, actions:{
                     Button(action: {
                         addSpotViewModel.setLoading(value: false)

@@ -12,12 +12,23 @@ class SpotRepositoryImpl: SpotRepository {
         let doc = try await dbRef.document(spotId).getDocument()
         if doc.exists {
             let data = doc.data()
-            if let data = data, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let imageUrl: String = data["imageUrl"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+            if let data = data, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+                let imageUrl = data["imageUrl"] as? String
                 let category = data["category"] as? [String]
                 let memo = data["memo"] as? String
                 let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
                 let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
-                return Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, createdAt: createdAt, updatedAt: updatedAt)
+                
+                var imageUploadingStatus: [ImageUploadingStatus] = []
+                if let uploadingStatus = data["imageUploadingStatus"] as? [[String: Any]] {
+                    for s in uploadingStatus {
+                        if let count = s["count"] as? Int, let userName = s["userName"] as? String, let startedAt = (s["startedAt"] as? Timestamp)?.dateValue() {
+                            imageUploadingStatus.append(ImageUploadingStatus(count: count, userName: userName, startedAt: startedAt))
+                        }
+                    }
+                }
+                
+                return Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, imageUploadingStatus: imageUploadingStatus, category: category, memo: memo, createdAt: createdAt, updatedAt: updatedAt)
             }
         }
         throw QueryError.NotFound
@@ -30,7 +41,8 @@ class SpotRepositoryImpl: SpotRepository {
         if !snapshot.isEmpty {
             for doc in snapshot.documents {
                 let data = doc.data()
-                if doc.exists, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let imageUrl: String = data["imageUrl"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+                if doc.exists, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+                    let imageUrl = data["imageUrl"] as? String
                     let category = data["category"] as? [String]
                     let memo = data["memo"] as? String
                     let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
@@ -54,7 +66,7 @@ class SpotRepositoryImpl: SpotRepository {
                 }
             }
         }
-
+        
         return photos
     }
     
@@ -64,7 +76,8 @@ class SpotRepositoryImpl: SpotRepository {
         if !snapshot.isEmpty {
             for document in snapshot.documents {
                 let data = document.data()
-                if document.exists, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let imageUrl: String = data["imageUrl"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+                if document.exists, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+                    let imageUrl = data["imageUrl"] as? String
                     let category = data["category"] as? [String]
                     let memo = data["memo"] as? String
                     let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
@@ -87,13 +100,81 @@ class SpotRepositoryImpl: SpotRepository {
         
         data["createdAt"] = Timestamp(date: Date())
         data["uid"] = uid
-        if let imageUploadingStatus = spot.imageUploadingStatus?.first {
+        if let imageUploadingStatus = spot.imageUploadingStatus?.first, imageUploadingStatus.count > 0 {
             var imageUploadingStatusData = imageUploadingStatus.asDictionary
             imageUploadingStatusData["startedAt"] = Timestamp(date: imageUploadingStatus.startedAt)
             data["imageUploadingStatus"] = FieldValue.arrayUnion([imageUploadingStatusData])
         }
-
+        
         let _ = dbRef.document(spot.id ?? "").setData(data) { err in
+            if let err = err {
+                error = err
+            }
+            semaphore.signal()
+        }
+        semaphore.wait()
+        if let error = error {
+            throw error
+        }
+        return
+    }
+    
+    func updateSpot(
+        spotId: String,
+        title: String?,
+        imageUrl: String?,
+        address: String?,
+        latitude: Double?,
+        longitude: Double?,
+        favorite: Bool?,
+        star: Bool?,
+        imageUploadingStatus: [ImageUploadingStatus]?,
+        category: [String]?,
+        memo: String?
+    ) async throws {
+        let semaphore = DispatchSemaphore(value: 0)
+        var error: Error? = nil
+        var data: [String: Any] = [:]
+        
+        if let title = title {
+            data["title"] = title
+        }
+        
+        if let imageUrl = imageUrl {
+            data["imageUrl"] = imageUrl
+        }
+        
+        if let address = address, let latitude = latitude, let longitude = longitude {
+            data["address"] = address
+            data["latitude"] = latitude
+            data["longitude"] = longitude
+        }
+        
+        if let favorite = favorite {
+            data["favorite"] = favorite
+        }
+       
+        if let star = star {
+            data["star"] = star
+        }
+        
+        if let imageUploadingStatus = imageUploadingStatus?.first, imageUploadingStatus.count > 0 {
+            var imageUploadingStatusData = imageUploadingStatus.asDictionary
+            imageUploadingStatusData["startedAt"] = Timestamp(date: imageUploadingStatus.startedAt)
+            data["imageUploadingStatus"] = FieldValue.arrayUnion([imageUploadingStatusData])
+        }
+        
+        if let category = category {
+            data["category"] = category
+        }
+        
+        if let memo = memo {
+            data["memo"] = memo
+        }
+        
+        data["updatedAt"] = Timestamp(date: Date())
+        
+        let _ = dbRef.document(spotId).updateData(data) { err in
             if let err = err {
                 error = err
             }
@@ -111,7 +192,7 @@ class SpotRepositoryImpl: SpotRepository {
         var imageUploadingStatusData = imageUploadingStatus.asDictionary
         imageUploadingStatusData["startedAt"] = Timestamp(date: imageUploadingStatus.startedAt)
         data["imageUploadingStatus"] = FieldValue.arrayRemove([imageUploadingStatusData])
-
+        
         let _ = dbRef.document(spotId).updateData(data) { err in
             if let err = err {
                 //
@@ -125,11 +206,12 @@ class SpotRepositoryImpl: SpotRepository {
         
         for photo in photos {
             var data = photo.asDictionary
+            data["uid"] = uid
             data["timestamp"] = Timestamp(date: photo.timestamp)
             data["createdAt"] = Timestamp(date: photo.createdAt ?? photo.timestamp)
             dbRef.document(spotId).collection("photos").addDocument(data: data)
         }
-
+        
         let _ = batch.commit() { err in
             if let err = err {
                 //
