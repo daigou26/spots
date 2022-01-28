@@ -15,14 +15,17 @@ struct SpotCard: View {
                 AsyncImage(url: URL(string: imageUrl)) { image in
                     image.resizable()
                 } placeholder: {
-                    VStack {
-                        Spacer()
-                        HStack {
+                    ZStack {
+                        VStack {
                             Spacer()
-                            ProgressView()
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
+                            }
                             Spacer()
-                        }
-                        Spacer()
+                        }.zIndex(1)
+                        Rectangle().fill(Color.white).aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
                     }
                 }.aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
             } else {

@@ -7,6 +7,14 @@ import Combine
 @testable import Spots
 
 class SpotUseCaseMock: SpotUseCase {
+    func getPhotos(spotId: String) -> AnyPublisher<[Photo], Error> {
+        return Deferred {
+            Future { promise in
+                return promise(.success([Photo(imageUrl: "", name: "", timestamp: Date())]))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     func getSpot(spotId: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
@@ -15,7 +23,7 @@ class SpotUseCaseMock: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func checkSpotDuplication(uid: String, title: String, address: String) -> AnyPublisher<CheckSpotDuplicationResponse, Error> {
+    func checkSpotDuplication(title: String, address: String) -> AnyPublisher<CheckSpotDuplicationResponse, Error> {
         return Deferred {
             Future { promise in
                 return promise(.success(.TitleAndAddress))
@@ -23,7 +31,7 @@ class SpotUseCaseMock: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func getSpots(uid: String) -> AnyPublisher<[Spot]?, Error> {
+    func getSpots() -> AnyPublisher<[Spot]?, Error> {
         return Deferred {
             Future { promise in
                 return promise(.success([]))
@@ -31,7 +39,7 @@ class SpotUseCaseMock: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func postSpot(uid: String, mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) -> AnyPublisher<Spot, Error> {
+    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
                 return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true)))

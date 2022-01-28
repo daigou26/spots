@@ -7,42 +7,56 @@ import SwiftUI
 struct SpotsView: View {
     @EnvironmentObject var viewModel: SpotsViewModel
     @State var showSpotListSheet: Bool = false
+    @State var goDetailView: Bool = false
+    @State var spotId: String = ""
     
     var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
-                Button("Refresh") {
-                    viewModel.refreshSpots()
-                }.buttonStyle(RefreshButtonStyle())
-                Spacer()
-                HStack {
+        NavigationView {
+            ZStack(alignment: .top) {
+                VStack {
+                    Button("Refresh") {
+                        viewModel.refreshSpots()
+                    }.buttonStyle(RefreshButtonStyle())
                     Spacer()
-                    Button(action: {
-                        viewModel.setShowAddSpotSheet(true)
-                    }) {
-                        Image(systemName: "mappin.and.ellipse")
-                    }.buttonStyle(AddSpotButtonStyle()).sheet(isPresented: $viewModel.showAddSpotSheet) {
-                        SelectMainImageView().environmentObject(AddSpotViewModel()).environmentObject(ImagePickerViewModel())
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            viewModel.setShowAddSpotSheet(true)
+                        }) {
+                            Image(systemName: "mappin.and.ellipse")
+                        }.buttonStyle(AddSpotButtonStyle()).sheet(isPresented: $viewModel.showAddSpotSheet) {
+                            SelectMainImageView().environmentObject(AddSpotViewModel()).environmentObject(ImagePickerViewModel())
+                        }
                     }
+                }.zIndex(1)
+                
+                NavigationLink(destination: SpotDetailView(id: spotId, goSpotDetailView: $viewModel.goSpotDetailView), isActive: $viewModel.goSpotDetailView) {
+                    EmptyView()
                 }
-            }.zIndex(1)
-            
-            MapView(spots: viewModel.spots, showSpotListSheet: $showSpotListSheet, selectedSpots: $viewModel.selectedSpots).edgesIgnoringSafeArea(.top)
-        }.partialSheet(isPresented: $showSpotListSheet, sheet: {
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack(alignment: .leading) {
-                    Text("スポット\(viewModel.selectedSpots.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
-                    ForEach(viewModel.selectedSpots, id: \.self) { spot in
-                        SpotCard(spot: spot).padding(.bottom, 28)
-                    }
-                }.frame(maxWidth: .infinity, alignment: .leading)
-            }.frame(maxWidth: .infinity).padding(EdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20))
-        }, onEnd: {}).onAppear {
-            // To query only one time
-            if !viewModel.isQueried {
-                self.viewModel.getSpots()
+                
+                MapView(spots: viewModel.spots, showSpotListSheet: $showSpotListSheet, selectedSpots: $viewModel.selectedSpots).edgesIgnoringSafeArea(.top)
+            }.navigationBarHidden(true).partialSheet(isPresented: $showSpotListSheet, sheet: {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(alignment: .leading) {
+                        Text("スポット\(viewModel.selectedSpots.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
+                        ForEach(viewModel.selectedSpots, id: \.self) { spot in
+                            if let spotId = spot.id {
+                                SpotCard(spot: spot).padding(.bottom, 28).onTapGesture {
+                                    self.showSpotListSheet = false
+                                    self.spotId = spotId
+                                    self.viewModel.goSpotDetailView = true
+                                }
+                            }
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+                }.frame(maxWidth: .infinity).padding(EdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20))
+            }, onEnd: {}).onAppear {
+                // To query only one time
+                if !viewModel.isQueried {
+                    self.viewModel.getSpots()
+                }
             }
-        }
+        }.accentColor(.black) 
     }
 }
 
