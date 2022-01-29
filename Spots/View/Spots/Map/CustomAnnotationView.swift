@@ -29,15 +29,23 @@ final class CustomAnnotationView: MKAnnotationView {
             sub.removeFromSuperview()
         }
         
-        var vc: UIHostingController = UIHostingController(rootView: CustomAnnotation(count: 0, imageUrl: "Sample"))
+        var vc: UIHostingController = UIHostingController(rootView: CustomAnnotation(count: 0, imageUrl: ""))
         if let clusterAnnotation = annotation as? MKClusterAnnotation {
+            
             let annotations = clusterAnnotation.memberAnnotations
-            let spots = annotations.map({ annotation -> Spot? in
+            var spots = annotations.map({ annotation -> Spot? in
                 if let customAnnotation = annotation as? CustomPointAnnotation {
                     return customAnnotation.spot
                 }
                 return nil
             }).compactMap{$0}
+            spots.sort {
+                if let c0 = $0.createdAt, let c1 = $1.createdAt {
+                  return  c0.timeIntervalSince1970 > c1.timeIntervalSince1970
+                }
+                return false
+            }
+
             vc = UIHostingController(rootView: CustomAnnotation(count: clusterAnnotation.memberAnnotations.count, imageUrl: spots[0].imageUrl ?? ""))
         } else {
             if let customAnnotation = annotation as? CustomPointAnnotation {

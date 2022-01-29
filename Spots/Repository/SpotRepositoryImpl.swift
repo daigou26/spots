@@ -104,6 +104,8 @@ class SpotRepositoryImpl: SpotRepository {
             var imageUploadingStatusData = imageUploadingStatus.asDictionary
             imageUploadingStatusData["startedAt"] = Timestamp(date: imageUploadingStatus.startedAt)
             data["imageUploadingStatus"] = FieldValue.arrayUnion([imageUploadingStatusData])
+        } else {
+            data["imageUploadingStatus"] = []
         }
         
         let _ = dbRef.document(spot.id ?? "").setData(data) { err in

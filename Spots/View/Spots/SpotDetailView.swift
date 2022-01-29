@@ -10,6 +10,8 @@ struct SpotDetailView: View {
     @ObservedObject var viewModel = SpotDetailViewModel()
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
+    @State var imageIndex: Int = 0
+    @State var goImageList = false
     
     var body: some View {
         VStack {
@@ -44,7 +46,7 @@ struct SpotDetailView: View {
                             if let memo = spot.memo {
                                 Text(memo).frame(height: 60).padding(.vertical).foregroundColor(.textGray)
                             } else {
-                                Rectangle().frame(height: 60)
+                                Rectangle().frame(height: 60).foregroundColor(.white)
                             }
                             
                             if viewModel.imageUploadingStatus != "" {
@@ -57,19 +59,25 @@ struct SpotDetailView: View {
                         
                         ScrollView {
                             VStack {
-                                LazyVGrid(columns: Array(repeating: .init(.fixed((width - 25) / 3)), count: 3), alignment: .center, spacing: 5) {
-                                    ForEach(viewModel.photos, id: \.self) { photo in
-                                        AsyncImage(url: URL(string: photo.imageUrl)) { image in
+                                LazyVGrid(columns: Array(repeating: .init(.fixed((width - 25) / 3)), count: 3), alignment: .center, spacing: 3) {
+                                    ForEach(viewModel.photos.indices, id: \.self) { i in
+                                        AsyncImage(url: URL(string: viewModel.photos[i].imageUrl)) { image in
                                             image.resizable()
                                                 .aspectRatio(contentMode: .fill)
                                                 .frame(width: (width - 25) / 3, height: (width - 25) / 3)
                                                 .cornerRadius(10)
                                         } placeholder: {
-                                            Rectangle().background(Color.background)
+                                            Rectangle().fill(.background).frame(width: (width - 25) / 3, height: (width - 25) / 3)
+                                        }.onTapGesture {
+                                            imageIndex = i
+                                            goImageList = true
                                         }
                                     }
                                 }
                             }
+                        }
+                        NavigationLink(destination: SpotImageList(i: imageIndex, photos: viewModel.photos), isActive: $goImageList) {
+                            EmptyView()
                         }
                     }.navigationBarTitleDisplayMode(.inline).navigationBarBackButtonHidden(true).toolbar {
                         ToolbarItem(placement: .navigationBarLeading){
