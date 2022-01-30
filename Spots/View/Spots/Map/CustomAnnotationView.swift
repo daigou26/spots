@@ -15,7 +15,6 @@ final class CustomAnnotationView: MKAnnotationView {
         clusteringIdentifier = "cluster"
         
         frame = CGRect(x: 0, y: 0, width: width, height: height)
-        centerOffset = CGPoint(x: 0, y: -height / 2)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,7 +53,8 @@ final class CustomAnnotationView: MKAnnotationView {
                 return
             }
         }
-        vc.view.bounds = CGRect(x: -width/2, y: -height/2, width: width, height: height)
+
+        vc.view.frame = bounds
         vc.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         subview = vc.view
         addSubview(vc.view)
