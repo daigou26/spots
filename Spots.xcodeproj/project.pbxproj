@@ -58,6 +58,7 @@
 		C0B4CFFF277A35FB008F1394 /* QueryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFFE277A35FA008F1394 /* QueryError.swift */; };
 		C0B4D001277A3696008F1394 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D000277A3696008F1394 /* Photo.swift */; };
 		C0B4D0042787103D008F1394 /* CheckSpotDuplicationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D0032787103D008F1394 /* CheckSpotDuplicationResponse.swift */; };
+		C0B4D00927A3E8CA008F1394 /* SpotImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D00827A3E8CA008F1394 /* SpotImageList.swift */; };
 		C0D9C06A275773800052A5C0 /* AddSpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */; };
 		C0D9C06C275776FE0052A5C0 /* SelectImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */; };
 		C0D9C06E275A49980052A5C0 /* InputSpotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */; };
@@ -148,6 +149,7 @@
 		C0B4CFFE277A35FA008F1394 /* QueryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryError.swift; sourceTree = "<group>"; };
 		C0B4D000277A3696008F1394 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		C0B4D0032787103D008F1394 /* CheckSpotDuplicationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSpotDuplicationResponse.swift; sourceTree = "<group>"; };
+		C0B4D00827A3E8CA008F1394 /* SpotImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotImageList.swift; sourceTree = "<group>"; };
 		C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewModel.swift; sourceTree = "<group>"; };
 		C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImagesView.swift; sourceTree = "<group>"; };
 		C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSpotInfoView.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */,
 				C058DAFA275CE77A0068AF66 /* InputLocationView.swift */,
 				C0B4CFF8277A2F3A008F1394 /* SpotDetailView.swift */,
+				C0B4D00827A3E8CA008F1394 /* SpotImageList.swift */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */,
 				C0483730273F0E710087AAFC /* UserRepositoryImpl.swift in Sources */,
 				C03F77E32760FFE600634036 /* LocationUseCaseImpl.swift in Sources */,
+				C0B4D00927A3E8CA008F1394 /* SpotImageList.swift in Sources */,
 				C05DD380274FC65D0071C163 /* SpotRepository.swift in Sources */,
 				C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */,
 				C05DD36E27417E0C0071C163 /* Spot.swift in Sources */,

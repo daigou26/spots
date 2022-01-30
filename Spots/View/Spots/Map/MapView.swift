@@ -84,12 +84,18 @@ struct MapView: UIViewRepresentable {
                 
                 if let clusterAnnotation = annotation as? MKClusterAnnotation {
                     let annotations = clusterAnnotation.memberAnnotations
-                    let spots = annotations.map({ annotation -> Spot? in
+                    var spots = annotations.map({ annotation -> Spot? in
                         if let customAnnotation = annotation as? CustomPointAnnotation {
                             return customAnnotation.spot
                         }
                         return nil
                     }).compactMap{$0}
+                    spots.sort {
+                        if let c0 = $0.createdAt, let c1 = $1.createdAt {
+                          return  c0.timeIntervalSince1970 > c1.timeIntervalSince1970
+                        }
+                        return false
+                    }
                     self.parent.selectedSpots = spots
                 } else {
                     if let customAnnotation = annotation as? CustomPointAnnotation {
