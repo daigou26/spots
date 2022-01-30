@@ -29,25 +29,11 @@ struct CustomAnnotation: View {
                     }
                     .shadow(radius: 7)
             }
-            Triangle().fill(Color.white)
-                .frame(width: 30, height: 8)
-                .shadow(radius: 7)
         }
     }
     
     var countCoordinate: CGFloat {
         return imageSize * sqrt(2) / 4 + 2
-    }
-}
-
-struct Triangle: Shape {
-    func path(in rect: CGRect) -> Path {
-        Path { path in
-            path.move(to: CGPoint(x: rect.midX, y: rect.maxY))
-            path.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
-            path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
-            path.closeSubpath()
-        }
     }
 }
 

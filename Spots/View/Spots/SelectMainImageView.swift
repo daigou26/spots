@@ -61,7 +61,7 @@ struct SelectMainImageView: View {
             }.interactiveDismissDisabled(addSpotViewModel.loading).navigationTitle("メインの写真").navigationBarTitleDisplayMode(.inline).toolbar {
                 ToolbarItem(placement: .navigationBarLeading){
                     Button(action: {
-                        spotsViewModel.setShowAddSpotSheet(false)
+                        spotsViewModel.showAddSpotSheet = false
                     }) {
                         Image(systemName: "xmark").foregroundColor(.black)
                     }

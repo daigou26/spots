@@ -35,6 +35,22 @@ class SpotRepositoryMock: SpotRepository {
         return
     }
     
+    func updateSpot(
+        spotId: String,
+        title: String?,
+        imageUrl: String?,
+        address: String?,
+        latitude: Double?,
+        longitude: Double?,
+        favorite: Bool?,
+        star: Bool?,
+        imageUploadingStatus: [ImageUploadingStatus]?,
+        category: [String]?,
+        memo: String?
+    ) async {
+        return
+    }
+    
     func updateImageUploadingStatus(uid: String, spotId: String, imageUploadingStatus: ImageUploadingStatus) async {
         return
     }

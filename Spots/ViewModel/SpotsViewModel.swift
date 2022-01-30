@@ -11,8 +11,8 @@ import MapKit
 class SpotsViewModel: ObservableObject {
     let generator = UINotificationFeedbackGenerator()
     @Published var spots: [Spot] = []
-    @Published var selectedSpots: [Spot] = []
     @Published var showAddSpotSheet: Bool = false
+    @Published var showSpotListSheet: Bool = false
     @Published var isQueried: Bool = false
     @Published var goSpotsView: Bool = false
     @Published var goSpotDetailView: Bool = false
@@ -20,6 +20,7 @@ class SpotsViewModel: ObservableObject {
         center: CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498),
         span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
     )
+    @Published var selectedAnnotations: [MKAnnotation] = []
     
     private var spotUseCase: SpotUseCase
     var cancellables = [AnyCancellable]()
@@ -28,10 +29,26 @@ class SpotsViewModel: ObservableObject {
         self.spotUseCase = spotUseCase
     }
     
-    func setShowAddSpotSheet(_ value: Bool) {
-        self.showAddSpotSheet = value
+    func getSelectedSpots() -> [Spot] {
+        if selectedAnnotations.count == 0 {
+            return []
+        } else {
+            var spots = selectedAnnotations.map({ annotation -> Spot? in
+                if let customAnnotation = annotation as? CustomPointAnnotation {
+                    return customAnnotation.spot
+                }
+                return nil
+            }).compactMap{$0}
+            spots.sort {
+                if let c0 = $0.createdAt, let c1 = $1.createdAt {
+                  return  c0.timeIntervalSince1970 > c1.timeIntervalSince1970
+                }
+                return false
+            }
+            return spots
+        }
     }
-    
+
     func getSpots() {
         spotUseCase.getSpots().receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {

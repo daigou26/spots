@@ -21,7 +21,7 @@ struct SpotsView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            viewModel.setShowAddSpotSheet(true)
+                            viewModel.showAddSpotSheet = true
                         }) {
                             Image(systemName: "mappin.and.ellipse")
                         }.buttonStyle(AddSpotButtonStyle()).sheet(isPresented: $viewModel.showAddSpotSheet) {
@@ -34,12 +34,12 @@ struct SpotsView: View {
                     EmptyView()
                 }
                 
-                MapView(spots: viewModel.spots, showSpotListSheet: $showSpotListSheet, selectedSpots: $viewModel.selectedSpots).edgesIgnoringSafeArea(.top)
+                MapView(spots: viewModel.spots, showSpotListSheet: $showSpotListSheet).edgesIgnoringSafeArea(.top)
             }.navigationBarHidden(true).partialSheet(isPresented: $showSpotListSheet, sheet: {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading) {
-                        Text("スポット\(viewModel.selectedSpots.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
-                        ForEach(viewModel.selectedSpots, id: \.self) { spot in
+                        Text("スポット\(viewModel.selectedAnnotations.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
+                        ForEach(viewModel.getSelectedSpots(), id: \.self) { spot in
                             if let spotId = spot.id {
                                 SpotCard(spot: spot).padding(.bottom, 28).onTapGesture {
                                     self.showSpotListSheet = false

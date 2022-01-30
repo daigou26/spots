@@ -10,13 +10,12 @@ struct MapView: UIViewRepresentable {
     //    @Binding var category: [String]
     @State var spots: [Spot]
     @State var centerCoordinate: CLLocationCoordinate2D
-    @Binding var selectedSpots: [Spot]
     @Binding var showSpotListSheet: Bool
     
     
     var annotations = [MKAnnotation]()
     
-    init(spots: [Spot], showSpotListSheet: Binding<Bool>, selectedSpots: Binding<[Spot]>) {
+    init(spots: [Spot], showSpotListSheet: Binding<Bool>) {
         self.centerCoordinate = CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498)
         for spot in spots {
             let newLocation = CustomPointAnnotation(spot: spot)
@@ -26,7 +25,6 @@ struct MapView: UIViewRepresentable {
         
         self.spots = spots
         self._showSpotListSheet = showSpotListSheet
-        self._selectedSpots = selectedSpots
         //        self._category = category
     }
     
@@ -34,7 +32,8 @@ struct MapView: UIViewRepresentable {
         let view = MKMapView(frame: .zero)
         view.pointOfInterestFilter = MKPointOfInterestFilter.excludingAll
         view.delegate = context.coordinator
-        view.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: "cluster")
+        view.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        view.register(CustomAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         view.mapType = .mutedStandard
         view.setRegion(spotsViewModel.region, animated: true)
         return view
@@ -51,12 +50,7 @@ struct MapView: UIViewRepresentable {
                 view.setRegion(spotsViewModel.region, animated: true)
             }
             view.removeAnnotations(view.annotations)
-            view.addAnnotations(annotations.filter({ annotation in
-                guard let annotation = annotation as? CustomPointAnnotation else {return false}
-                //            TODO: filtering
-                //            return category.contains(annotation.category)
-                return true
-            }))
+            view.addAnnotations(annotations)
         }
     }
     
@@ -72,9 +66,16 @@ struct MapView: UIViewRepresentable {
         }
         
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            let view = mapView.dequeueReusableAnnotationView(withIdentifier: "cluster", for: annotation)
-            view.clusteringIdentifier = "cluster"
-            return view
+            if annotation is MKClusterAnnotation {
+                let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier, for: annotation)
+                view.clusteringIdentifier = "cluster"
+                return view
+            } else if annotation is CustomPointAnnotation {
+                let view = mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
+                view.clusteringIdentifier = "cluster"
+                return view
+            }
+            return nil
         }
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
@@ -84,28 +85,11 @@ struct MapView: UIViewRepresentable {
                 
                 if let clusterAnnotation = annotation as? MKClusterAnnotation {
                     let annotations = clusterAnnotation.memberAnnotations
-                    var spots = annotations.map({ annotation -> Spot? in
-                        if let customAnnotation = annotation as? CustomPointAnnotation {
-                            return customAnnotation.spot
-                        }
-                        return nil
-                    }).compactMap{$0}
-                    spots.sort {
-                        if let c0 = $0.createdAt, let c1 = $1.createdAt {
-                          return  c0.timeIntervalSince1970 > c1.timeIntervalSince1970
-                        }
-                        return false
-                    }
-                    self.parent.selectedSpots = spots
+                    self.parent.spotsViewModel.selectedAnnotations = annotations
                 } else {
-                    if let customAnnotation = annotation as? CustomPointAnnotation {
-                        self.parent.selectedSpots = [customAnnotation.spot]
-                    } else {
-                        return
-                    }
+                    self.parent.spotsViewModel.selectedAnnotations = [annotation]
                 }
             }
-            
             self.parent.showSpotListSheet = true
         }
         
