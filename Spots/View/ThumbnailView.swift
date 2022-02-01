@@ -6,8 +6,6 @@ import SwiftUI
 
 struct ThumbnailView: View {
     var photo: Asset
-    var width: CGFloat
-    var height: CGFloat
     var checked: Bool = false
     
     var body: some View {
@@ -15,8 +13,8 @@ struct ThumbnailView: View {
             if checked {
                 Image(systemName: "checkmark.square.fill")
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 30 , height: 30)
-                    .aspectRatio(contentMode: .fill)
                     .foregroundColor(.main)
                     .background(Color.white)
                     .cornerRadius(6)
@@ -26,8 +24,7 @@ struct ThumbnailView: View {
             }
             Image(uiImage: photo.image)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: width, height: height)
+                .aspectRatio(1, contentMode: .fill)
                 .cornerRadius(10)
         }
     }
@@ -36,9 +33,19 @@ struct ThumbnailView: View {
 struct ThumbnailView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack(alignment: .topTrailing) {
-            Image(systemName: "checkmark.square.fill").resizable().frame(width: 30 , height: 30).aspectRatio(contentMode: .fill).foregroundColor(.main).background(Color.white).cornerRadius(6).zIndex(1).padding(.top, 5).padding(.trailing, 5)
+            Image(systemName: "checkmark.square.fill")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 30 , height: 30)
+                .foregroundColor(.main)
+                .background(Color.white)
+                .cornerRadius(6)
+                .zIndex(1)
+                .padding(.top, 5)
+                .padding(.trailing, 5)
             Image("Sample").resizable()
-                .aspectRatio(contentMode: .fill).frame(width: 150, height: 150)
+                .scaledToFill()
+                .frame(width: 150, height: 150)
                 .cornerRadius(10)
         }
     }

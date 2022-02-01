@@ -19,7 +19,7 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
         PHPhotoLibrary.shared().register(self)
     }
     
-    func setUp() {
+    func setUp(_ thmbnailSize: Int) {
         // Request permission
         PHPhotoLibrary.requestAuthorization(for: .readWrite) {[self] status in
             DispatchQueue.main.async {
@@ -27,10 +27,10 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
                 case .denied: libraryStatus = .Denied
                 case .authorized:
                     libraryStatus = .Approved
-                    fetchPhotos()
+                    fetchPhotos(thmbnailSize)
                 case .limited:
                     libraryStatus = .Limited
-                    fetchPhotos()
+                    fetchPhotos(thmbnailSize)
                 default: libraryStatus = .Denied
                 }
             }
@@ -79,7 +79,7 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
         }
     }
     
-    func fetchPhotos() {
+    func fetchPhotos(_ thmbnailSize: Int) {
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         options.includeHiddenAssets = false
@@ -89,13 +89,14 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
         allPhotos = fetchResults
         fetchResults.enumerateObjects {[self] asset, index, _ in
             if asset.mediaType == .image {
-                getImageFromAsset(asset: asset, size: CGSize(width: 150, height: 150)) { image in
+                getImageFromAsset(asset: asset, size: CGSize(width: thmbnailSize, height: thmbnailSize)) { image in
                     photos.append(Asset(asset: asset, image: image))
                 }
             }
         }
     }
     
+    // Called if the image is selected
     func extractPreviewData(asset: PHAsset) {
         if asset.mediaType == .image {
             getImageFromAsset(asset: asset, size: PHImageManagerMaximumSize) { image in

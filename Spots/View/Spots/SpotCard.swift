@@ -6,6 +6,7 @@ import SwiftUI
 
 struct SpotCard: View {
     @State var spot: Spot
+    let width = UIScreen.main.bounds.width
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -13,7 +14,7 @@ struct SpotCard: View {
             Text(spot.address).padding(.bottom, 1)
             if let imageUrl = spot.imageUrl, imageUrl != "" {
                 AsyncImage(url: URL(string: imageUrl)) { image in
-                    image.resizable()
+                    image.resizable().scaledToFill().frame(height: width / 1.8).clipped().cornerRadius(6)
                 } placeholder: {
                     ZStack {
                         VStack {
@@ -25,11 +26,11 @@ struct SpotCard: View {
                             }
                             Spacer()
                         }.zIndex(1)
-                        Rectangle().fill(Color.white).aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
+                        Rectangle().fill(Color.white).scaledToFill().frame(height: width / 1.8).clipped().cornerRadius(6)
                     }
-                }.aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
+                }
             } else {
-                Rectangle().fill(Color.background).aspectRatio(1.8, contentMode: .fit).clipped().cornerRadius(6)
+                Rectangle().fill(Color.background).scaledToFill().frame(height: width / 1.8).clipped().cornerRadius(6)
             }
         }
     }

@@ -30,24 +30,20 @@ class ImageUseCaseImpl: ImageUseCase {
         return images
     }
     
-    func getImageFromAsset(asset: PHAsset, size: CGSize) async -> UIImage? {
-        let semaphore = DispatchSemaphore(value: 0)
-        
+    func getImageFromAsset(asset: PHAsset, size: CGSize) async -> UIImage? {        
         // To cache image
         let imageManager = PHCachingImageManager()
         imageManager.allowsCachingHighQualityImages = true
         
         let imageOptions = PHImageRequestOptions()
         imageOptions.deliveryMode = .highQualityFormat
-        imageOptions.isSynchronous = false
+        imageOptions.isSynchronous = true
         
         var resizedImage: UIImage? = nil
         
         imageManager.requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: imageOptions) { image, _ in
             resizedImage = image
-            semaphore.signal()
         }
-        semaphore.wait()
         
         return resizedImage
     }
