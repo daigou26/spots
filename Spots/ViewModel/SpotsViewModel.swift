@@ -76,7 +76,7 @@ class SpotsViewModel: ObservableObject {
             case .failure: break
             }
         }, receiveValue: { spot in
-            self.spots.append(spot)
+            self.spots.insert(spot, at: 0)
             self.region = MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: spot.latitude, longitude: spot.longitude),
                 span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)

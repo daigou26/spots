@@ -12,7 +12,7 @@ struct LoginView: View {
             
             Image("Login")
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .aspectRatio(contentMode: .fill)
             
             
             Text("Welcome to Spots!")

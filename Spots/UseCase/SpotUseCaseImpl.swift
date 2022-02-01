@@ -100,19 +100,17 @@ class SpotUseCaseImpl: SpotUseCase {
                         }
                         let coordinate = try await self.locationUseCase.geocode(address: address)
                         let imageUploadingStatus = ImageUploadingStatus(count: images?.count ?? 0, userName: Account.shared.name, startedAt: Date())
-                        let spot: Spot = Spot(id: spotId, title: title, imageUrl: imageUrl, address: address, latitude: coordinate.latitude, longitude: coordinate.longitude, favorite: favorite, star: star, imageUploadingStatus: [imageUploadingStatus], memo: memo)
+                        let spot: Spot = Spot(id: spotId, title: title, imageUrl: imageUrl, address: address, latitude: coordinate.latitude, longitude: coordinate.longitude, favorite: favorite, star: star, imageUploadingStatus: [imageUploadingStatus], memo: memo, createdAt: Date())
                         
                         try await self.spotRepository.postSpot(uid: self.uid, spot: spot)
                         
                         if let images = images, images.count > 0 {
-                            Task {
-                                let imagesData = await self.imageUseCase.extractImagesData(assets: images.map({ image in
-                                    return image.asset
-                                }))
-                                let photos = await self.spotStorageRepository.uploadImages(spotId: spotId, images: imagesData)
-                                await self.spotRepository.postPhotos(uid: self.uid, spotId: spotId, photos: photos)
-                                await self.spotRepository.updateImageUploadingStatus(uid: self.uid, spotId: spotId, imageUploadingStatus: imageUploadingStatus)
-                            }
+                            let imagesData = await self.imageUseCase.extractImagesData(assets: images.map({ image in
+                                return image.asset
+                            }))
+                            let photos = await self.spotStorageRepository.uploadImages(spotId: spotId, images: imagesData)
+                            await self.spotRepository.postPhotos(uid: self.uid, spotId: spotId, photos: photos)
+                            await self.spotRepository.updateImageUploadingStatus(uid: self.uid, spotId: spotId, imageUploadingStatus: imageUploadingStatus)
                         }
                         promise(.success((spot)))
                     } catch {
@@ -144,7 +142,7 @@ class SpotUseCaseImpl: SpotUseCase {
                         let imageUploadingStatus = ImageUploadingStatus(count: images?.count ?? 0, userName: Account.shared.name, startedAt: Date())
                         
                         
-                        try await self.spotRepository.updateSpot(spotId: spotId, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, imageUploadingStatus: [imageUploadingStatus], category: nil, memo: memo)
+                        try await self.spotRepository.updateSpot(spotId: spotId, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, imageUploadingStatus: [imageUploadingStatus], category: nil, memo: memo, updatedAt: Date())
                         
                         if let images = images, images.count > 0 {
                             Task {

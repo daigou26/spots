@@ -6,4 +6,5 @@ import Foundation
 
 enum QueryError: Error {
     case NotFound
+    case SomethingWentWrong
 }

@@ -94,12 +94,10 @@ class SpotRepositoryImpl: SpotRepository {
     }
     
     func postSpot(uid: String, spot: Spot) async throws {
-        let semaphore = DispatchSemaphore(value: 0)
-        var error: Error? = nil
         var data = spot.asDictionary
-        
-        data["createdAt"] = Timestamp(date: Date())
+        data["createdAt"] = Timestamp(date: spot.createdAt ?? Date())
         data["uid"] = uid
+        
         if let imageUploadingStatus = spot.imageUploadingStatus?.first, imageUploadingStatus.count > 0 {
             var imageUploadingStatusData = imageUploadingStatus.asDictionary
             imageUploadingStatusData["startedAt"] = Timestamp(date: imageUploadingStatus.startedAt)
@@ -108,13 +106,16 @@ class SpotRepositoryImpl: SpotRepository {
             data["imageUploadingStatus"] = []
         }
         
-        let _ = dbRef.document(spot.id ?? "").setData(data) { err in
-            if let err = err {
-                error = err
+        let error: Error? = try await withCheckedThrowingContinuation { continuation in
+            let _ = dbRef.document(spot.id ?? "").setData(data) { err in
+                var error: Error?
+                if let err = err {
+                    error = err
+                }
+                continuation.resume(returning: error)
             }
-            semaphore.signal()
         }
-        semaphore.wait()
+        
         if let error = error {
             throw error
         }
@@ -132,10 +133,9 @@ class SpotRepositoryImpl: SpotRepository {
         star: Bool?,
         imageUploadingStatus: [ImageUploadingStatus]?,
         category: [String]?,
-        memo: String?
+        memo: String?,
+        updatedAt: Date
     ) async throws {
-        let semaphore = DispatchSemaphore(value: 0)
-        var error: Error? = nil
         var data: [String: Any] = [:]
         
         if let title = title {
@@ -174,15 +174,18 @@ class SpotRepositoryImpl: SpotRepository {
             data["memo"] = memo
         }
         
-        data["updatedAt"] = Timestamp(date: Date())
+        data["updatedAt"] = Timestamp(date: updatedAt)
         
-        let _ = dbRef.document(spotId).updateData(data) { err in
-            if let err = err {
-                error = err
+        let error: Error? = try await withCheckedThrowingContinuation { continuation in
+            let _ = dbRef.document(spotId).updateData(data) { err in
+                var error: Error?
+                if let err = err {
+                    error = err
+                }
+                continuation.resume(returning: error)
             }
-            semaphore.signal()
         }
-        semaphore.wait()
+        
         if let error = error {
             throw error
         }
@@ -197,7 +200,7 @@ class SpotRepositoryImpl: SpotRepository {
         
         let _ = dbRef.document(spotId).updateData(data) { err in
             if let err = err {
-                //
+                // TODO: send log
             }
         }
         return
@@ -216,7 +219,7 @@ class SpotRepositoryImpl: SpotRepository {
         
         let _ = batch.commit() { err in
             if let err = err {
-                //
+                // TODO: send log
             }
         }
         return

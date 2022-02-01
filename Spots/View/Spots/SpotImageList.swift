@@ -18,7 +18,7 @@ struct SpotImageList: View {
                             image.resizable()
                                 .aspectRatio(contentMode: .fill)
                         } placeholder: {
-                            Rectangle().fill(.white).frame(height: 200)
+                            Rectangle().fill(.white).frame(height: 500)
                         }.id(index)
                     }
                 }.onAppear {

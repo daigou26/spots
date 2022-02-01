@@ -26,7 +26,7 @@ struct SpotDetailView: View {
                         if let imageUrl = spot.imageUrl {
                             AsyncImage(url: URL(string: imageUrl)) { image in
                                 image.resizable()
-                                    .aspectRatio(contentMode: .fill)
+                                    .scaledToFill()
                                     .frame(height: height / 4)
                                     .clipped()
                             } placeholder: {
@@ -59,11 +59,11 @@ struct SpotDetailView: View {
                         
                         ScrollView {
                             VStack {
-                                LazyVGrid(columns: Array(repeating: .init(.fixed((width - 25) / 3)), count: 3), alignment: .center, spacing: 3) {
+                                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), alignment: .center, spacing: 3) {
                                     ForEach(viewModel.photos.indices, id: \.self) { i in
                                         AsyncImage(url: URL(string: viewModel.photos[i].imageUrl)) { image in
                                             image.resizable()
-                                                .aspectRatio(contentMode: .fill)
+                                                .scaledToFill()
                                                 .frame(width: (width - 25) / 3, height: (width - 25) / 3)
                                                 .cornerRadius(10)
                                         } placeholder: {

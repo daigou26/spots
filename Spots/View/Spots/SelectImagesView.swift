@@ -25,7 +25,7 @@ struct SelectImagesView: View {
                 VStack {
                     LazyVGrid(columns: Array(repeating: .init(.fixed((width - 25) / 3)), count: 3), alignment: .center, spacing: 5) {
                         ForEach(imagePickerViewModel.photos, id: \.self) { photo in
-                            ThumbnailView(photo: photo, width: (width - 25) / 3, height: (width - 25) / 3, checked: imagePickerViewModel.selectedImages.contains(photo) ).onTapGesture {
+                            ThumbnailView(photo: photo, checked: imagePickerViewModel.selectedImages.contains(photo)).onTapGesture {
                                 imagePickerViewModel.setSelectedImages(photo)
                             }
                         }

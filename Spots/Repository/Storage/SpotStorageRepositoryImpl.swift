@@ -9,76 +9,83 @@ class SpotStorageRepositoryImpl: SpotStorageRepository {
     var ref = Storage.storage().reference()
     
     func uploadMainImage(spotId: String, image: Data) async throws -> String {
-        let semaphore = DispatchSemaphore(value: 0)
-        var imageUrl: String = ""
-        var error: Error? = nil
+        var error: Error?
         
         let newRef = ref.child("spots/\(spotId)/main")
         let uploadTask = newRef.putData(image)
-        uploadTask.observe(.success) { _ in
-            newRef.downloadURL { url, e in
-                if e != nil {
+        
+        // Convert a completion handler into an async function
+        let imageUrl: String? = try await withCheckedThrowingContinuation { continuation in
+            var imageUrl: String?
+            uploadTask.observe(.success) { _ in
+                newRef.downloadURL { url, e in
+                    if e != nil {
+                        error = e
+                    }
+                    if let url = url {
+                        imageUrl = url.absoluteString
+                    }
+                    continuation.resume(returning: imageUrl)
+                }
+            }
+            uploadTask.observe(.failure) { snapshot in
+                if let e = snapshot.error {
                     error = e
                 }
-                if let url = url {
-                    imageUrl = url.absoluteString
-                }
-                semaphore.signal()
-            }
-        }
-        uploadTask.observe(.failure) { snapshot in
-            if let e = snapshot.error {
-                error = e
-                semaphore.signal()
+                continuation.resume(returning: imageUrl)
             }
         }
         
-        semaphore.wait()
+        if let imageUrl = imageUrl {
+            return imageUrl
+        }
         
         if let error = error {
             throw error
         }
-        return imageUrl
+        throw QueryError.SomethingWentWrong
     }
     
     func uploadImages(spotId: String, images: [Data]) async -> [Photo] {
         let timestamp = Int(Date().timeIntervalSince1970)
-        var photos: [Photo] = []
         let date = Date()
 
-        await withTaskGroup(of: (Photo?).self) { group in
+        let photos: [Photo?] = await withTaskGroup(of: (Photo?).self, returning: [Photo?].self) { group in
             for (index, image) in images.enumerated() {
                 let name = "\(timestamp)_\(index)"
                 let path = "spots/\(spotId)/images/\(name)"
                 group.addTask {
-                    return await self.upload(index: index, path: path, name: name, image: image, date: date)
+                    return await self.upload(path: path, name: name, image: image, date: date)
                 }
             }
             
+            var results: [Photo?] = []
             for await photo in group {
                 if let photo = photo {
-                    photos.append(photo)
+                    results.append(photo)
                 }
             }
+
+            return results
         }
-        return photos
+        return photos.compactMap { $0 }
     }
     
-    func upload(index: Int, path: String, name: String, image: Data, date: Date) async -> Photo? {
+    func upload(path: String, name: String, image: Data, date: Date) async -> Photo? {
         let newRef = ref.child(path)
-        let semaphore = DispatchSemaphore(value: 0)
         let uploadTask = newRef.putData(image)
-        var imageUrl: String? = nil
 
-        uploadTask.observe(.success) { _ in
-            newRef.downloadURL { url, e in
-                if let url = url {
-                    imageUrl = url.absoluteString
+        let imageUrl: String? = await withCheckedContinuation { continuation in
+            uploadTask.observe(.success) { _ in
+                newRef.downloadURL { url, e in
+                    var imageUrl: String? = nil
+                    if let url = url {
+                        imageUrl = url.absoluteString
+                    }
+                    continuation.resume(returning: imageUrl)
                 }
-                semaphore.signal()
             }
         }
-        semaphore.wait()
 
         if let imageUrl = imageUrl {
             return Photo(imageUrl: imageUrl, name: name, timestamp: date, createdAt: date)

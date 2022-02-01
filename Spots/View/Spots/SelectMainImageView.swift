@@ -16,7 +16,7 @@ struct SelectMainImageView: View {
             Group {
                 VStack {
                     if let preview = imagePickerViewModel.selectedImagePreview {
-                        Image(uiImage: preview).resizable().aspectRatio(1.6, contentMode: .fit).clipped().padding(.bottom, 15)
+                        Image(uiImage: preview).resizable().scaledToFill().frame(height: width / 1.6).clipped().padding(.bottom, 15)
                     } else {
                         Color.lightGray.frame(width: width, height: width * 0.625).padding(.bottom, 15)
                     }
@@ -34,9 +34,9 @@ struct SelectMainImageView: View {
                     } else {
                         ScrollView {
                             VStack {
-                                LazyVGrid(columns: Array(repeating: .init(.fixed((width - 25) / 3)), count: 3), alignment: .center, spacing: 5) {
+                                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 5) {
                                     ForEach(imagePickerViewModel.photos, id: \.self) { photo in
-                                        ThumbnailView(photo: photo, width: (width - 25) / 3, height: (width - 25) / 3).onTapGesture {
+                                        ThumbnailView(photo: photo).onTapGesture {
                                             imagePickerViewModel.extractPreviewData(asset: photo.asset)
                                         }
                                     }
@@ -78,7 +78,7 @@ struct SelectMainImageView: View {
                 }
             }.onAppear {
                 if imagePickerViewModel.libraryStatus == .Denied {
-                    imagePickerViewModel.setUp()
+                    imagePickerViewModel.setUp(Int(width))
                 }
             }
         }
