@@ -46,7 +46,7 @@ class SpotStorageRepositoryImpl: SpotStorageRepository {
         throw QueryError.SomethingWentWrong
     }
     
-    func uploadImages(spotId: String, images: [Data]) async -> [Photo] {
+    func uploadImages(spotId: String, images: [(data: Data, width: Float, height: Float)]) async -> [Photo] {
         let timestamp = Int(Date().timeIntervalSince1970)
         let date = Date()
 
@@ -71,9 +71,9 @@ class SpotStorageRepositoryImpl: SpotStorageRepository {
         return photos.compactMap { $0 }
     }
     
-    func upload(path: String, name: String, image: Data, date: Date) async -> Photo? {
+    func upload(path: String, name: String, image: (data: Data, width: Float, height: Float), date: Date) async -> Photo? {
         let newRef = ref.child(path)
-        let uploadTask = newRef.putData(image)
+        let uploadTask = newRef.putData(image.data)
 
         let imageUrl: String? = await withCheckedContinuation { continuation in
             uploadTask.observe(.success) { _ in
@@ -88,7 +88,7 @@ class SpotStorageRepositoryImpl: SpotStorageRepository {
         }
 
         if let imageUrl = imageUrl {
-            return Photo(imageUrl: imageUrl, name: name, timestamp: date, createdAt: date)
+            return Photo(imageUrl: imageUrl, name: name, width: image.width, height: image.height, timestamp: date, createdAt: date)
         }
         return nil
     }

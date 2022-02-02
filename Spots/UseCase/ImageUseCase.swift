@@ -7,5 +7,5 @@ import Photos
 import UIKit
 
 protocol ImageUseCase {
-    func extractImagesData(assets: [PHAsset]) async -> [Data]
+    func extractImagesData(assets: [PHAsset]) async -> [(data: Data, width: Float, height: Float)]
 }

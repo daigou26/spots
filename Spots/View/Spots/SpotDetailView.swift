@@ -6,12 +6,14 @@ import SwiftUI
 
 struct SpotDetailView: View {
     @State var id: String
-    @Binding var goSpotDetailView: Bool
-    @ObservedObject var viewModel = SpotDetailViewModel()
-    let width = UIScreen.main.bounds.width
-    let height = UIScreen.main.bounds.height
     @State var imageIndex: Int = 0
     @State var goImageList = false
+    @State var refresh = true
+    @Binding var goSpotDetailView: Bool
+    @ObservedObject var viewModel = SpotDetailViewModel()
+    
+    let width = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
     
     var body: some View {
         VStack {
@@ -115,8 +117,12 @@ struct SpotDetailView: View {
                 }
             }
         }.onAppear {
-            viewModel.getSpot(spotId: id)
-            viewModel.getPhotos(spotId: id)
+            // Do not execute when back from ImageList
+            if (refresh) {
+                viewModel.getSpot(spotId: id)
+                viewModel.getPhotos(spotId: id)
+                refresh = false
+            }
         }
     }
 }
