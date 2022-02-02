@@ -6,5 +6,5 @@ import Foundation
 
 protocol SpotStorageRepository {
     func uploadMainImage(spotId: String, image: Data) async throws -> String
-    func uploadImages(spotId: String, images: [Data]) async -> [Photo]
+    func uploadImages(spotId: String, images: [(data: Data, width: Float, height: Float)]) async -> [Photo]
 }

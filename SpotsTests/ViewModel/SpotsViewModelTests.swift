@@ -10,7 +10,7 @@ class SpotUseCaseMock: SpotUseCase {
     func getPhotos(spotId: String) -> AnyPublisher<[Photo], Error> {
         return Deferred {
             Future { promise in
-                return promise(.success([Photo(imageUrl: "", name: "", timestamp: Date())]))
+                return promise(.success([Photo(imageUrl: "", name: "", width: 0, height: 0, timestamp: Date())]))
             }
         }.eraseToAnyPublisher()
     }

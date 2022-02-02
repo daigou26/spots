@@ -60,9 +60,9 @@ class SpotRepositoryImpl: SpotRepository {
         if !snapshot.isEmpty {
             for doc in snapshot.documents {
                 let data = doc.data()
-                if doc.exists, let imageUrl: String = data["imageUrl"] as? String, let name: String = data["name"] as? String {
+                if doc.exists, let imageUrl: String = data["imageUrl"] as? String, let name: String = data["name"] as? String, let  width: Float = data["width"] as? Float, let height: Float = data["height"] as? Float {
                     let timestamp = (data["timestamp"] as! Timestamp).dateValue()
-                    photos.append(Photo(id: doc.documentID, imageUrl: imageUrl, name: name, timestamp: timestamp))
+                    photos.append(Photo(id: doc.documentID, imageUrl: imageUrl, name: name, width: width, height: height, timestamp: timestamp))
                 }
             }
         }

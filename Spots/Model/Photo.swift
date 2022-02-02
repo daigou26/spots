@@ -9,6 +9,8 @@ struct Photo: Hashable {
     @DocumentID var id: String?
     var imageUrl: String
     var name: String
+    var width: Float
+    var height: Float
     let timestamp: Date
     var createdAt: Date?
     

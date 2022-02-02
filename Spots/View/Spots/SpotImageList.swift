@@ -8,6 +8,7 @@ struct SpotImageList: View {
     @State var i = 0
     @State var photos: [Photo] = []
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    let width = UIScreen.main.bounds.width
 
     var body: some View {
         ScrollViewReader { scrollView in
@@ -18,11 +19,11 @@ struct SpotImageList: View {
                             image.resizable()
                                 .aspectRatio(contentMode: .fill)
                         } placeholder: {
-                            Rectangle().fill(.white).frame(height: 500)
+                            Rectangle().fill(.white).frame(height: width / CGFloat(photos[index].width) * CGFloat(photos[index].height))
                         }.id(index)
                     }
                 }.onAppear {
-                    scrollView.scrollTo(i)
+                    scrollView.scrollTo(i, anchor: .top)
                 }
             }
         }.navigationBarTitleDisplayMode(.inline).navigationBarBackButtonHidden(true).toolbar {

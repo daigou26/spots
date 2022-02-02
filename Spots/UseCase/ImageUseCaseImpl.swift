@@ -7,17 +7,17 @@ import Photos
 import SwiftUI
 
 class ImageUseCaseImpl: ImageUseCase {
-    func extractImagesData(assets: [PHAsset]) async -> [Data] {
-        var images: [Data] = []
-        await withTaskGroup(of: (Data?).self) { group in
+    func extractImagesData(assets: [PHAsset]) async -> [(data: Data, width: Float, height: Float)] {
+        var images: [(data: Data, width: Float, height: Float)] = []
+        await withTaskGroup(of: ((data: Data, width: Float, height: Float)?).self) { group in
             for asset in assets {
                 group.addTask {
                     let uiImage = await self.getImageFromAsset(asset: asset, size: PHImageManagerMaximumSize)
-                    guard let uiImage = uiImage else {
+                    guard let uiImage = uiImage, let jpeg = uiImage.jpegData(compressionQuality: 0) else {
                         return nil
                     }
 
-                    return uiImage.jpegData(compressionQuality: 0)
+                    return (data: jpeg, width: Float(uiImage.size.width), height: Float(uiImage.size.height))
                 }
             }
             
