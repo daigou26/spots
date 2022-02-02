@@ -46,7 +46,8 @@ class SpotRepositoryMock: SpotRepository {
         star: Bool?,
         imageUploadingStatus: [ImageUploadingStatus]?,
         category: [String]?,
-        memo: String?
+        memo: String?,
+        updatedAt: Date
     ) async {
         return
     }
