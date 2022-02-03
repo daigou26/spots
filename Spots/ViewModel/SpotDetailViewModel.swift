@@ -64,7 +64,8 @@ class SpotDetailViewModel: ObservableObject {
             address: nil,
             favorite: favorite,
             star: nil,
-            memo: nil
+            memo: nil,
+            deleted: nil
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: do {
@@ -86,7 +87,8 @@ class SpotDetailViewModel: ObservableObject {
             address: nil,
             favorite: nil,
             star: star,
-            memo: nil
+            memo: nil,
+            deleted: nil
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: do {

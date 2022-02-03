@@ -11,7 +11,8 @@ struct Photo: Hashable {
     var name: String
     var width: Float
     var height: Float
-    let timestamp: Date
+    var timestamp: Date
+    var deleted: Bool
     var createdAt: Date?
     
     var asDictionary : [String:Any] {

@@ -30,7 +30,7 @@ struct SpotsView: View {
                     }
                 }.zIndex(1)
                 
-                NavigationLink(destination: SpotDetailView(id: spotId, goSpotDetailView: $viewModel.goSpotDetailView), isActive: $viewModel.goSpotDetailView) {
+                NavigationLink(destination: SpotDetailView(id: spotId), isActive: $viewModel.goSpotDetailView) {
                     EmptyView()
                 }
                 

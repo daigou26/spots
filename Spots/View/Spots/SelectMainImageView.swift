@@ -69,7 +69,7 @@ struct SelectMainImageView: View {
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button(action: {
                         if let selectedImage = imagePickerViewModel.selectedImagePreview {
-                            addSpotViewModel.setMainImage(selectedImage)
+                            addSpotViewModel.mainImage = selectedImage
                         }
                         goNext = true
                     }) {

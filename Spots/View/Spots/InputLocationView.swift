@@ -21,7 +21,7 @@ struct InputLocationView: View {
                 Task {
                     await addSpotViewModel.validateAddress(address: address)
                     if addSpotViewModel.addressErrorMessage == "" {
-                        addSpotViewModel.setAddress(address)
+                        addSpotViewModel.address = address
                         goInputLocationView = false
                     }
                 }

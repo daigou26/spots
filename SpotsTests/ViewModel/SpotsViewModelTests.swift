@@ -47,7 +47,7 @@ class SpotUseCaseMock: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, memo: String?) -> AnyPublisher<Void, Error> {
+    func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, memo: String?, deleted: Bool?) -> AnyPublisher<Void, Error> {
         return Deferred {
             Future { promise in
                 return promise(.success(()))

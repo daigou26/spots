@@ -18,6 +18,7 @@ struct Spot: Hashable {
     var imageUploadingStatus: [ImageUploadingStatus]?
     var category: [String]?
     var memo: String?
+    var deleted: Bool
     var createdAt: Date?
     var updatedAt: Date?
     var coordinate: CLLocationCoordinate2D {
