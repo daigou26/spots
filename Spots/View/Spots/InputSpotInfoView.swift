@@ -15,14 +15,14 @@ struct InputSpotInfoView: View {
             ScrollView {
                 Group {
                     HStack {
-                        Text("タイトル")
+                        Text("タイトル").foregroundColor(.textGray)
                         Spacer()
                     }
                     
                     TextField(addSpotViewModel.title, text: $addSpotViewModel.title).frame(height: 22)
                     Divider().padding(.bottom, 18).padding(.top, 5)
                     HStack {
-                        Text("場所")
+                        Text("場所").foregroundColor(.textGray)
                         Spacer()
                         Button(action: {goInputLocationView = true}) {
                             Text(addSpotViewModel.address).lineLimit(1).frame(maxWidth: UIScreen.main.bounds.width / 3, alignment: .trailing)
@@ -31,18 +31,18 @@ struct InputSpotInfoView: View {
                     }
                     Divider().padding(.vertical, 18)
                     HStack {
-                        Text("お気に入り")
+                        Text("お気に入り").foregroundColor(.textGray)
                         Spacer()
                         Toggle("", isOn: $addSpotViewModel.favorite).padding(.trailing, 6)
                     }
                     HStack {
-                        Text("行きたい")
+                        Text("行きたい").foregroundColor(.textGray)
                         Spacer()
                         Toggle("", isOn: $addSpotViewModel.star).padding(.trailing, 6)
                     }
                     Divider().padding(.vertical, 18)
                     HStack {
-                        Text("メモ")
+                        Text("メモ").foregroundColor(.textGray)
                         Spacer()
                     }
                     TextEditor(text: $addSpotViewModel.memo).frame(height: 200)
@@ -71,7 +71,7 @@ struct InputSpotInfoView: View {
                 })
             }.padding(.horizontal, 20).padding(.vertical, 30)
             
-            NavigationLink(destination: InputLocationView(goInputLocationView: $goInputLocationView), isActive: $goInputLocationView) {
+            NavigationLink(destination: InputLocationView(), isActive: $goInputLocationView) {
                 EmptyView()
             }
             

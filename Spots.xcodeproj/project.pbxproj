@@ -48,6 +48,8 @@
 		C07CCA77273D948700C32FE9 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA76273D948700C32FE9 /* AuthUseCase.swift */; };
 		C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */; };
 		C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */; };
+		C0A19E0727AC41AF0065D39F /* UpdateSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */; };
+		C0A19E0B27B03D550065D39F /* UpdateMainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */; };
 		C0B4CFEF276A3E2C008F1394 /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */; };
 		C0B4CFF1276A3E82008F1394 /* ImageUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */; };
 		C0B4CFF52779F751008F1394 /* AddSpotViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */; };
@@ -139,6 +141,8 @@
 		C07CCA76273D948700C32FE9 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
 		C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCaseImpl.swift; sourceTree = "<group>"; };
 		C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSpotView.swift; sourceTree = "<group>"; };
+		C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMainImageView.swift; sourceTree = "<group>"; };
 		C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
 		C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCaseImpl.swift; sourceTree = "<group>"; };
 		C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewModelTests.swift; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 				C058DAFA275CE77A0068AF66 /* InputLocationView.swift */,
 				C0B4CFF8277A2F3A008F1394 /* SpotDetailView.swift */,
 				C0B4D00827A3E8CA008F1394 /* SpotImageList.swift */,
+				C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */,
+				C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -583,6 +589,7 @@
 				C00AD6542756C23A006B575A /* ThumbnailView.swift in Sources */,
 				C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */,
 				C05DD370274F2A860071C163 /* PartialSheet.swift in Sources */,
+				C0A19E0727AC41AF0065D39F /* UpdateSpotView.swift in Sources */,
 				C05DD36A274157700071C163 /* ProfileViewModel.swift in Sources */,
 				C05DD36C2741798C0071C163 /* MapView.swift in Sources */,
 				C00AD64C2756A8B5006B575A /* ImagePickerViewModel.swift in Sources */,
@@ -592,6 +599,7 @@
 				C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */,
 				C0483730273F0E710087AAFC /* UserRepositoryImpl.swift in Sources */,
 				C03F77E32760FFE600634036 /* LocationUseCaseImpl.swift in Sources */,
+				C0A19E0B27B03D550065D39F /* UpdateMainImageView.swift in Sources */,
 				C0B4D00927A3E8CA008F1394 /* SpotImageList.swift in Sources */,
 				C05DD380274FC65D0071C163 /* SpotRepository.swift in Sources */,
 				C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */,

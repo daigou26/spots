@@ -45,12 +45,18 @@ struct MapView: UIViewRepresentable {
             return annotation is CustomPointAnnotation
         }
 
-        if (viewAnnotations.count != annotations.count) {
-            if (viewAnnotations.count < annotations.count) {
+        if viewAnnotations.count != annotations.count {
+            if viewAnnotations.count < annotations.count {
                 view.setRegion(spotsViewModel.region, animated: true)
             }
             view.removeAnnotations(view.annotations)
             view.addAnnotations(annotations)
+        }
+        
+        if spotsViewModel.updated {
+            view.removeAnnotations(view.annotations)
+            view.addAnnotations(annotations)
+            spotsViewModel.updated = false
         }
     }
     

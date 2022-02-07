@@ -130,7 +130,7 @@ class SpotUseCaseImpl: SpotUseCase {
                     star: Bool?,
                     memo: String?,
                     deleted: Bool?
-    ) -> AnyPublisher<Void, Error> {
+    ) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
                 Task {
@@ -149,7 +149,7 @@ class SpotUseCaseImpl: SpotUseCase {
                         }
                         
                         let imageUploadingStatus = ImageUploadingStatus(count: images?.count ?? 0, userName: Account.shared.name, startedAt: Date())
-                        
+                        let spot: Spot = Spot(id: spotId, title: title ?? "", imageUrl: imageUrl ?? "", address: address ?? "", latitude: latitude ?? 0, longitude: longitude ?? 0, favorite: favorite ?? false, star: star ?? false, imageUploadingStatus: nil, memo: memo ?? memo, deleted: false, createdAt: Date())
                         
                         try await self.spotRepository.updateSpot(spotId: spotId,
                                                                  title: title,
@@ -175,7 +175,7 @@ class SpotUseCaseImpl: SpotUseCase {
                                 await self.spotRepository.updateImageUploadingStatus(uid: self.uid, spotId: spotId, imageUploadingStatus: imageUploadingStatus)
                             }
                         }
-                        promise(.success(()))
+                        promise(.success((spot)))
                     } catch {
                         promise(.failure(error))
                     }

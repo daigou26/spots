@@ -10,7 +10,7 @@ class SpotUseCaseMock: SpotUseCase {
     func getPhotos(spotId: String) -> AnyPublisher<[Photo], Error> {
         return Deferred {
             Future { promise in
-                return promise(.success([Photo(imageUrl: "", name: "", width: 0, height: 0, timestamp: Date())]))
+                return promise(.success([Photo(imageUrl: "", name: "", width: 0, height: 0, timestamp: Date(), deleted: false)]))
             }
         }.eraseToAnyPublisher()
     }
@@ -18,7 +18,7 @@ class SpotUseCaseMock: SpotUseCase {
     func getSpot(spotId: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
-                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true)))
+                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false)))
             }
         }.eraseToAnyPublisher()
     }
@@ -42,15 +42,15 @@ class SpotUseCaseMock: SpotUseCase {
     func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
-                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true)))
+                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false)))
             }
         }.eraseToAnyPublisher()
     }
     
-    func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, memo: String?, deleted: Bool?) -> AnyPublisher<Void, Error> {
+    func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, memo: String?, deleted: Bool?) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
-                return promise(.success(()))
+                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false)))
             }
         }.eraseToAnyPublisher()
     }
@@ -72,7 +72,7 @@ class SpotsViewModelTests: XCTestCase {
         expectation.fulfill()
         await waitForExpectations(timeout: 1)
         XCTAssertEqual(spotsViewModel.spots, [])
-        XCTAssertEqual(spotsViewModel.isQueried, true)
+        XCTAssertEqual(spotsViewModel.queried, true)
     }
     
     func testpostSpot() async throws {

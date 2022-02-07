@@ -13,7 +13,8 @@ class SpotsViewModel: ObservableObject {
     @Published var spots: [Spot] = []
     @Published var showAddSpotSheet: Bool = false
     @Published var showSpotListSheet: Bool = false
-    @Published var isQueried: Bool = false
+    @Published var queried: Bool = false
+    @Published var updated: Bool = false
     @Published var goSpotsView: Bool = false
     @Published var goSpotDetailView: Bool = false
     @Published var region = MKCoordinateRegion(
@@ -54,7 +55,7 @@ class SpotsViewModel: ObservableObject {
         spotUseCase.getSpots().receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: do {
-                self.isQueried = true
+                self.queried = true
             }
             case .failure: break
             }
@@ -115,6 +116,16 @@ class SpotsViewModel: ObservableObject {
                 self.updating = false
             }
             }
-        }, receiveValue: {}).store(in: &cancellables)
+        }, receiveValue: {spot in}).store(in: &cancellables)
+    }
+    
+    func updateSpot(spotId: String, spot: Spot) {
+        spots = spots.map { s in
+            if s.id == spot.id {
+                return spot
+            }
+            return s
+        }
+        updated = true
     }
 }

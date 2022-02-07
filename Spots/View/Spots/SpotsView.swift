@@ -30,7 +30,7 @@ struct SpotsView: View {
                     }
                 }.zIndex(1)
                 
-                NavigationLink(destination: SpotDetailView(id: spotId), isActive: $viewModel.goSpotDetailView) {
+                NavigationLink(destination: SpotDetailView(id: spotId).environmentObject(SpotDetailViewModel()), isActive: $viewModel.goSpotDetailView) {
                     EmptyView()
                 }
                 
@@ -52,8 +52,8 @@ struct SpotsView: View {
                 }.frame(maxWidth: .infinity).padding(EdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20))
             }, onEnd: {}).onAppear {
                 // To query only one time
-                if !viewModel.isQueried {
-                    self.viewModel.getSpots()
+                if !viewModel.queried {
+                    viewModel.getSpots()
                 }
             }
         }.accentColor(.black) 

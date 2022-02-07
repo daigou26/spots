@@ -84,7 +84,6 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         options.includeHiddenAssets = false
         
-        
         let fetchResults = PHAsset.fetchAssets(with: options)
         allPhotos = fetchResults
         fetchResults.enumerateObjects {[self] asset, index, _ in
