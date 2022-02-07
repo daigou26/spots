@@ -11,13 +11,14 @@ struct Spot: Hashable {
     var title: String
     var imageUrl: String?
     var address: String
-    let latitude: Double
-    let longitude: Double
+    var latitude: Double
+    var longitude: Double
     var favorite: Bool
     var star: Bool
     var imageUploadingStatus: [ImageUploadingStatus]?
     var category: [String]?
     var memo: String?
+    var deleted: Bool
     var createdAt: Date?
     var updatedAt: Date?
     var coordinate: CLLocationCoordinate2D {

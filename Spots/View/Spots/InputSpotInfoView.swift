@@ -9,24 +9,20 @@ struct InputSpotInfoView: View {
     @EnvironmentObject var spotsViewModel: SpotsViewModel
     @State var goNext = false
     @State var goInputLocationView = false
-    @State var title = ""
-    @State var favorite = false
-    @State var star = false
-    @State var memo = ""
     
     var body: some View {
         ZStack(alignment: .center) {
             ScrollView {
                 Group {
                     HStack {
-                        Text("タイトル")
+                        Text("タイトル").foregroundColor(.textGray)
                         Spacer()
                     }
                     
-                    TextField("", text: $title).frame(height: 22)
+                    TextField(addSpotViewModel.title, text: $addSpotViewModel.title).frame(height: 22)
                     Divider().padding(.bottom, 18).padding(.top, 5)
                     HStack {
-                        Text("場所")
+                        Text("場所").foregroundColor(.textGray)
                         Spacer()
                         Button(action: {goInputLocationView = true}) {
                             Text(addSpotViewModel.address).lineLimit(1).frame(maxWidth: UIScreen.main.bounds.width / 3, alignment: .trailing)
@@ -35,25 +31,25 @@ struct InputSpotInfoView: View {
                     }
                     Divider().padding(.vertical, 18)
                     HStack {
-                        Text("お気に入り")
+                        Text("お気に入り").foregroundColor(.textGray)
                         Spacer()
-                        Toggle("", isOn: $favorite).padding(.trailing, 6)
+                        Toggle("", isOn: $addSpotViewModel.favorite).padding(.trailing, 6)
                     }
                     HStack {
-                        Text("行きたい")
+                        Text("行きたい").foregroundColor(.textGray)
                         Spacer()
-                        Toggle("", isOn: $star).padding(.trailing, 6)
+                        Toggle("", isOn: $addSpotViewModel.star).padding(.trailing, 6)
                     }
                     Divider().padding(.vertical, 18)
                     HStack {
-                        Text("メモ")
+                        Text("メモ").foregroundColor(.textGray)
                         Spacer()
                     }
-                    TextEditor(text: $memo).frame(height: 200)
+                    TextEditor(text: $addSpotViewModel.memo).frame(height: 200)
                 }.alert("スポットが重複しています", isPresented: $addSpotViewModel.duplicatedTitleAndAddress, actions:{
                     Button(action: {
-                        addSpotViewModel.setLoading(value: false)
-                        addSpotViewModel.setDuplicatedTitleAndAddress(value: false)
+                        addSpotViewModel.loading = false
+                        addSpotViewModel.duplicatedTitleAndAddress = false
                     }, label: {
                         Text("OK")
                     })
@@ -61,21 +57,21 @@ struct InputSpotInfoView: View {
                     Text("タイトルまたは住所を変更してください")
                 }.alert("すでに同一住所のスポットが存在しています。\n登録を続けますか？", isPresented: $addSpotViewModel.duplicatedAddress, actions:{
                     Button(action: {
-                        addSpotViewModel.setLoading(value: false)
-                        addSpotViewModel.setDuplicatedTitleAndAddress(value: false)
+                        addSpotViewModel.loading = false
+                        addSpotViewModel.duplicatedAddress = false
                     }, label: {
                         Text("キャンセル")
                     })
                     Button(action: {
-                        addSpotViewModel.setDuplicatedTitleAndAddress(value: false)
-                        spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage?.jpegData(compressionQuality: 0), images: addSpotViewModel.images, title: title, address: addSpotViewModel.address, favorite: favorite, star: star, memo: memo)
+                        addSpotViewModel.duplicatedAddress = false
+                        spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage?.jpegData(compressionQuality: 0), images: addSpotViewModel.images, title: addSpotViewModel.title, address: addSpotViewModel.address, favorite: addSpotViewModel.favorite, star: addSpotViewModel.star, memo: addSpotViewModel.memo)
                     }, label: {
                         Text("はい")
                     })
                 })
             }.padding(.horizontal, 20).padding(.vertical, 30)
             
-            NavigationLink(destination: InputLocationView(goInputLocationView: $goInputLocationView), isActive: $goInputLocationView) {
+            NavigationLink(destination: InputLocationView(), isActive: $goInputLocationView) {
                 EmptyView()
             }
             
@@ -85,16 +81,16 @@ struct InputSpotInfoView: View {
             }
         }.navigationBarBackButtonHidden(addSpotViewModel.loading)
             .navigationBarItems(trailing: Button(action: {
-                addSpotViewModel.setTitle(title)
-                addSpotViewModel.setLoading(value: true)
+                addSpotViewModel.loading = true
                 
                 // If this spot address is duplicated, show an alert. If not, post this spot.
                 addSpotViewModel.checkToExistsSameAddressSpot {
-                    spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage?.jpegData(compressionQuality: 0), images: addSpotViewModel.images, title: title, address: addSpotViewModel.address, favorite: favorite, star: star, memo: memo)
+                    spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage?.jpegData(compressionQuality: 0), images: addSpotViewModel.images, title: addSpotViewModel.title, address: addSpotViewModel.address, favorite: addSpotViewModel.favorite, star: addSpotViewModel.star, memo: addSpotViewModel.memo)
+                    
                 }
             }) {
                 Text("登録")
-            }.disabled(title == "" || addSpotViewModel.address == ""))
+            }.disabled(addSpotViewModel.title == "" || addSpotViewModel.address == ""))
     }
 }
 

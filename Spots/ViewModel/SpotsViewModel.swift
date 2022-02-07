@@ -13,7 +13,8 @@ class SpotsViewModel: ObservableObject {
     @Published var spots: [Spot] = []
     @Published var showAddSpotSheet: Bool = false
     @Published var showSpotListSheet: Bool = false
-    @Published var isQueried: Bool = false
+    @Published var queried: Bool = false
+    @Published var updated: Bool = false
     @Published var goSpotsView: Bool = false
     @Published var goSpotDetailView: Bool = false
     @Published var region = MKCoordinateRegion(
@@ -21,6 +22,7 @@ class SpotsViewModel: ObservableObject {
         span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
     )
     @Published var selectedAnnotations: [MKAnnotation] = []
+    @Published var updating: Bool = false
     
     private var spotUseCase: SpotUseCase
     var cancellables = [AnyCancellable]()
@@ -53,7 +55,7 @@ class SpotsViewModel: ObservableObject {
         spotUseCase.getSpots().receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: do {
-                self.isQueried = true
+                self.queried = true
             }
             case .failure: break
             }
@@ -63,7 +65,11 @@ class SpotsViewModel: ObservableObject {
     }
     
     func refreshSpots() {
-        self.spots = []
+        spots = []
+        region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498),
+            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
+        )
         getSpots()
     }
     
@@ -83,5 +89,43 @@ class SpotsViewModel: ObservableObject {
             )
             self.generator.notificationOccurred(.success)
         }).store(in: &cancellables)
+    }
+    
+    func deleteSpot(spotId: String) {
+        updating = true
+        spotUseCase.updateSpot(
+            spotId: spotId,
+            mainImage: nil,
+            images: nil,
+            title: nil,
+            address: nil,
+            favorite: nil,
+            star: nil,
+            memo: nil,
+            deleted: true
+        ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished: do {
+                self.spots = self.spots.filter { spot in
+                    return spot.id != spotId
+                }
+                self.updating = false
+                self.goSpotDetailView = false
+            }
+            case .failure: do {
+                self.updating = false
+            }
+            }
+        }, receiveValue: {spot in}).store(in: &cancellables)
+    }
+    
+    func updateSpot(spotId: String, spot: Spot) {
+        spots = spots.map { s in
+            if s.id == spot.id {
+                return spot
+            }
+            return s
+        }
+        updated = true
     }
 }

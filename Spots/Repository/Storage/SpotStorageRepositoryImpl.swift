@@ -88,7 +88,7 @@ class SpotStorageRepositoryImpl: SpotStorageRepository {
         }
 
         if let imageUrl = imageUrl {
-            return Photo(imageUrl: imageUrl, name: name, width: image.width, height: image.height, timestamp: date, createdAt: date)
+            return Photo(imageUrl: imageUrl, name: name, width: image.width, height: image.height, timestamp: date, deleted: false, createdAt: date)
         }
         return nil
     }

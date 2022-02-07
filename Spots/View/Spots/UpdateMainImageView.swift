@@ -1,24 +1,35 @@
 //
-//  Created on 2021/11/30
+//  Created on 2022/02/07
 //
 
 import SwiftUI
 
-struct SelectMainImageView: View {
-    @EnvironmentObject var spotsViewModel: SpotsViewModel
-    @EnvironmentObject var addSpotViewModel: AddSpotViewModel
-    @EnvironmentObject var imagePickerViewModel: ImagePickerViewModel
+struct UpdateMainImageView: View {
+    @EnvironmentObject var spotDetailViewModel: SpotDetailViewModel
+    @ObservedObject var imagePickerViewModel = ImagePickerViewModel()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var goNext = false
+    @State var updating = false
     let width = UIScreen.main.bounds.width
     
     var body: some View {
-        NavigationView {
-            Group {
+        Group {
+            ZStack(alignment: .center) {
                 VStack {
                     if let preview = imagePickerViewModel.selectedImagePreview {
                         Image(uiImage: preview).resizable().scaledToFill().frame(height: width / 1.6).clipped().padding(.bottom, 15)
+                    } else if let imageUrl = spotDetailViewModel.spot?.imageUrl {
+                        AsyncImage(url: URL(string: imageUrl)) { image in
+                            image.resizable()
+                                .scaledToFill()
+                                .frame(height: width / 1.6)
+                                .clipped()
+                                .padding(.bottom, 15)
+                        } placeholder: {
+                            Rectangle().fill(Color.background).frame(height: width / 1.6).padding(.bottom, 15)
+                        }
                     } else {
-                        Color.lightGray.frame(width: width, height: width * 0.625).padding(.bottom, 15)
+                        Rectangle().fill(Color.background).frame(height: width / 1.6).padding(.bottom, 15)
                     }
                     
                     if imagePickerViewModel.libraryStatus == .Denied {
@@ -54,39 +65,46 @@ struct SelectMainImageView: View {
                             }
                         }
                     }
-                    NavigationLink(destination: SelectImagesView(), isActive: $goNext) {
-                        EmptyView()
-                    }
                 }
-            }.interactiveDismissDisabled(addSpotViewModel.loading).navigationTitle("メインの写真").navigationBarTitleDisplayMode(.inline).toolbar {
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button(action: {
-                        spotsViewModel.showAddSpotSheet = false
-                    }) {
-                        Image(systemName: "xmark").foregroundColor(.black)
-                    }
+                if updating {
+                    ProgressView().scaleEffect(x: 1.5, y: 1.5, anchor: .center).progressViewStyle(CircularProgressViewStyle(tint: Color.white)).zIndex(1)
+                    Rectangle().fill(Color.black).opacity(0.4).edgesIgnoringSafeArea(.all)
                 }
-                ToolbarItem(placement: .navigationBarTrailing){
-                    Button(action: {
-                        if let selectedImage = imagePickerViewModel.selectedImagePreview {
-                            addSpotViewModel.mainImage = selectedImage
+            }
+        }.navigationBarBackButtonHidden(true).toolbar {
+            ToolbarItem(placement: .navigationBarLeading){
+                Button(action: {
+                    imagePickerViewModel.selectedImagePreview = nil
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "chevron.left").font(.system(size: 16).bold()).foregroundColor(.black)
+                }.disabled(updating)
+            }
+            ToolbarItem(placement: .navigationBarTrailing){
+                Button("保存") {
+                    Task {
+                        updating = true
+                        var res = false
+                        if let id = spotDetailViewModel.spot?.id, let image = imagePickerViewModel.selectedImagePreview?.jpegData(compressionQuality: 0) {
+                            res = await spotDetailViewModel.updateMainImage(spotId: id, image: image)
                         }
-                        goNext = true
-                    }) {
-                        Text("次へ")
+                        updating = false
+                        if res {
+                            presentationMode.wrappedValue.dismiss()
+                        }
                     }
-                }
-            }.onAppear {
-                if imagePickerViewModel.libraryStatus == .Denied {
-                    imagePickerViewModel.setUp(Int(width))
-                }
+                }.disabled(updating)
+            }
+        }.onAppear {
+            if imagePickerViewModel.libraryStatus == .Denied {
+                imagePickerViewModel.setUp(Int(width))
             }
         }
     }
 }
 
-struct SelectMainImageView_Previews: PreviewProvider {
+struct UpdateMainImageView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectMainImageView().environmentObject(AddSpotViewModel()).environmentObject(ImagePickerViewModel())
+        UpdateMainImageView().environmentObject(SpotDetailViewModel())
     }
 }

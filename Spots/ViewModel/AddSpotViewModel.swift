@@ -12,6 +12,9 @@ class AddSpotViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var address: String = ""
     @Published var addressErrorMessage: String = ""
+    @Published var favorite = false
+    @Published var star = false
+    @Published var memo: String = ""
     @Published var loading: Bool = false
     @Published var duplicatedTitleAndAddress: Bool = false  // Whether same title and address spot exists
     @Published var duplicatedAddress: Bool = false  // Whether same address spot exists
@@ -23,10 +26,6 @@ class AddSpotViewModel: ObservableObject {
     init(spotUseCase: SpotUseCase = SpotUseCaseImpl(), locationUseCase: LocationUseCase = LocationUseCaseImpl()) {
         self.spotUseCase = spotUseCase
         self.locationUseCase = locationUseCase
-    }
-
-    func setMainImage(_ image: UIImage) {
-        self.mainImage = image
     }
     
     func addImages(_ newImages: [Asset]) {
@@ -43,26 +42,6 @@ class AddSpotViewModel: ObservableObject {
         } catch {
             addressErrorMessage = "住所を入力してください"
         }
-    }
-    
-    func setAddress(_ address: String) {
-        self.address = address
-    }
-    
-    func setTitle(_ title: String) {
-        self.title = title
-    }
-    
-    func setLoading(value: Bool) {
-        self.loading = value
-    }
-    
-    func setDuplicatedTitleAndAddress(value: Bool) {
-        self.duplicatedTitleAndAddress = value
-    }
-    
-    func setDuplicatedAddress(value: Bool) {
-        self.duplicatedAddress = value
     }
     
     func checkToExistsSameAddressSpot(postSpot: @escaping () -> Void) {

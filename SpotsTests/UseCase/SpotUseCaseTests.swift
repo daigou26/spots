@@ -8,7 +8,7 @@ import Combine
 
 class SpotRepositoryMock: SpotRepository {
     func getSpot(spotId: String) async throws -> Spot {
-        return Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true)
+        return Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false)
     }
     
     func getSpots(uid: String) async throws -> [Spot]? {
@@ -47,6 +47,7 @@ class SpotRepositoryMock: SpotRepository {
         imageUploadingStatus: [ImageUploadingStatus]?,
         category: [String]?,
         memo: String?,
+        deleted: Bool?,
         updatedAt: Date
     ) async {
         return

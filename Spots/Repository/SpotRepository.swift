@@ -23,6 +23,7 @@ protocol SpotRepository {
         imageUploadingStatus: [ImageUploadingStatus]?,
         category: [String]?,
         memo: String?,
+        deleted: Bool?,
         updatedAt: Date
     ) async throws
     func postPhotos(uid: String, spotId: String, photos: [Photo]) async

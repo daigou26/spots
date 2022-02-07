@@ -12,7 +12,18 @@ class SpotRepositoryImpl: SpotRepository {
         let doc = try await dbRef.document(spotId).getDocument()
         if doc.exists {
             let data = doc.data()
-            if let data = data, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+            
+            if let data = data, let deleted = data["deleted"] as? Bool, deleted {
+                throw QueryError.Deleted
+            }
+            
+            if let data = data,
+               let title: String = data["title"] as? String,
+               let address: String = data["address"] as? String,
+               let favorite: Bool = data["favorite"] as? Bool,
+               let star: Bool = data["star"] as? Bool,
+               let latitude: Double = data["latitude"] as? Double,
+               let longitude: Double =  data["longitude"] as? Double {
                 let imageUrl = data["imageUrl"] as? String
                 let category = data["category"] as? [String]
                 let memo = data["memo"] as? String
@@ -28,7 +39,7 @@ class SpotRepositoryImpl: SpotRepository {
                     }
                 }
                 
-                return Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, imageUploadingStatus: imageUploadingStatus, category: category, memo: memo, createdAt: createdAt, updatedAt: updatedAt)
+                return Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, imageUploadingStatus: imageUploadingStatus, category: category, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt)
             }
         }
         throw QueryError.NotFound
@@ -36,18 +47,24 @@ class SpotRepositoryImpl: SpotRepository {
     
     func getSpotByAddress(uid: String, address: String) async throws -> [Spot] {
         var spots: [Spot] = []
-        let snapshot = try await dbRef.whereField("uid", isEqualTo: uid).whereField("address", isEqualTo: address).getDocuments()
+        let snapshot = try await dbRef.whereField("uid", isEqualTo: uid).whereField("address", isEqualTo: address).whereField("deleted", isEqualTo: false).getDocuments()
         
         if !snapshot.isEmpty {
             for doc in snapshot.documents {
                 let data = doc.data()
-                if doc.exists, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+                if doc.exists,
+                   let title: String = data["title"] as? String,
+                   let address: String = data["address"] as? String,
+                   let favorite: Bool = data["favorite"] as? Bool,
+                   let star: Bool = data["star"] as? Bool,
+                   let latitude: Double = data["latitude"] as? Double,
+                   let longitude: Double =  data["longitude"] as? Double {
                     let imageUrl = data["imageUrl"] as? String
                     let category = data["category"] as? [String]
                     let memo = data["memo"] as? String
                     let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
                     let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
-                    spots.append(Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, createdAt: createdAt, updatedAt: updatedAt))
+                    spots.append(Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt))
                 }
             }
         }
@@ -56,13 +73,17 @@ class SpotRepositoryImpl: SpotRepository {
     
     func getPhotos(spotId: String) async throws -> [Photo] {
         var photos: [Photo] = []
-        let snapshot = try await dbRef.document(spotId).collection("photos").getDocuments()
+        let snapshot = try await dbRef.document(spotId).collection("photos").whereField("deleted", isEqualTo: false).getDocuments()
         if !snapshot.isEmpty {
             for doc in snapshot.documents {
                 let data = doc.data()
-                if doc.exists, let imageUrl: String = data["imageUrl"] as? String, let name: String = data["name"] as? String, let  width: Float = data["width"] as? Float, let height: Float = data["height"] as? Float {
+                if doc.exists,
+                   let imageUrl: String = data["imageUrl"] as? String,
+                   let name: String = data["name"] as? String,
+                   let  width: Float = data["width"] as? Float,
+                   let height: Float = data["height"] as? Float {
                     let timestamp = (data["timestamp"] as! Timestamp).dateValue()
-                    photos.append(Photo(id: doc.documentID, imageUrl: imageUrl, name: name, width: width, height: height, timestamp: timestamp))
+                    photos.append(Photo(id: doc.documentID, imageUrl: imageUrl, name: name, width: width, height: height, timestamp: timestamp, deleted: false))
                 }
             }
         }
@@ -72,17 +93,23 @@ class SpotRepositoryImpl: SpotRepository {
     
     func getSpots(uid: String) async throws -> [Spot]? {
         var spots: [Spot] = []
-        let snapshot = try await dbRef.whereField("uid", isEqualTo: uid).getDocuments()
+        let snapshot = try await dbRef.whereField("uid", isEqualTo: uid).whereField("deleted", isEqualTo: false).getDocuments()
         if !snapshot.isEmpty {
             for document in snapshot.documents {
                 let data = document.data()
-                if document.exists, let title: String = data["title"] as? String, let address: String = data["address"] as? String, let favorite: Bool = data["favorite"] as? Bool, let star: Bool = data["star"] as? Bool, let latitude: Double = data["latitude"] as? Double, let longitude: Double =  data["longitude"] as? Double {
+                if document.exists,
+                   let title: String = data["title"] as? String,
+                   let address: String = data["address"] as? String,
+                   let favorite: Bool = data["favorite"] as? Bool,
+                   let star: Bool = data["star"] as? Bool,
+                   let latitude: Double = data["latitude"] as? Double,
+                   let longitude: Double =  data["longitude"] as? Double {
                     let imageUrl = data["imageUrl"] as? String
                     let category = data["category"] as? [String]
                     let memo = data["memo"] as? String
                     let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
                     let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
-                    spots.append(Spot(id: document.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, createdAt: createdAt, updatedAt: updatedAt))
+                    spots.append(Spot(id: document.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt))
                 }
             }
         }
@@ -96,6 +123,7 @@ class SpotRepositoryImpl: SpotRepository {
     func postSpot(uid: String, spot: Spot) async throws {
         var data = spot.asDictionary
         data["createdAt"] = Timestamp(date: spot.createdAt ?? Date())
+        data["deleted"] = false
         data["uid"] = uid
         
         if let imageUploadingStatus = spot.imageUploadingStatus?.first, imageUploadingStatus.count > 0 {
@@ -134,6 +162,7 @@ class SpotRepositoryImpl: SpotRepository {
         imageUploadingStatus: [ImageUploadingStatus]?,
         category: [String]?,
         memo: String?,
+        deleted: Bool?,
         updatedAt: Date
     ) async throws {
         var data: [String: Any] = [:]
@@ -155,7 +184,7 @@ class SpotRepositoryImpl: SpotRepository {
         if let favorite = favorite {
             data["favorite"] = favorite
         }
-       
+        
         if let star = star {
             data["star"] = star
         }
@@ -172,6 +201,10 @@ class SpotRepositoryImpl: SpotRepository {
         
         if let memo = memo {
             data["memo"] = memo
+        }
+        
+        if let deleted = deleted {
+            data["deleted"] = deleted
         }
         
         data["updatedAt"] = Timestamp(date: updatedAt)
@@ -213,6 +246,7 @@ class SpotRepositoryImpl: SpotRepository {
             var data = photo.asDictionary
             data["uid"] = uid
             data["timestamp"] = Timestamp(date: photo.timestamp)
+            data["deleted"] = false
             data["createdAt"] = Timestamp(date: photo.createdAt ?? photo.timestamp)
             dbRef.document(spotId).collection("photos").addDocument(data: data)
         }

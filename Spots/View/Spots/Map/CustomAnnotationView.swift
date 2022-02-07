@@ -23,7 +23,6 @@ final class CustomAnnotationView: MKAnnotationView {
     
     override func prepareForDisplay() {
         super.prepareForDisplay()
-        
         if let sub = subview {
             sub.removeFromSuperview()
         }
