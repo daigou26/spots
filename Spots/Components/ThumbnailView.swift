@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct ThumbnailView: View {
-    var photo: Asset
+    var asset: Asset
     var checked: Bool = false
     
     var body: some View {
@@ -22,7 +22,7 @@ struct ThumbnailView: View {
                     .padding(.top, 5)
                     .padding(.trailing, 5)
             }
-            Image(uiImage: photo.image)
+            Image(uiImage: asset.image)
                 .resizable()
                 .aspectRatio(1, contentMode: .fill)
                 .cornerRadius(10)

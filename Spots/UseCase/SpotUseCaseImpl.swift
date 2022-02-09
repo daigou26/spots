@@ -183,4 +183,22 @@ class SpotUseCaseImpl: SpotUseCase {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func updatePhoto(spotId: String,
+                     photoId: String,
+                     photo: Photo
+    ) -> AnyPublisher<Photo, Error> {
+        return Deferred {
+            Future { promise in
+                Task {
+                    do {
+                        try await self.spotRepository.updatePhoto(spotId: spotId, photoId: photoId, photo: photo)
+                        promise(.success((photo)))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
 }

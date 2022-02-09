@@ -54,6 +54,14 @@ class SpotUseCaseMock: SpotUseCase {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func updatePhoto(spotId: String, photoId: String, photo: Photo) -> AnyPublisher<Photo, Error> {
+        return Deferred {
+            Future { promise in
+                return promise(.success(Photo(imageUrl: "", name: "", width: 0, height: 0, timestamp: Date(), deleted: false)))
+            }
+        }.eraseToAnyPublisher()
+    }
 }
 
 class SpotsViewModelTests: XCTestCase {

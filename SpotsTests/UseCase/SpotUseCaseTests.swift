@@ -35,6 +35,10 @@ class SpotRepositoryMock: SpotRepository {
         return
     }
     
+    func updateImageUploadingStatus(uid: String, spotId: String, imageUploadingStatus: ImageUploadingStatus) async {
+        return
+    }
+    
     func updateSpot(
         spotId: String,
         title: String?,
@@ -53,7 +57,7 @@ class SpotRepositoryMock: SpotRepository {
         return
     }
     
-    func updateImageUploadingStatus(uid: String, spotId: String, imageUploadingStatus: ImageUploadingStatus) async {
+    func updatePhoto(spotId: String, photoId: String, photo: Photo) async throws {
         return
     }
 }

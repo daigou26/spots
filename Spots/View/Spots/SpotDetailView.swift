@@ -116,7 +116,7 @@ struct SpotDetailView: View {
                         NavigationLink(destination: InputLocationView(editing: true).environmentObject(viewModel), isActive: $goInputLocationView) {
                             EmptyView()
                         }
-                        NavigationLink(destination: SpotImageList(i: imageIndex, photos: viewModel.photos), isActive: $goImageList) {
+                        NavigationLink(destination: SpotImageList(i: imageIndex, photos: viewModel.photos).environmentObject(viewModel), isActive: $goImageList) {
                             EmptyView()
                         }
                     }

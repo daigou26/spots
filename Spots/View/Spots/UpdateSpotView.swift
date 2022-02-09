@@ -50,14 +50,14 @@ struct UpdateSpotView: View {
             ToolbarItem(placement: .navigationBarTrailing){
                 Button("保存") {
                     Task {
-                        var res = false
+                        var success = false
                         if let id = spotDetailViewModel.spot?.id, spotDetailViewModel.updatingTitle {
-                            res = await spotDetailViewModel.updateTitle(spotId: id, title: title)
+                            success = await spotDetailViewModel.updateTitle(spotId: id, title: title)
                         }
                         if let id = spotDetailViewModel.spot?.id, spotDetailViewModel.updatingMemo {
-                            res = await spotDetailViewModel.updateMemo(spotId: id, memo: memo)
+                            success = await spotDetailViewModel.updateMemo(spotId: id, memo: memo)
                         }
-                        if res {
+                        if success {
                             presentationMode.wrappedValue.dismiss()
                         }
                     }
