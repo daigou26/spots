@@ -29,7 +29,7 @@ struct GridLocalImages: View {
                         Text("写真を選択").foregroundColor(.white).fontWeight(.bold).padding(.vertical, 10).padding(.horizontal).background(Color.main).cornerRadius(10)
                     }).padding(.bottom, 30)
                 }
-            }
+            }.padding(.horizontal, 5)
         }
     }
 }

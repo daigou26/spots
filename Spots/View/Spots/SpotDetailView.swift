@@ -35,6 +35,20 @@ struct SpotDetailView: View {
                         }
                         
                         VStack {
+                            Spacer()
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    viewModel.showAddPhotosSheet = true
+                                }) {
+                                    Image(systemName: "plus")
+                                }.buttonStyle(AddButtonStyle()).sheet(isPresented: $viewModel.showAddPhotosSheet) {
+                                    AddImagesView().environmentObject(viewModel).environmentObject(ImagePickerViewModel())
+                                }
+                            }
+                        }.zIndex(1)
+                        
+                        VStack {
                             ZStack(alignment: .bottomTrailing) {
                                 if let imageUrl = spot.imageUrl {
                                     AsyncImage(url: URL(string: imageUrl)) { image in

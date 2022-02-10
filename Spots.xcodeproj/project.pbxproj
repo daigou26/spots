@@ -51,6 +51,7 @@
 		C0A19E0727AC41AF0065D39F /* UpdateSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */; };
 		C0A19E0B27B03D550065D39F /* UpdateMainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */; };
 		C0A19E0E27B1BCAC0065D39F /* GridImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0D27B1BCAC0065D39F /* GridImages.swift */; };
+		C0A19E1027B5197E0065D39F /* AddImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0F27B5197E0065D39F /* AddImagesView.swift */; };
 		C0B4CFEF276A3E2C008F1394 /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */; };
 		C0B4CFF1276A3E82008F1394 /* ImageUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */; };
 		C0B4CFF52779F751008F1394 /* AddSpotViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */; };
@@ -145,6 +146,7 @@
 		C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSpotView.swift; sourceTree = "<group>"; };
 		C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMainImageView.swift; sourceTree = "<group>"; };
 		C0A19E0D27B1BCAC0065D39F /* GridImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImages.swift; sourceTree = "<group>"; };
+		C0A19E0F27B5197E0065D39F /* AddImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImagesView.swift; sourceTree = "<group>"; };
 		C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
 		C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCaseImpl.swift; sourceTree = "<group>"; };
 		C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewModelTests.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				C0B4D00827A3E8CA008F1394 /* SpotImageList.swift */,
 				C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */,
 				C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */,
+				C0A19E0F27B5197E0065D39F /* AddImagesView.swift */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				C0A19E0B27B03D550065D39F /* UpdateMainImageView.swift in Sources */,
 				C0B4D00927A3E8CA008F1394 /* SpotImageList.swift in Sources */,
 				C05DD380274FC65D0071C163 /* SpotRepository.swift in Sources */,
+				C0A19E1027B5197E0065D39F /* AddImagesView.swift in Sources */,
 				C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */,
 				C05DD36E27417E0C0071C163 /* Spot.swift in Sources */,
 				C0B4D0042787103D008F1394 /* CheckSpotDuplicationResponse.swift in Sources */,

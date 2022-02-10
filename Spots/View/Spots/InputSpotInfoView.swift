@@ -79,18 +79,19 @@ struct InputSpotInfoView: View {
                 ProgressView().scaleEffect(x: 1.5, y: 1.5, anchor: .center).progressViewStyle(CircularProgressViewStyle(tint: Color.white)).zIndex(1)
                 Rectangle().fill(Color.black).opacity(0.4).edgesIgnoringSafeArea(.all)
             }
-        }.navigationBarBackButtonHidden(addSpotViewModel.loading)
-            .navigationBarItems(trailing: Button(action: {
-                addSpotViewModel.loading = true
+        }
+        .navigationBarBackButtonHidden(addSpotViewModel.loading)
+        .navigationBarItems(trailing: Button(action: {
+            addSpotViewModel.loading = true
+            
+            // If this spot address is duplicated, show an alert. If not, post this spot.
+            addSpotViewModel.checkToExistsSameAddressSpot {
+                spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage?.jpegData(compressionQuality: 0), images: addSpotViewModel.images, title: addSpotViewModel.title, address: addSpotViewModel.address, favorite: addSpotViewModel.favorite, star: addSpotViewModel.star, memo: addSpotViewModel.memo)
                 
-                // If this spot address is duplicated, show an alert. If not, post this spot.
-                addSpotViewModel.checkToExistsSameAddressSpot {
-                    spotsViewModel.postSpot(mainImage: addSpotViewModel.mainImage?.jpegData(compressionQuality: 0), images: addSpotViewModel.images, title: addSpotViewModel.title, address: addSpotViewModel.address, favorite: addSpotViewModel.favorite, star: addSpotViewModel.star, memo: addSpotViewModel.memo)
-                    
-                }
-            }) {
-                Text("登録")
-            }.disabled(addSpotViewModel.title == "" || addSpotViewModel.address == ""))
+            }
+        }) {
+            Text("登録")
+        }.disabled(addSpotViewModel.title == "" || addSpotViewModel.address == ""))
     }
 }
 
