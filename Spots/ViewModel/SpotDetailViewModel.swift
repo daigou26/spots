@@ -18,6 +18,7 @@ class SpotDetailViewModel: ObservableObject {
     @Published var updatingTitle: Bool = false
     @Published var updatingMemo: Bool = false
     @Published var errorMessage: String = ""
+    @Published var showAddPhotosSheet = false
     
     private var spotUseCase: SpotUseCase
     private var locationUseCase: LocationUseCase
@@ -60,6 +61,10 @@ class SpotDetailViewModel: ObservableObject {
                 case .failure: break
                 }
             }, receiveValue: { photos in
+                var photos = photos
+                photos.sort {
+                    return  $0.timestamp.timeIntervalSince1970 > $1.timestamp.timeIntervalSince1970
+                }
                 self.photos = photos
                 continuation.resume()
             }).store(in: &cancellables)
@@ -88,7 +93,7 @@ class SpotDetailViewModel: ObservableObject {
                 self.updatingFavorite = false
             }
             }
-        }, receiveValue: {spot in}).store(in: &cancellables)
+        }, receiveValue: {_ in}).store(in: &cancellables)
     }
     
     func updateStar(spotId: String, star: Bool) {
@@ -113,7 +118,7 @@ class SpotDetailViewModel: ObservableObject {
                 self.updatingStar = false
             }
             }
-        }, receiveValue: {spot in}).store(in: &cancellables)
+        }, receiveValue: {_ in}).store(in: &cancellables)
     }
     
     func updateTitle(spotId: String, title: String) async -> Bool {
@@ -143,7 +148,7 @@ class SpotDetailViewModel: ObservableObject {
                     continuation.resume(returning: false)
                 }
                 }
-            }, receiveValue: {spot in}).store(in: &cancellables)
+            }, receiveValue: {_ in}).store(in: &cancellables)
         }
         return result
     }
@@ -175,11 +180,11 @@ class SpotDetailViewModel: ObservableObject {
                     continuation.resume(returning: false)
                 }
                 }
-            }, receiveValue: {spot in}).store(in: &cancellables)
+            }, receiveValue: {_ in}).store(in: &cancellables)
         }
         return result
     }
-
+    
     @MainActor
     func updateAddress(spotId: String, address: String) async -> Bool {
         updating = true
@@ -216,7 +221,7 @@ class SpotDetailViewModel: ObservableObject {
                     continuation.resume(returning: false)
                 }
                 }
-            }, receiveValue: {spot in
+            }, receiveValue: {(spot, _) in
                 self.spot?.address = address
                 self.spot?.longitude = spot.longitude
                 self.spot?.latitude = spot.latitude
@@ -225,7 +230,7 @@ class SpotDetailViewModel: ObservableObject {
         return res
     }
     
-    func updateMainImage(spotId: String, image: Data) async -> Bool {    
+    func updateMainImage(spotId: String, image: Data) async -> Bool {
         let res: Bool = await withCheckedContinuation { continuation in
             spotUseCase.updateSpot(
                 spotId: spotId,
@@ -246,9 +251,54 @@ class SpotDetailViewModel: ObservableObject {
                     continuation.resume(returning: false)
                 }
                 }
-            }, receiveValue: {spot in
+            }, receiveValue: {(spot, _) in
                 self.spot?.imageUrl = spot.imageUrl
             }).store(in: &cancellables)
+        }
+        return res
+    }
+    
+    func addPhotos(spotId: String, images: [Asset]) async -> Bool {
+        let res: Bool = await withCheckedContinuation { continuation in
+            spotUseCase.updateSpot(spotId: spotId, mainImage: nil, images: images, title: nil, address: nil, favorite: nil, star: nil, memo: nil, deleted: nil).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished: do {
+                    continuation.resume(returning: true)
+                }
+                case .failure: do {
+                    continuation.resume(returning: false)
+                }
+                }
+            }, receiveValue: { (spot, photos) in
+                var photos = photos
+                photos.sort {
+                    return  $0.timestamp.timeIntervalSince1970 > $1.timestamp.timeIntervalSince1970
+                }
+                self.photos.insert(contentsOf: photos, at: 0)
+            }).store(in: &cancellables)
+        }
+        return res
+    }
+    
+    func removePhoto(spotId: String, photoId: String, photo: Photo) async -> Bool {
+        var photo = photo
+        photo.deleted = true
+        let res: Bool = await withCheckedContinuation { continuation in
+            spotUseCase.updatePhoto(spotId: spotId, photoId: photoId, photo: photo)
+                .receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished: do {
+                        continuation.resume(returning: true)
+                    }
+                    case .failure: do {
+                        continuation.resume(returning: false)
+                    }
+                    }
+                }, receiveValue: {_ in
+                    self.photos = self.photos.filter { p in
+                        return p.id != photoId
+                    }
+                }).store(in: &cancellables)
         }
         return res
     }

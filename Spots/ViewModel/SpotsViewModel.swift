@@ -116,9 +116,10 @@ class SpotsViewModel: ObservableObject {
                 self.updating = false
             }
             }
-        }, receiveValue: {spot in}).store(in: &cancellables)
+        }, receiveValue: {_ in}).store(in: &cancellables)
     }
     
+    // Update UI
     func updateSpot(spotId: String, spot: Spot) {
         spots = spots.map { s in
             if s.id == spot.id {

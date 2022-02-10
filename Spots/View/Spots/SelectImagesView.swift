@@ -21,27 +21,9 @@ struct SelectImagesView: View {
                 Spacer()
             }
             
-            ScrollView {
-                VStack {
-                    LazyVGrid(columns: Array(repeating: .init(.fixed((width - 25) / 3)), count: 3), alignment: .center, spacing: 5) {
-                        ForEach(imagePickerViewModel.photos, id: \.self) { photo in
-                            ThumbnailView(photo: photo, checked: imagePickerViewModel.selectedImages.contains(photo)).onTapGesture {
-                                imagePickerViewModel.setSelectedImages(photo)
-                            }
-                        }
-                    }
-                    
-                    if imagePickerViewModel.libraryStatus == .Limited {
-                        Text("追加で写真を選択する").foregroundColor(.gray).padding(.top, 20)
-                        Button(action: {
-                            // Go to settings
-                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
-                        }, label: {
-                            Text("写真を選択").foregroundColor(.white).fontWeight(.bold).padding(.vertical, 10).padding(.horizontal).background(Color.main).cornerRadius(10)
-                        }).padding(.bottom, 30)
-                    }
-                }
-            }
+            GridLocalImages(onTap: {
+                asset in imagePickerViewModel.setSelectedImages(asset)
+            }, checkEnabled: true).environmentObject(imagePickerViewModel)
             NavigationLink(destination: InputSpotInfoView(), isActive: $goNext) {
                 EmptyView()
             }

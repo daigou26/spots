@@ -130,7 +130,7 @@ class SpotUseCaseImpl: SpotUseCase {
                     star: Bool?,
                     memo: String?,
                     deleted: Bool?
-    ) -> AnyPublisher<Spot, Error> {
+    ) -> AnyPublisher<(Spot, [Photo]), Error> {
         return Deferred {
             Future { promise in
                 Task {
@@ -166,16 +166,33 @@ class SpotUseCaseImpl: SpotUseCase {
                                                                  updatedAt: Date())
                         
                         if let images = images, images.count > 0 {
-                            Task {
-                                let imagesData = await self.imageUseCase.extractImagesData(assets: images.map({ image in
-                                    return image.asset
-                                }))
-                                let photos = await self.spotStorageRepository.uploadImages(spotId: spotId, images: imagesData)
-                                await self.spotRepository.postPhotos(uid: self.uid, spotId: spotId, photos: photos)
-                                await self.spotRepository.updateImageUploadingStatus(uid: self.uid, spotId: spotId, imageUploadingStatus: imageUploadingStatus)
-                            }
+                            let imagesData = await self.imageUseCase.extractImagesData(assets: images.map({ image in
+                                return image.asset
+                            }))
+                            let photos = await self.spotStorageRepository.uploadImages(spotId: spotId, images: imagesData)
+                            await self.spotRepository.postPhotos(uid: self.uid, spotId: spotId, photos: photos)
+                            await self.spotRepository.updateImageUploadingStatus(uid: self.uid, spotId: spotId, imageUploadingStatus: imageUploadingStatus)
+                            promise(.success((spot, photos)))
                         }
-                        promise(.success((spot)))
+                        promise(.success((spot, [])))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func updatePhoto(spotId: String,
+                     photoId: String,
+                     photo: Photo
+    ) -> AnyPublisher<Photo, Error> {
+        return Deferred {
+            Future { promise in
+                Task {
+                    do {
+                        try await self.spotRepository.updatePhoto(spotId: spotId, photoId: photoId, photo: photo)
+                        promise(.success((photo)))
                     } catch {
                         promise(.failure(error))
                     }

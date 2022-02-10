@@ -8,10 +8,10 @@ import UIKit
 
 class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObserver {
     @Published var libraryStatus = PhotoAuthStatus.Denied
-    @Published var photos: [Asset] = []
+    @Published var assets: [Asset] = []
     @Published var selectedImagePreview: UIImage? = nil
     @Published var selectedImages: [Asset] = []
-    var allPhotos: PHFetchResult<PHAsset>!
+    var allAssets: PHFetchResult<PHAsset>!
     
     override init() {
         super.init()
@@ -27,10 +27,10 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
                 case .denied: libraryStatus = .Denied
                 case .authorized:
                     libraryStatus = .Approved
-                    fetchPhotos(thmbnailSize)
+                    fetchAssets(thmbnailSize)
                 case .limited:
                     libraryStatus = .Limited
-                    fetchPhotos(thmbnailSize)
+                    fetchAssets(thmbnailSize)
                 default: libraryStatus = .Denied
                 }
             }
@@ -48,25 +48,25 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
     }
     
     func photoLibraryDidChange(_ changeInstance: PHChange) {
-        guard let _ = allPhotos else {return}
-        if let updates = changeInstance.changeDetails(for: allPhotos) {
-            let updatedPhotos = updates.fetchResultAfterChanges
-            updatedPhotos.enumerateObjects {[self] asset, index, _ in
+        guard let _ = allAssets else {return}
+        if let updates = changeInstance.changeDetails(for: allAssets) {
+            let updatedAssets = updates.fetchResultAfterChanges
+            updatedAssets.enumerateObjects {[self] asset, index, _ in
                 if asset.mediaType != .image {return}
-                if !allPhotos.contains(asset) {
+                if !allAssets.contains(asset) {
                     // If it's not included, get the image and append to array
                     getImageFromAsset(asset: asset, size: CGSize(width: 150, height: 150)) { image in
                         DispatchQueue.main.async {
-                            photos.append(Asset(asset: asset, image: image))
+                            assets.append(Asset(asset: asset, image: image))
                         }
                     }
                 }
             }
             
-            allPhotos.enumerateObjects { asset, index, _ in
-                if !updatedPhotos.contains(asset) {
+            allAssets.enumerateObjects { asset, index, _ in
+                if !updatedAssets.contains(asset) {
                     DispatchQueue.main.async {
-                        self.photos.removeAll() { result in
+                        self.assets.removeAll() { result in
                             return result.asset == asset
                         }
                     }
@@ -74,22 +74,22 @@ class ImagePickerViewModel: NSObject, ObservableObject, PHPhotoLibraryChangeObse
             }
             
             DispatchQueue.main.async {
-                self.allPhotos = updatedPhotos
+                self.allAssets = updatedAssets
             }
         }
     }
     
-    func fetchPhotos(_ thmbnailSize: Int) {
+    func fetchAssets(_ thmbnailSize: Int) {
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         options.includeHiddenAssets = false
         
         let fetchResults = PHAsset.fetchAssets(with: options)
-        allPhotos = fetchResults
+        allAssets = fetchResults
         fetchResults.enumerateObjects {[self] asset, index, _ in
             if asset.mediaType == .image {
                 getImageFromAsset(asset: asset, size: CGSize(width: thmbnailSize, height: thmbnailSize)) { image in
-                    photos.append(Asset(asset: asset, image: image))
+                    assets.append(Asset(asset: asset, image: image))
                 }
             }
         }

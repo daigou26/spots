@@ -26,6 +26,7 @@ protocol SpotRepository {
         deleted: Bool?,
         updatedAt: Date
     ) async throws
-    func postPhotos(uid: String, spotId: String, photos: [Photo]) async
     func updateImageUploadingStatus(uid: String, spotId: String, imageUploadingStatus: ImageUploadingStatus) async
+    func postPhotos(uid: String, spotId: String, photos: [Photo]) async
+    func updatePhoto(spotId: String, photoId: String, photo: Photo) async throws
 }

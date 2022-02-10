@@ -24,7 +24,7 @@ struct SpotsView: View {
                             viewModel.showAddSpotSheet = true
                         }) {
                             Image(systemName: "mappin.and.ellipse")
-                        }.buttonStyle(AddSpotButtonStyle()).sheet(isPresented: $viewModel.showAddSpotSheet) {
+                        }.buttonStyle(AddButtonStyle()).sheet(isPresented: $viewModel.showAddSpotSheet) {
                             SelectMainImageView().environmentObject(AddSpotViewModel()).environmentObject(ImagePickerViewModel())
                         }
                     }
@@ -73,7 +73,7 @@ struct RefreshButtonStyle: ButtonStyle {
     }
 }
 
-struct AddSpotButtonStyle: ButtonStyle {
+struct AddButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .foregroundColor(.white)

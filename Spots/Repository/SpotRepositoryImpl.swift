@@ -258,4 +258,25 @@ class SpotRepositoryImpl: SpotRepository {
         }
         return
     }
+    
+    func updatePhoto(spotId: String, photoId: String, photo: Photo) async throws {
+        var data = photo.asDictionary
+        data["timestamp"] = Timestamp(date: photo.timestamp)
+        data["deleted"] = photo.deleted
+        
+        let error: Error? = try await withCheckedThrowingContinuation { continuation in
+            let _ = dbRef.document(spotId).collection("photos").document(photoId).updateData(data) { err in
+                var error: Error?
+                if let err = err {
+                    error = err
+                }
+                continuation.resume(returning: error)
+            }
+        }
+        
+        if let error = error {
+            throw error
+        }
+        return
+    }
 }
