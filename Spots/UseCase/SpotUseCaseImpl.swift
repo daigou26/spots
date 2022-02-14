@@ -88,7 +88,7 @@ class SpotUseCaseImpl: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) -> AnyPublisher<Spot, Error> {
+    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, category: [String]?, memo: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
                 Task {
@@ -100,7 +100,7 @@ class SpotUseCaseImpl: SpotUseCase {
                         }
                         let coordinate = try await self.locationUseCase.geocode(address: address)
                         let imageUploadingStatus = ImageUploadingStatus(count: images?.count ?? 0, userName: Account.shared.name, startedAt: Date())
-                        let spot: Spot = Spot(id: spotId, title: title, imageUrl: imageUrl, address: address, latitude: coordinate.latitude, longitude: coordinate.longitude, favorite: favorite, star: star, imageUploadingStatus: [imageUploadingStatus], memo: memo, deleted: false, createdAt: Date())
+                        let spot: Spot = Spot(id: spotId, title: title, imageUrl: imageUrl, address: address, latitude: coordinate.latitude, longitude: coordinate.longitude, favorite: favorite, star: star, imageUploadingStatus: [imageUploadingStatus], category: category, memo: memo, deleted: false, createdAt: Date())
                         
                         try await self.spotRepository.postSpot(uid: self.uid, spot: spot)
                         
@@ -128,6 +128,7 @@ class SpotUseCaseImpl: SpotUseCase {
                     address: String?,
                     favorite: Bool?,
                     star: Bool?,
+                    category: [String]?,
                     memo: String?,
                     deleted: Bool?
     ) -> AnyPublisher<(Spot, [Photo]), Error> {
@@ -149,7 +150,7 @@ class SpotUseCaseImpl: SpotUseCase {
                         }
                         
                         let imageUploadingStatus = ImageUploadingStatus(count: images?.count ?? 0, userName: Account.shared.name, startedAt: Date())
-                        let spot: Spot = Spot(id: spotId, title: title ?? "", imageUrl: imageUrl ?? "", address: address ?? "", latitude: latitude ?? 0, longitude: longitude ?? 0, favorite: favorite ?? false, star: star ?? false, imageUploadingStatus: nil, memo: memo ?? memo, deleted: false, createdAt: Date())
+                        let spot: Spot = Spot(id: spotId, title: title ?? "", imageUrl: imageUrl ?? "", address: address ?? "", latitude: latitude ?? 0, longitude: longitude ?? 0, favorite: favorite ?? false, star: star ?? false, imageUploadingStatus: nil, category: category, memo: memo, deleted: false, createdAt: Date())
                         
                         try await self.spotRepository.updateSpot(spotId: spotId,
                                                                  title: title,
@@ -160,7 +161,7 @@ class SpotUseCaseImpl: SpotUseCase {
                                                                  favorite: favorite,
                                                                  star: star,
                                                                  imageUploadingStatus: [imageUploadingStatus],
-                                                                 category: nil,
+                                                                 category: category,
                                                                  memo: memo,
                                                                  deleted: deleted,
                                                                  updatedAt: Date())

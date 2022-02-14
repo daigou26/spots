@@ -39,7 +39,7 @@ class SpotUseCaseMock: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) -> AnyPublisher<Spot, Error> {
+    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, category: [String]?, memo: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
                 return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false, createdAt: Date())))
@@ -47,7 +47,7 @@ class SpotUseCaseMock: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, memo: String?, deleted: Bool?) -> AnyPublisher<(Spot, [Photo]), Error> {
+    func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, category: [String]?, memo: String?, deleted: Bool?) -> AnyPublisher<(Spot, [Photo]), Error> {
         return Deferred {
             Future { promise in
                 return promise(.success((Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false, createdAt: Date()), [])))

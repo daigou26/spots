@@ -7,29 +7,53 @@ import SwiftUI
 struct CategoriesList: View {
     @EnvironmentObject var spotDetailViewModel: SpotDetailViewModel
     @ObservedObject var viewModel = CategoriesViewModel()
+    @Binding var showCategoriesSheet: Bool
     @State var showAddCategoryForm = false
     
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
-                Text("カテゴリー").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
-                if viewModel.categories.count == 0 {
+                HStack {
+                    Text("カテゴリー").font(.system(size: 20, weight: .bold))
+                    Spacer()
+                    Text("保存").font(.system(size: 16)).foregroundColor(.textGray).onTapGesture {
+                        Task {
+                            if let spotId = spotDetailViewModel.spot?.id {
+                                let res = await spotDetailViewModel.updateCategories(spotId: spotId, categories: viewModel.categoryItems.map({ item in
+                                    if item.checked {
+                                        return item.category.id
+                                    }
+                                    return nil
+                                }).compactMap{$0})
+                                if res {
+                                    showCategoriesSheet = false
+                                }
+                            }
+                            
+                        }
+                    }
+                }.padding(.bottom, 30)
+                
+                if viewModel.categoryItems.count == 0 {
                     Text("カテゴリーが存在しません").foregroundColor(.textGray)
                 }
                 List {
-                    ForEach(viewModel.categories.indices, id: \.self) { idx in
-                        CategoryCard(idx: idx, tempCategoryColor: Color(hex: viewModel.categories[idx].category.color), tempCategoryName: viewModel.categories[idx].category.name)
+                    ForEach(viewModel.categoryItems.indices, id: \.self) { idx in
+                        CategoryCard(idx: idx, tempCategoryColor: Color(hex: viewModel.categoryItems[idx].category.color), tempCategoryName: viewModel.categoryItems[idx].category.name)
                             .environmentObject(viewModel)
+                            .environmentObject(spotDetailViewModel)
                             .swipeActions(edge: .trailing, allowsFullSwipe: true, content: {
                                 Button {
-                                    viewModel.categories[idx].editMode = true
+                                    viewModel.categoryItems[idx].editMode = true
                                 } label: {
                                     Text("編集")
                                 }
 
                             })
-                            .padding(.vertical, 16)
-                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
+                            .onTapGesture {
+                                viewModel.categoryItems[idx].checked = !viewModel.categoryItems[idx].checked
+                            }
+                            .listRowInsets(EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0))
                     }
                 }
                 .listStyle(.plain)
@@ -71,12 +95,21 @@ struct CategoriesList: View {
             }
             .padding(EdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20))
             .navigationBarHidden(true)
+            .onAppear {
+                viewModel.categoryItems = viewModel.categoryItems.map { categoryItem in
+                    var categoryItem = categoryItem
+                    if spotDetailViewModel.isSetCategory(id: categoryItem.category.id ?? "") {
+                        categoryItem.checked = true
+                    }
+                    return categoryItem
+                }
+            }
         }
     }
 }
 
 struct CategoriesList_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesList().environmentObject(SpotDetailViewModel())
+        CategoriesList(showCategoriesSheet: .constant(true)).environmentObject(SpotDetailViewModel())
     }
 }

@@ -9,11 +9,12 @@ import SwiftUI
 struct CategoryItem: Hashable {
     var category: Category
     var editMode: Bool
+    var checked: Bool
 }
 
 class CategoriesViewModel: ObservableObject {
-    @Published var categories = Account.shared.categories.map { category in
-        return CategoryItem(category: category, editMode: false)
+    @Published var categoryItems = Account.shared.categories.map { category in
+        return CategoryItem(category: category, editMode: false, checked: false)
     }
     @Published var tempCategoryColor = Color.white
     @Published var tempCategoryName = ""
@@ -36,7 +37,7 @@ class CategoriesViewModel: ObservableObject {
         uploading = true
         let color = tempCategoryColor.hex
         let result: Bool = await withCheckedContinuation { continuation in
-            categoryUseCase.postCategory(name: tempCategoryName, color: color, idx: categories.count)
+            categoryUseCase.postCategory(name: tempCategoryName, color: color, idx: categoryItems.count)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { completion in
                     switch completion {
@@ -49,8 +50,8 @@ class CategoriesViewModel: ObservableObject {
                     }
                     }
                 }, receiveValue: { category in
-                    self.categories.append(CategoryItem(category: category, editMode: false))
-                    Account.shared.update(categories: self.categories.map({ c in
+                    self.categoryItems.append(CategoryItem(category: category, editMode: false, checked: false))
+                    Account.shared.update(categories: self.categoryItems.map({ c in
                         return c.category
                     }))
                 }).store(in: &cancellables)
@@ -63,7 +64,7 @@ class CategoriesViewModel: ObservableObject {
     func updateCategory(idx: Int, name: String, color: Color) async -> Void {
         uploading = true
         let color = color.hex
-        if let categoryId = categories[idx].category.id {
+        if let categoryId = categoryItems[idx].category.id {
             let _: Void = await withCheckedContinuation { continuation in
                 categoryUseCase.updateCategory(categoryId: categoryId, name: name, color: color, idx: idx)
                     .receive(on: DispatchQueue.main)
@@ -77,13 +78,13 @@ class CategoriesViewModel: ObservableObject {
                         }
                         }
                     }, receiveValue: { res in
-                        var updatedCategoryItem = self.categories[idx]
+                        var updatedCategoryItem = self.categoryItems[idx]
                         updatedCategoryItem.category.name = name
                         updatedCategoryItem.category.color = color
                         updatedCategoryItem.editMode = false
                         
-                        self.categories[idx] = updatedCategoryItem
-                        Account.shared.update(categories: self.categories.map({ c in
+                        self.categoryItems[idx] = updatedCategoryItem
+                        Account.shared.update(categories: self.categoryItems.map({ c in
                             return c.category
                         }))
                     }).store(in: &cancellables)

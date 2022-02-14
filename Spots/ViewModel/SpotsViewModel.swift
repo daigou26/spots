@@ -71,7 +71,16 @@ class SpotsViewModel: ObservableObject {
     }
     
     func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) {
-        spotUseCase.postSpot(mainImage: mainImage, images: images, title: title, address: address, favorite: favorite, star: star, memo: memo).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+        spotUseCase.postSpot(
+            mainImage: mainImage,
+            images: images,
+            title: title,
+            address: address,
+            favorite: favorite,
+            star: star,
+            category: nil,
+            memo: memo
+        ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: do {
                 self.showAddSpotSheet = false
@@ -98,6 +107,7 @@ class SpotsViewModel: ObservableObject {
             address: nil,
             favorite: nil,
             star: nil,
+            category: nil,
             memo: nil,
             deleted: true
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in

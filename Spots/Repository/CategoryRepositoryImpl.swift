@@ -33,6 +33,7 @@ class CategoryRepositoryImpl: CategoryRepository {
         var category = category
         let docId = dbRef.document().documentID
         var data = category.asDictionary
+        data["uid"] = uid
         data["createdAt"] = Timestamp(date: data["createdAt"] as? Date ?? Date())
         try await dbRef.document(docId).setData(data)
         category.id = docId

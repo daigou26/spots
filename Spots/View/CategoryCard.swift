@@ -6,6 +6,7 @@ import SwiftUI
 
 struct CategoryCard: View {
     @EnvironmentObject var categoriesViewModel: CategoriesViewModel
+    @EnvironmentObject var spotDetailViewModel: SpotDetailViewModel
     @State var idx: Int
     @State var tempCategoryColor = Color.white
     @State var tempCategoryName = ""
@@ -13,22 +14,28 @@ struct CategoryCard: View {
     var body: some View {
         VStack(spacing: 1) {
             HStack {
-                if !categoriesViewModel.categories[idx].editMode {
+                if !categoriesViewModel.categoryItems[idx].editMode {
                     Circle()
-                        .fill(Color(hex: categoriesViewModel.categories[idx].category.color))
+                        .fill(Color(hex: categoriesViewModel.categoryItems[idx].category.color))
                         .frame(width:22, height: 22)
-                    Text(categoriesViewModel.categories[idx].category.name)
+                    Text(categoriesViewModel.categoryItems[idx].category.name)
+                    Spacer()
+                    if categoriesViewModel.categoryItems[idx].checked {
+                        Image(systemName: "checkmark").foregroundColor(.blue)
+                    }
                 } else {
                     ColorPicker("", selection: $tempCategoryColor).labelsHidden()
                     TextField("カテゴリー", text: $tempCategoryName)
                     Button {
-                        categoriesViewModel.categories[idx].editMode = false
+                        categoriesViewModel.categoryItems[idx].editMode = false
                     } label: {
                         Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.background)
                     }.disabled(categoriesViewModel.uploading)
                     Button {
                         Task {
                             await categoriesViewModel.updateCategory(idx: idx, name: tempCategoryName, color: tempCategoryColor)
+                            spotDetailViewModel.categories[idx].name = tempCategoryName
+                            spotDetailViewModel.categories[idx].color = tempCategoryColor.hex
                         }
                     } label: {
                         Image(systemName: "checkmark").font(.system(size: 18, weight: .bold)).foregroundColor(.green)
@@ -37,7 +44,7 @@ struct CategoryCard: View {
                     .disabled(categoriesViewModel.uploading || tempCategoryName == "")
                 }
             }
-        }
+        }.background(Color.white)
     }
 }
 
