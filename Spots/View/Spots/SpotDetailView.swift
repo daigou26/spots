@@ -16,7 +16,7 @@ struct SpotDetailView: View {
     @State var goUpdateMainImageView = false
     @State var goUpdateSpotView = false
     @State var goInputLocationView = false
-    @State var showCategoriesSheet = false
+    @State var goCategoriesList = false
     
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
@@ -84,25 +84,31 @@ struct SpotDetailView: View {
                                     Spacer()
                                 }
                                 
-                                if let category = spot.category, category.count > 0 {
+                                if let categories = spot.categories, categories.count > 0 {
                                     HStack {
                                         Circle()
                                             .fill(Color(hex: viewModel.getCategoryColor(idx: 0)))
                                             .frame(width:18, height: 18)
                                         Text(viewModel.getCategoryName(idx: 0))
-                                        if category.count > 1 {
+                                        if categories.count > 1 {
                                             Circle()
                                                 .fill(Color(hex: viewModel.getCategoryColor(idx: 1)))
                                                 .frame(width:18, height: 18)
                                                 .padding(.leading, 8)
                                             Text(viewModel.getCategoryName(idx: 1))
                                         }
-                                        if category.count > 2 {
+                                        if categories.count > 2 {
                                             Text("...")
                                         }
                                     }.onTapGesture {
-                                        showCategoriesSheet = true
+                                        goCategoriesList = true
                                     }.padding(.top, 1)
+                                } else {
+                                    Text("カテゴリーを設定する").font(.system(size: 16)).foregroundColor(.background)
+                                        .onTapGesture {
+                                            goCategoriesList = true
+                                        }
+                                        .padding(.top, 1)
                                 }
                                 
                                 Group {
@@ -157,7 +163,7 @@ struct SpotDetailView: View {
                             EmptyView()
                         }
                     }
-                    .partialSheet(isPresented: $showCategoriesSheet, sheet: {CategoriesList(showCategoriesSheet: $showCategoriesSheet).environmentObject(viewModel)}, onEnd: {})
+                    .partialSheet(isPresented: $goCategoriesList, sheet: {CategoriesList(goCategoriesList: $goCategoriesList, editing: true).environmentObject(viewModel)}, onEnd: {})
                     .alert(isPresented: $deleteConfirmationDialog) {
                         Alert(title: Text("スポットの削除"),
                               message: Text("データが削除されますがよろしいですか？"),

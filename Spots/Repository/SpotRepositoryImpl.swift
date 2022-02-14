@@ -27,7 +27,7 @@ class SpotRepositoryImpl: SpotRepository {
                let createdAt: Date = (data["createdAt"] as? Timestamp)?.dateValue() {
                 
                 let imageUrl = data["imageUrl"] as? String
-                let category = data["category"] as? [String]
+                let categories = data["categories"] as? [String]
                 let memo = data["memo"] as? String
                 let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
                 
@@ -40,7 +40,7 @@ class SpotRepositoryImpl: SpotRepository {
                     }
                 }
                 
-                return Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, imageUploadingStatus: imageUploadingStatus, category: category, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt)
+                return Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, imageUploadingStatus: imageUploadingStatus, categories: categories, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt)
             }
         }
         throw QueryError.NotFound
@@ -63,10 +63,10 @@ class SpotRepositoryImpl: SpotRepository {
                    let createdAt: Date = (data["createdAt"] as? Timestamp)?.dateValue() {
                     
                     let imageUrl = data["imageUrl"] as? String
-                    let category = data["category"] as? [String]
+                    let categories = data["categories"] as? [String]
                     let memo = data["memo"] as? String
                     let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
-                    spots.append(Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt))
+                    spots.append(Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, categories: categories, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt))
                 }
             }
         }
@@ -110,10 +110,10 @@ class SpotRepositoryImpl: SpotRepository {
                     let createdAt: Date = (data["createdAt"] as? Timestamp)?.dateValue() {
                     
                     let imageUrl = data["imageUrl"] as? String
-                    let category = data["category"] as? [String]
+                    let categories = data["categories"] as? [String]
                     let memo = data["memo"] as? String
                     let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
-                    spots.append(Spot(id: document.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt))
+                    spots.append(Spot(id: document.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, categories: categories, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt))
                 }
             }
         }
@@ -164,7 +164,7 @@ class SpotRepositoryImpl: SpotRepository {
         favorite: Bool?,
         star: Bool?,
         imageUploadingStatus: [ImageUploadingStatus]?,
-        category: [String]?,
+        categories: [String]?,
         memo: String?,
         deleted: Bool?,
         updatedAt: Date
@@ -199,8 +199,8 @@ class SpotRepositoryImpl: SpotRepository {
             data["imageUploadingStatus"] = FieldValue.arrayUnion([imageUploadingStatusData])
         }
         
-        if let category = category {
-            data["category"] = category
+        if let categories = categories {
+            data["categories"] = categories
         }
         
         if let memo = memo {

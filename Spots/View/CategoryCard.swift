@@ -8,6 +8,7 @@ struct CategoryCard: View {
     @EnvironmentObject var categoriesViewModel: CategoriesViewModel
     @EnvironmentObject var spotDetailViewModel: SpotDetailViewModel
     @State var idx: Int
+    @State var editing: Bool = false // InputSpotInfoView or SpotDetailView
     @State var tempCategoryColor = Color.white
     @State var tempCategoryName = ""
     
@@ -34,8 +35,11 @@ struct CategoryCard: View {
                     Button {
                         Task {
                             await categoriesViewModel.updateCategory(idx: idx, name: tempCategoryName, color: tempCategoryColor)
-                            spotDetailViewModel.categories[idx].name = tempCategoryName
-                            spotDetailViewModel.categories[idx].color = tempCategoryColor.hex
+                            if editing {
+                                // Update SpotDetailView categories
+                                spotDetailViewModel.categories[idx].name = tempCategoryName
+                                spotDetailViewModel.categories[idx].color = tempCategoryColor.hex
+                            }
                         }
                     } label: {
                         Image(systemName: "checkmark").font(.system(size: 18, weight: .bold)).foregroundColor(.green)

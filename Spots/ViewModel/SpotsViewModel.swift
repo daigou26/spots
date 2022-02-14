@@ -70,7 +70,7 @@ class SpotsViewModel: ObservableObject {
         getSpots()
     }
     
-    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) {
+    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, categories: [String], memo: String) {
         spotUseCase.postSpot(
             mainImage: mainImage,
             images: images,
@@ -78,7 +78,7 @@ class SpotsViewModel: ObservableObject {
             address: address,
             favorite: favorite,
             star: star,
-            category: nil,
+            categories: categories,
             memo: memo
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
@@ -107,7 +107,7 @@ class SpotsViewModel: ObservableObject {
             address: nil,
             favorite: nil,
             star: nil,
-            category: nil,
+            categories: nil,
             memo: nil,
             deleted: true
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in

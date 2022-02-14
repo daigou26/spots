@@ -14,6 +14,7 @@ class AddSpotViewModel: ObservableObject {
     @Published var addressErrorMessage: String = ""
     @Published var favorite = false
     @Published var star = false
+    @Published var categories: [String] = []
     @Published var memo: String = ""
     @Published var loading: Bool = false
     @Published var duplicatedTitleAndAddress: Bool = false  // Whether same title and address spot exists
@@ -31,6 +32,12 @@ class AddSpotViewModel: ObservableObject {
     func addImages(_ newImages: [Asset]) {
         for image in newImages {
             self.images.append(image)
+        }
+    }
+    
+    func getSetCategories() -> [Category] {
+        return Account.shared.categories.filter { c in
+            return self.categories.contains(c.id ?? "")
         }
     }
     

@@ -32,26 +32,26 @@ class SpotDetailViewModel: ObservableObject {
     }
     
     func getCategoryColor(idx: Int) -> String {
-        if let spot = spot, let category = spot.category {
+        if let spot = spot, let spotCategories = spot.categories {
             return categories.filter { c in
-                return c.id == category[idx]
+                return c.id == spotCategories[idx]
             }.first?.color ?? ""
         }
         return ""
     }
     
     func getCategoryName(idx: Int) -> String {
-        if let spot = spot, let category = spot.category {
+        if let spot = spot, let spotCategories = spot.categories {
             return categories.filter { c in
-                return c.id == category[idx]
+                return c.id == spotCategories[idx]
             }.first?.name ?? ""
         }
         return ""
     }
     
     func isSetCategory(id: String) -> Bool {
-        if let spot = spot, let category = spot.category {
-            return category.contains(id)
+        if let spot = spot, let spotCategories = spot.categories {
+            return spotCategories.contains(id)
         }
         return false
     }
@@ -108,7 +108,7 @@ class SpotDetailViewModel: ObservableObject {
             address: nil,
             favorite: favorite,
             star: nil,
-            category: nil,
+            categories: nil,
             memo: nil,
             deleted: nil
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -134,7 +134,7 @@ class SpotDetailViewModel: ObservableObject {
             address: nil,
             favorite: nil,
             star: star,
-            category: nil,
+            categories: nil,
             memo: nil,
             deleted: nil
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -162,7 +162,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: nil,
                 favorite: nil,
                 star: nil,
-                category: nil,
+                categories: nil,
                 memo: nil,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -195,7 +195,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: nil,
                 favorite: nil,
                 star: nil,
-                category: nil,
+                categories: nil,
                 memo: memo,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -238,7 +238,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: address,
                 favorite: nil,
                 star: nil,
-                category: nil,
+                categories: nil,
                 memo: nil,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -272,7 +272,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: nil,
                 favorite: nil,
                 star: nil,
-                category: nil,
+                categories: nil,
                 memo: nil,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -301,7 +301,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: nil,
                 favorite: nil,
                 star: nil,
-                category: categories,
+                categories: categories,
                 memo: nil,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -314,7 +314,7 @@ class SpotDetailViewModel: ObservableObject {
                 }
                 }
             }, receiveValue: {(spot, _) in
-                self.spot?.category = spot.category
+                self.spot?.categories = spot.categories
             }).store(in: &cancellables)
         }
         return res
@@ -330,7 +330,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: nil,
                 favorite: nil,
                 star: nil,
-                category: nil,
+                categories: nil,
                 memo: nil,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in

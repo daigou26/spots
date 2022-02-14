@@ -49,7 +49,7 @@ class SpotRepositoryMock: SpotRepository {
         favorite: Bool?,
         star: Bool?,
         imageUploadingStatus: [ImageUploadingStatus]?,
-        category: [String]?,
+        categories: [String]?,
         memo: String?,
         deleted: Bool?,
         updatedAt: Date

@@ -16,7 +16,7 @@ struct Spot: Hashable {
     var favorite: Bool
     var star: Bool
     var imageUploadingStatus: [ImageUploadingStatus]?
-    var category: [String]?
+    var categories: [String]?
     var memo: String?
     var deleted: Bool
     var createdAt: Date

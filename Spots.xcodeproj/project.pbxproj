@@ -32,7 +32,6 @@
 		C05780C327B6C51B005CA36D /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C227B6C51B005CA36D /* CategoriesList.swift */; };
 		C05780C527B6C621005CA36D /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C427B6C621005CA36D /* CategoriesViewModel.swift */; };
 		C05780C727B6CC69005CA36D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C627B6CC69005CA36D /* ColorExtension.swift */; };
-		C05780C927B7A332005CA36D /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C827B7A332005CA36D /* AddCategoryView.swift */; };
 		C05780CB27B8576F005CA36D /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CA27B8576F005CA36D /* CategoryUseCase.swift */; };
 		C05780CD27B857D5005CA36D /* CategoryUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CC27B857D5005CA36D /* CategoryUseCaseImpl.swift */; };
 		C05780CF27B91B2E005CA36D /* CategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CE27B91B2E005CA36D /* CategoryCard.swift */; };
@@ -137,7 +136,6 @@
 		C05780C227B6C51B005CA36D /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
 		C05780C427B6C621005CA36D /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
 		C05780C627B6CC69005CA36D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		C05780C827B7A332005CA36D /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
 		C05780CA27B8576F005CA36D /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
 		C05780CC27B857D5005CA36D /* CategoryUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCaseImpl.swift; sourceTree = "<group>"; };
 		C05780CE27B91B2E005CA36D /* CategoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCard.swift; sourceTree = "<group>"; };
@@ -317,7 +315,6 @@
 				C0FE77102739144D000E4566 /* LoginView.swift */,
 				C05DD3652740C1CC0071C163 /* ProfileView.swift */,
 				C05780C227B6C51B005CA36D /* CategoriesList.swift */,
-				C05780C827B7A332005CA36D /* AddCategoryView.swift */,
 				C05780CE27B91B2E005CA36D /* CategoryCard.swift */,
 			);
 			path = View;
@@ -637,7 +634,6 @@
 				C05780BF27B6B067005CA36D /* CategoryRepository.swift in Sources */,
 				C05DD3662740C1CC0071C163 /* ProfileView.swift in Sources */,
 				C0B4CFFB277A2F80008F1394 /* SpotDetailViewModel.swift in Sources */,
-				C05780C927B7A332005CA36D /* AddCategoryView.swift in Sources */,
 				C00AD6542756C23A006B575A /* ThumbnailView.swift in Sources */,
 				C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */,
 				C05DD370274F2A860071C163 /* PartialSheet.swift in Sources */,

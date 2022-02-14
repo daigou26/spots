@@ -39,7 +39,7 @@ class SpotUseCaseMock: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, category: [String]?, memo: String) -> AnyPublisher<Spot, Error> {
+    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, categories: [String]?, memo: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
                 return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false, createdAt: Date())))
@@ -47,7 +47,7 @@ class SpotUseCaseMock: SpotUseCase {
         }.eraseToAnyPublisher()
     }
     
-    func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, category: [String]?, memo: String?, deleted: Bool?) -> AnyPublisher<(Spot, [Photo]), Error> {
+    func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, categories: [String]?, memo: String?, deleted: Bool?) -> AnyPublisher<(Spot, [Photo]), Error> {
         return Deferred {
             Future { promise in
                 return promise(.success((Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false, createdAt: Date()), [])))
@@ -87,7 +87,7 @@ class SpotsViewModelTests: XCTestCase {
         let expectation = self.expectation(description: #function)
         let spotsViewModel = SpotsViewModel(SpotUseCaseMock())
         XCTAssertEqual(spotsViewModel.spots.count, 0)
-        spotsViewModel.postSpot(mainImage: nil, images: nil, title: "", address: "", favorite: false, star: false, memo: "")
+        spotsViewModel.postSpot(mainImage: nil, images: nil, title: "", address: "", favorite: false, star: false, categories: [], memo: "")
         expectation.fulfill()
         await waitForExpectations(timeout: 1)
         XCTAssertEqual(spotsViewModel.spots.count, 1)
