@@ -21,18 +21,14 @@ struct User: Identifiable {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
     }
-}
-extension User: Codable {
-    // TODO: Fix decord func(Because of the Date type, this occurred a error)
-//    init(_ dictionary: [String: Any]) throws {
-//        self = try JSONDecoder().decode(User.self, from: JSONSerialization.data(withJSONObject: dictionary))
-//    }
     
-    func toDict() -> [String: Any] {
-        var data: [String: Any] = ["name": self.name, "email": self.email]
-        if let imageUrl = self.imageUrl {
-            data["imageUrl"] = imageUrl
-        }
-        return data
+    var asDictionary : [String:Any] {
+        let mirror = Mirror(reflecting: self)
+        let dict = Dictionary(uniqueKeysWithValues: mirror.children.lazy.map({ (label:String?, value:Any) -> (String, Any)? in
+            guard let label = label else { return nil }
+            if label == "_id" {return nil}
+            return (label, value)
+        }).compactMap { $0 })
+        return dict
     }
 }

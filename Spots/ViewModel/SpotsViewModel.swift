@@ -42,10 +42,7 @@ class SpotsViewModel: ObservableObject {
                 return nil
             }).compactMap{$0}
             spots.sort {
-                if let c0 = $0.createdAt, let c1 = $1.createdAt {
-                  return  c0.timeIntervalSince1970 > c1.timeIntervalSince1970
-                }
-                return false
+                return  $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
             }
             return spots
         }

@@ -19,7 +19,7 @@ struct Spot: Hashable {
     var category: [String]?
     var memo: String?
     var deleted: Bool
-    var createdAt: Date?
+    var createdAt: Date
     var updatedAt: Date?
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

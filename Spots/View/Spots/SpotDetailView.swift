@@ -16,6 +16,8 @@ struct SpotDetailView: View {
     @State var goUpdateMainImageView = false
     @State var goUpdateSpotView = false
     @State var goInputLocationView = false
+    @State var showCategoriesSheet = false
+
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     
@@ -82,6 +84,16 @@ struct SpotDetailView: View {
                                     Spacer()
                                 }
                                 
+                                HStack {
+                                    Circle()
+                                        .fill(Color.red)
+                                        .frame(width:18, height: 18)
+                                    Text("カテゴリ")
+                                }.onTapGesture {
+                                    showCategoriesSheet = true
+                                }.padding(.top, 1)
+                                
+                                
                                 Group {
                                     if let memo = spot.memo, memo != "" {
                                         Text(memo).frame(height: 60, alignment: .top)
@@ -134,6 +146,7 @@ struct SpotDetailView: View {
                             EmptyView()
                         }
                     }
+                    .partialSheet(isPresented: $showCategoriesSheet, sheet: {CategoriesList().environmentObject(viewModel)}, onEnd: {})
                     .alert(isPresented: $deleteConfirmationDialog) {
                         Alert(title: Text("スポットの削除"),
                               message: Text("データが削除されますがよろしいですか？"),

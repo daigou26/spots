@@ -23,11 +23,12 @@ class SpotRepositoryImpl: SpotRepository {
                let favorite: Bool = data["favorite"] as? Bool,
                let star: Bool = data["star"] as? Bool,
                let latitude: Double = data["latitude"] as? Double,
-               let longitude: Double =  data["longitude"] as? Double {
+               let longitude: Double =  data["longitude"] as? Double,
+               let createdAt: Date = (data["createdAt"] as? Timestamp)?.dateValue() {
+                
                 let imageUrl = data["imageUrl"] as? String
                 let category = data["category"] as? [String]
                 let memo = data["memo"] as? String
-                let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
                 let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
                 
                 var imageUploadingStatus: [ImageUploadingStatus] = []
@@ -58,11 +59,12 @@ class SpotRepositoryImpl: SpotRepository {
                    let favorite: Bool = data["favorite"] as? Bool,
                    let star: Bool = data["star"] as? Bool,
                    let latitude: Double = data["latitude"] as? Double,
-                   let longitude: Double =  data["longitude"] as? Double {
+                   let longitude: Double =  data["longitude"] as? Double,
+                   let createdAt: Date = (data["createdAt"] as? Timestamp)?.dateValue() {
+                    
                     let imageUrl = data["imageUrl"] as? String
                     let category = data["category"] as? [String]
                     let memo = data["memo"] as? String
-                    let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
                     let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
                     spots.append(Spot(id: doc.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt))
                 }
@@ -81,9 +83,10 @@ class SpotRepositoryImpl: SpotRepository {
                    let imageUrl: String = data["imageUrl"] as? String,
                    let name: String = data["name"] as? String,
                    let  width: Float = data["width"] as? Float,
-                   let height: Float = data["height"] as? Float {
+                   let height: Float = data["height"] as? Float,
+                   let createdAt: Date = (data["createdAt"] as? Timestamp)?.dateValue() {
                     let timestamp = (data["timestamp"] as! Timestamp).dateValue()
-                    photos.append(Photo(id: doc.documentID, imageUrl: imageUrl, name: name, width: width, height: height, timestamp: timestamp, deleted: false))
+                    photos.append(Photo(id: doc.documentID, imageUrl: imageUrl, name: name, width: width, height: height, timestamp: timestamp, deleted: false, createdAt: createdAt))
                 }
             }
         }
@@ -103,11 +106,12 @@ class SpotRepositoryImpl: SpotRepository {
                    let favorite: Bool = data["favorite"] as? Bool,
                    let star: Bool = data["star"] as? Bool,
                    let latitude: Double = data["latitude"] as? Double,
-                   let longitude: Double =  data["longitude"] as? Double {
+                   let longitude: Double =  data["longitude"] as? Double,
+                    let createdAt: Date = (data["createdAt"] as? Timestamp)?.dateValue() {
+                    
                     let imageUrl = data["imageUrl"] as? String
                     let category = data["category"] as? [String]
                     let memo = data["memo"] as? String
-                    let createdAt = (data["createdAt"] as? Timestamp)?.dateValue()
                     let updatedAt = (data["updatedAt"] as? Timestamp)?.dateValue()
                     spots.append(Spot(id: document.documentID, title: title, imageUrl: imageUrl, address: address, latitude: latitude, longitude: longitude, favorite: favorite, star: star, category: category, memo: memo, deleted: false, createdAt: createdAt, updatedAt: updatedAt))
                 }
@@ -122,7 +126,7 @@ class SpotRepositoryImpl: SpotRepository {
     
     func postSpot(uid: String, spot: Spot) async throws {
         var data = spot.asDictionary
-        data["createdAt"] = Timestamp(date: spot.createdAt ?? Date())
+        data["createdAt"] = Timestamp(date: spot.createdAt)
         data["deleted"] = false
         data["uid"] = uid
         
@@ -247,7 +251,7 @@ class SpotRepositoryImpl: SpotRepository {
             data["uid"] = uid
             data["timestamp"] = Timestamp(date: photo.timestamp)
             data["deleted"] = false
-            data["createdAt"] = Timestamp(date: photo.createdAt ?? photo.timestamp)
+            data["createdAt"] = Timestamp(date: photo.createdAt)
             dbRef.document(spotId).collection("photos").addDocument(data: data)
         }
         

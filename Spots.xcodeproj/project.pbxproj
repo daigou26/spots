@@ -26,6 +26,16 @@
 		C0483730273F0E710087AAFC /* UserRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */; };
 		C0483732273F0F700087AAFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0483731273F0F700087AAFC /* User.swift */; };
 		C04837372740429A0087AAFC /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04837362740429A0087AAFC /* AuthViewModelTests.swift */; };
+		C05780BD27B692BD005CA36D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780BC27B692BD005CA36D /* Category.swift */; };
+		C05780BF27B6B067005CA36D /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780BE27B6B067005CA36D /* CategoryRepository.swift */; };
+		C05780C127B6B074005CA36D /* CategoryRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C027B6B074005CA36D /* CategoryRepositoryImpl.swift */; };
+		C05780C327B6C51B005CA36D /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C227B6C51B005CA36D /* CategoriesList.swift */; };
+		C05780C527B6C621005CA36D /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C427B6C621005CA36D /* CategoriesViewModel.swift */; };
+		C05780C727B6CC69005CA36D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C627B6CC69005CA36D /* ColorExtension.swift */; };
+		C05780C927B7A332005CA36D /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C827B7A332005CA36D /* AddCategoryView.swift */; };
+		C05780CB27B8576F005CA36D /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CA27B8576F005CA36D /* CategoryUseCase.swift */; };
+		C05780CD27B857D5005CA36D /* CategoryUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CC27B857D5005CA36D /* CategoryUseCaseImpl.swift */; };
+		C05780CF27B91B2E005CA36D /* CategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CE27B91B2E005CA36D /* CategoryCard.swift */; };
 		C058DAFB275CE77A0068AF66 /* InputLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058DAFA275CE77A0068AF66 /* InputLocationView.swift */; };
 		C058DAFD275CF0C20068AF66 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */; };
 		C05DD3662740C1CC0071C163 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD3652740C1CC0071C163 /* ProfileView.swift */; };
@@ -121,6 +131,16 @@
 		C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryImpl.swift; sourceTree = "<group>"; };
 		C0483731273F0F700087AAFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C04837362740429A0087AAFC /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
+		C05780BC27B692BD005CA36D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		C05780BE27B6B067005CA36D /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		C05780C027B6B074005CA36D /* CategoryRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryImpl.swift; sourceTree = "<group>"; };
+		C05780C227B6C51B005CA36D /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
+		C05780C427B6C621005CA36D /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
+		C05780C627B6CC69005CA36D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		C05780C827B7A332005CA36D /* AddCategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		C05780CA27B8576F005CA36D /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
+		C05780CC27B857D5005CA36D /* CategoryUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCaseImpl.swift; sourceTree = "<group>"; };
+		C05780CE27B91B2E005CA36D /* CategoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCard.swift; sourceTree = "<group>"; };
 		C058DAFA275CE77A0068AF66 /* InputLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputLocationView.swift; sourceTree = "<group>"; };
 		C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		C05DD3652740C1CC0071C163 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -231,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				C05DD36F274F2A860071C163 /* PartialSheet.swift */,
+				C05780C627B6CC69005CA36D /* ColorExtension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -283,6 +304,7 @@
 				C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */,
 				C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */,
 				C0B4CFFA277A2F80008F1394 /* SpotDetailViewModel.swift */,
+				C05780C427B6C621005CA36D /* CategoriesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -294,6 +316,9 @@
 				C0FE76D327386D61000E4566 /* ContentView.swift */,
 				C0FE77102739144D000E4566 /* LoginView.swift */,
 				C05DD3652740C1CC0071C163 /* ProfileView.swift */,
+				C05780C227B6C51B005CA36D /* CategoriesList.swift */,
+				C05780C827B7A332005CA36D /* AddCategoryView.swift */,
+				C05780CE27B91B2E005CA36D /* CategoryCard.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -306,6 +331,8 @@
 				C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */,
 				C05DD37F274FC65D0071C163 /* SpotRepository.swift */,
 				C05DD381274FC6BC0071C163 /* SpotRepositoryImpl.swift */,
+				C05780BE27B6B067005CA36D /* CategoryRepository.swift */,
+				C05780C027B6B074005CA36D /* CategoryRepositoryImpl.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -323,6 +350,7 @@
 				C0B4CFFC277A35C4008F1394 /* LocationError.swift */,
 				C0B4CFFE277A35FA008F1394 /* QueryError.swift */,
 				C0B4D000277A3696008F1394 /* Photo.swift */,
+				C05780BC27B692BD005CA36D /* Category.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -338,6 +366,8 @@
 				C03F77E22760FFE600634036 /* LocationUseCaseImpl.swift */,
 				C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */,
 				C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */,
+				C05780CA27B8576F005CA36D /* CategoryUseCase.swift */,
+				C05780CC27B857D5005CA36D /* CategoryUseCaseImpl.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -578,9 +608,11 @@
 				C0B4D001277A3696008F1394 /* Photo.swift in Sources */,
 				C05DD375274F86BA0071C163 /* SpotCard.swift in Sources */,
 				C03F77E627620AB000634036 /* SpotStorageRepository.swift in Sources */,
+				C05780C327B6C51B005CA36D /* CategoriesList.swift in Sources */,
 				C003D3C4273BA702009C790F /* AuthViewModel.swift in Sources */,
 				C058DAFD275CF0C20068AF66 /* LocationViewModel.swift in Sources */,
 				C05DD3682740CA140071C163 /* Account.swift in Sources */,
+				C05780CB27B8576F005CA36D /* CategoryUseCase.swift in Sources */,
 				C05DD382274FC6BC0071C163 /* SpotRepositoryImpl.swift in Sources */,
 				C00AD64E2756AA41006B575A /* AuthStatus.swift in Sources */,
 				C03CC9B72756622F00FB79FB /* SelectMainImageView.swift in Sources */,
@@ -591,24 +623,31 @@
 				C058DAFB275CE77A0068AF66 /* InputLocationView.swift in Sources */,
 				C03F77E827620AFE00634036 /* SpotStorageRepositoryImpl.swift in Sources */,
 				C0A19E0E27B1BCAC0065D39F /* GridImages.swift in Sources */,
+				C05780C527B6C621005CA36D /* CategoriesViewModel.swift in Sources */,
 				C03F77E12760FF5900634036 /* LocationUseCase.swift in Sources */,
 				C00AD6502756AA7E006B575A /* PhotoAuthStatus.swift in Sources */,
 				C048372E273F076B0087AAFC /* UserRepository.swift in Sources */,
 				C0FE76D427386D61000E4566 /* ContentView.swift in Sources */,
 				C0D9C06A275773800052A5C0 /* AddSpotViewModel.swift in Sources */,
+				C05780BD27B692BD005CA36D /* Category.swift in Sources */,
+				C05780C127B6B074005CA36D /* CategoryRepositoryImpl.swift in Sources */,
 				C0B4CFFD277A35C4008F1394 /* LocationError.swift in Sources */,
 				C0B4CFF9277A2F3A008F1394 /* SpotDetailView.swift in Sources */,
 				C0B4CFFF277A35FB008F1394 /* QueryError.swift in Sources */,
+				C05780BF27B6B067005CA36D /* CategoryRepository.swift in Sources */,
 				C05DD3662740C1CC0071C163 /* ProfileView.swift in Sources */,
 				C0B4CFFB277A2F80008F1394 /* SpotDetailViewModel.swift in Sources */,
+				C05780C927B7A332005CA36D /* AddCategoryView.swift in Sources */,
 				C00AD6542756C23A006B575A /* ThumbnailView.swift in Sources */,
 				C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */,
 				C05DD370274F2A860071C163 /* PartialSheet.swift in Sources */,
 				C0A19E0727AC41AF0065D39F /* UpdateSpotView.swift in Sources */,
+				C05780CF27B91B2E005CA36D /* CategoryCard.swift in Sources */,
 				C05DD36A274157700071C163 /* ProfileViewModel.swift in Sources */,
 				C05DD36C2741798C0071C163 /* MapView.swift in Sources */,
 				C00AD64C2756A8B5006B575A /* ImagePickerViewModel.swift in Sources */,
 				C0FE76D227386D61000E4566 /* SpotsApp.swift in Sources */,
+				C05780C727B6CC69005CA36D /* ColorExtension.swift in Sources */,
 				C05DD373274F74FB0071C163 /* SpotsView.swift in Sources */,
 				C05DD386274FD9270071C163 /* SpotUseCaseImpl.swift in Sources */,
 				C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */,
@@ -621,6 +660,7 @@
 				C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */,
 				C05DD36E27417E0C0071C163 /* Spot.swift in Sources */,
 				C0B4D0042787103D008F1394 /* CheckSpotDuplicationResponse.swift in Sources */,
+				C05780CD27B857D5005CA36D /* CategoryUseCaseImpl.swift in Sources */,
 				C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */,
 				C0FE77112739144D000E4566 /* LoginView.swift in Sources */,
 				C003D3CC273BEA23009C790F /* ColorExtention.swift in Sources */,

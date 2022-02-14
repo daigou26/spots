@@ -10,7 +10,7 @@ class SpotUseCaseMock: SpotUseCase {
     func getPhotos(spotId: String) -> AnyPublisher<[Photo], Error> {
         return Deferred {
             Future { promise in
-                return promise(.success([Photo(imageUrl: "", name: "", width: 0, height: 0, timestamp: Date(), deleted: false)]))
+                return promise(.success([Photo(imageUrl: "", name: "", width: 0, height: 0, timestamp: Date(), deleted: false, createdAt: Date())]))
             }
         }.eraseToAnyPublisher()
     }
@@ -18,7 +18,7 @@ class SpotUseCaseMock: SpotUseCase {
     func getSpot(spotId: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
-                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false)))
+                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false, createdAt: Date())))
             }
         }.eraseToAnyPublisher()
     }
@@ -42,7 +42,7 @@ class SpotUseCaseMock: SpotUseCase {
     func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) -> AnyPublisher<Spot, Error> {
         return Deferred {
             Future { promise in
-                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false)))
+                return promise(.success(Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false, createdAt: Date())))
             }
         }.eraseToAnyPublisher()
     }
@@ -50,7 +50,7 @@ class SpotUseCaseMock: SpotUseCase {
     func updateSpot(spotId: String, mainImage: Data?, images: [Asset]?, title: String?, address: String?, favorite: Bool?, star: Bool?, memo: String?, deleted: Bool?) -> AnyPublisher<(Spot, [Photo]), Error> {
         return Deferred {
             Future { promise in
-                return promise(.success((Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false), [])))
+                return promise(.success((Spot(title: "", address: "", latitude: 0, longitude: 0, favorite: true, star: true, deleted: false, createdAt: Date()), [])))
             }
         }.eraseToAnyPublisher()
     }
@@ -58,7 +58,7 @@ class SpotUseCaseMock: SpotUseCase {
     func updatePhoto(spotId: String, photoId: String, photo: Photo) -> AnyPublisher<Photo, Error> {
         return Deferred {
             Future { promise in
-                return promise(.success(Photo(imageUrl: "", name: "", width: 0, height: 0, timestamp: Date(), deleted: false)))
+                return promise(.success(Photo(imageUrl: "", name: "", width: 0, height: 0, timestamp: Date(), deleted: false, createdAt: Date())))
             }
         }.eraseToAnyPublisher()
     }

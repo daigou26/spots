@@ -11,9 +11,11 @@ import GoogleSignIn
 // Now only implemented GoogleSignIn
 class AuthUseCaseImpl: AuthUseCase {
     let userRepository: UserRepository
+    let categoryRepository: CategoryRepository
     
-    init(userRepository: UserRepository = UserRepositoryImpl()) {
+    init(userRepository: UserRepository = UserRepositoryImpl(), categoryRepository: CategoryRepository = CategoryRepositoryImpl()) {
         self.userRepository = userRepository
+        self.categoryRepository = categoryRepository
     }
     
     @MainActor
@@ -43,14 +45,16 @@ class AuthUseCaseImpl: AuthUseCase {
                                     } else if let user = authRes?.user, let name = user.displayName, let email = user.email {
                                         do {
                                             // Get user document
-                                            let res = try await self.userRepository.getUser(user.uid)
-                                            if let res = res {
-                                                Account.shared.save(uid: user.uid, email: res.email, name: res.name, imageUrl: res.imageUrl)
+                                            let userRes = try await self.userRepository.getUser(user.uid)
+                                            // Get spot categories info
+                                            let categoriesRes = try await self.categoryRepository.getCategories(user.uid)
+                                            if let userRes = userRes {
+                                                Account.shared.save(uid: user.uid, email: userRes.email, name: userRes.name, imageUrl: userRes.imageUrl, categories: categoriesRes)
                                             } else {
                                                 // Create user data
                                                 let userData: User = User(name: name, email: email, imageUrl: user.photoURL?.absoluteString)
                                                 try await self.userRepository.createUser(userData, uid: user.uid)
-                                                Account.shared.save(uid: user.uid, email: email, name: name, imageUrl: user.photoURL?.absoluteString)
+                                                Account.shared.save(uid: user.uid, email: email, name: name, imageUrl: user.photoURL?.absoluteString, categories: categoriesRes)
                                             }
                                             
                                             promise(.success(true))
@@ -90,10 +94,10 @@ class AuthUseCaseImpl: AuthUseCase {
                         Task {
                             if error == nil, let user = authRes?.user {
                                 do {
-                                    // Get user document
-                                    let res = try await self.userRepository.getUser(user.uid)
-                                    if let res = res {
-                                        Account.shared.save(uid: user.uid, email: res.email, name: res.name, imageUrl: res.imageUrl)
+                                    let userRes = try await self.userRepository.getUser(user.uid)
+                                    let categoriesRes = try await self.categoryRepository.getCategories(user.uid)
+                                    if let userRes = userRes {
+                                        Account.shared.save(uid: user.uid, email: userRes.email, name: userRes.name, imageUrl: userRes.imageUrl, categories: categoriesRes)
                                     } else {
                                         promise(.success(false))
                                     }

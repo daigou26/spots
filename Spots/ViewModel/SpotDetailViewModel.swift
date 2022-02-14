@@ -19,6 +19,7 @@ class SpotDetailViewModel: ObservableObject {
     @Published var updatingMemo: Bool = false
     @Published var errorMessage: String = ""
     @Published var showAddPhotosSheet = false
+    @Published var goAddCategoryView = false
     
     private var spotUseCase: SpotUseCase
     private var locationUseCase: LocationUseCase

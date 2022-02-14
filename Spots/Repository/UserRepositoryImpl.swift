@@ -3,7 +3,7 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 
 class UserRepositoryImpl: UserRepository {
     let dbRef = Firestore.firestore().collection("users")
@@ -20,13 +20,13 @@ class UserRepositoryImpl: UserRepository {
         }
     }
     func createUser(_ user: User, uid: String) async throws {
-        var data = user.toDict()
+        var data = user.asDictionary
         data["createdAt"] = Timestamp(date: Date())
         try await dbRef.document(uid).setData(data)
     }
     
     func updateUser(_ user: User, uid: String) async throws {
-        var data = user.toDict()
+        var data = user.asDictionary
         data["updatedAt"] = Timestamp(date: Date())
         try await dbRef.document(uid).updateData(data)
     }
