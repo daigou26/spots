@@ -38,6 +38,6 @@ struct SpotCard: View {
 
 struct SpotCard_Previews: PreviewProvider {
     static var previews: some View {
-        SpotCard(spot: Spot(id: "1", title: "日比谷公園", imageUrl: "Sample", address: "東京都", latitude: 35.68000, longitude: 139.752000, favorite: false, star:false, deleted: false))
+        SpotCard(spot: Spot(id: "1", title: "日比谷公園", imageUrl: "Sample", address: "東京都", latitude: 35.68000, longitude: 139.752000, favorite: false, star:false, deleted: false, createdAt: Date()))
     }
 }

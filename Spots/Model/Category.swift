@@ -1,20 +1,18 @@
 //
-//  Created on 2021/12/28
+//  Created on 2022/02/11
 //
 
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Photo: Hashable {
+struct Category: Hashable {
     @DocumentID var id: String?
-    var imageUrl: String
     var name: String
-    var width: Float
-    var height: Float
-    var timestamp: Date
-    var deleted: Bool
+    var color: String
+    var idx: Int
     var createdAt: Date
-    
+    var deleted: Bool
+
     var asDictionary : [String:Any] {
         let mirror = Mirror(reflecting: self)
         let dict = Dictionary(uniqueKeysWithValues: mirror.children.lazy.map({ (label:String?, value:Any) -> (String, Any)? in

@@ -10,6 +10,7 @@ import UIKit
 class SpotDetailViewModel: ObservableObject {
     @Published var loading: Bool = false
     @Published var spot: Spot? = nil
+    @Published var categories = Account.shared.categories
     @Published var photos: [Photo] = []
     @Published var imageUploadingStatus: String = ""
     @Published var updatingFavorite: Bool = false
@@ -19,6 +20,7 @@ class SpotDetailViewModel: ObservableObject {
     @Published var updatingMemo: Bool = false
     @Published var errorMessage: String = ""
     @Published var showAddPhotosSheet = false
+    @Published var goAddCategoryView = false
     
     private var spotUseCase: SpotUseCase
     private var locationUseCase: LocationUseCase
@@ -27,6 +29,31 @@ class SpotDetailViewModel: ObservableObject {
     init(_ spotUseCase: SpotUseCase = SpotUseCaseImpl(), locationUseCase: LocationUseCase = LocationUseCaseImpl()) {
         self.spotUseCase = spotUseCase
         self.locationUseCase = locationUseCase
+    }
+    
+    func getCategoryColor(idx: Int) -> String {
+        if let spot = spot, let spotCategories = spot.categories {
+            return categories.filter { c in
+                return c.id == spotCategories[idx]
+            }.first?.color ?? ""
+        }
+        return ""
+    }
+    
+    func getCategoryName(idx: Int) -> String {
+        if let spot = spot, let spotCategories = spot.categories {
+            return categories.filter { c in
+                return c.id == spotCategories[idx]
+            }.first?.name ?? ""
+        }
+        return ""
+    }
+    
+    func isSetCategory(id: String) -> Bool {
+        if let spot = spot, let spotCategories = spot.categories {
+            return spotCategories.contains(id)
+        }
+        return false
     }
     
     func getSpot(spotId: String) async {
@@ -81,6 +108,7 @@ class SpotDetailViewModel: ObservableObject {
             address: nil,
             favorite: favorite,
             star: nil,
+            categories: nil,
             memo: nil,
             deleted: nil
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -106,6 +134,7 @@ class SpotDetailViewModel: ObservableObject {
             address: nil,
             favorite: nil,
             star: star,
+            categories: nil,
             memo: nil,
             deleted: nil
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -133,6 +162,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: nil,
                 favorite: nil,
                 star: nil,
+                categories: nil,
                 memo: nil,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -165,6 +195,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: nil,
                 favorite: nil,
                 star: nil,
+                categories: nil,
                 memo: memo,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -207,6 +238,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: address,
                 favorite: nil,
                 star: nil,
+                categories: nil,
                 memo: nil,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -240,6 +272,7 @@ class SpotDetailViewModel: ObservableObject {
                 address: nil,
                 favorite: nil,
                 star: nil,
+                categories: nil,
                 memo: nil,
                 deleted: nil
             ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
@@ -258,9 +291,49 @@ class SpotDetailViewModel: ObservableObject {
         return res
     }
     
+    func updateCategories(spotId: String, categories: [String]) async -> Bool {
+        let res: Bool = await withCheckedContinuation { continuation in
+            spotUseCase.updateSpot(
+                spotId: spotId,
+                mainImage: nil,
+                images: nil,
+                title: nil,
+                address: nil,
+                favorite: nil,
+                star: nil,
+                categories: categories,
+                memo: nil,
+                deleted: nil
+            ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished: do {
+                    continuation.resume(returning: true)
+                }
+                case .failure: do {
+                    continuation.resume(returning: false)
+                }
+                }
+            }, receiveValue: {(spot, _) in
+                self.spot?.categories = spot.categories
+            }).store(in: &cancellables)
+        }
+        return res
+    }
+    
     func addPhotos(spotId: String, images: [Asset]) async -> Bool {
         let res: Bool = await withCheckedContinuation { continuation in
-            spotUseCase.updateSpot(spotId: spotId, mainImage: nil, images: images, title: nil, address: nil, favorite: nil, star: nil, memo: nil, deleted: nil).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+            spotUseCase.updateSpot(
+                spotId: spotId,
+                mainImage: nil,
+                images: images,
+                title: nil,
+                address: nil,
+                favorite: nil,
+                star: nil,
+                categories: nil,
+                memo: nil,
+                deleted: nil
+            ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished: do {
                     continuation.resume(returning: true)

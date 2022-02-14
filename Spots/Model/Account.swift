@@ -5,26 +5,33 @@
 import Foundation
 
 // Logged in user's data(singlton)
-final public class Account {
+final class Account {
     private init() {}
-    public static let shared = Account()
+    static let shared = Account()
     
-    public var uid: String = ""
-    public var email: String = ""
-    public var name: String = ""
-    public var imageUrl: String? = ""
+    var uid: String = ""
+    var email: String = ""
+    var name: String = ""
+    var imageUrl: String? = ""
+    var categories: [Category] = []
     
-    public func save(uid: String, email: String, name: String, imageUrl: String?) {
+    func save(uid: String, email: String, name: String, imageUrl: String?, categories: [Category]) {
         self.uid = uid
         self.email = email
         self.name = name
         self.imageUrl = imageUrl
+        self.categories = categories
     }
     
-    public func reset() {
+    func update(categories: [Category]) {
+        self.categories = categories
+    }
+    
+    func reset() {
         self.uid = ""
         self.email = ""
         self.name = ""
         self.imageUrl = ""
+        self.categories = []
     }
 }

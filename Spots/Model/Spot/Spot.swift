@@ -16,10 +16,10 @@ struct Spot: Hashable {
     var favorite: Bool
     var star: Bool
     var imageUploadingStatus: [ImageUploadingStatus]?
-    var category: [String]?
+    var categories: [String]?
     var memo: String?
     var deleted: Bool
-    var createdAt: Date?
+    var createdAt: Date
     var updatedAt: Date?
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

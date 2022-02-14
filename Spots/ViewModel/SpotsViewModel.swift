@@ -42,10 +42,7 @@ class SpotsViewModel: ObservableObject {
                 return nil
             }).compactMap{$0}
             spots.sort {
-                if let c0 = $0.createdAt, let c1 = $1.createdAt {
-                  return  c0.timeIntervalSince1970 > c1.timeIntervalSince1970
-                }
-                return false
+                return  $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
             }
             return spots
         }
@@ -73,8 +70,17 @@ class SpotsViewModel: ObservableObject {
         getSpots()
     }
     
-    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, memo: String) {
-        spotUseCase.postSpot(mainImage: mainImage, images: images, title: title, address: address, favorite: favorite, star: star, memo: memo).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
+    func postSpot(mainImage: Data?, images: [Asset]?, title: String, address: String, favorite: Bool, star: Bool, categories: [String], memo: String) {
+        spotUseCase.postSpot(
+            mainImage: mainImage,
+            images: images,
+            title: title,
+            address: address,
+            favorite: favorite,
+            star: star,
+            categories: categories,
+            memo: memo
+        ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
             case .finished: do {
                 self.showAddSpotSheet = false
@@ -101,6 +107,7 @@ class SpotsViewModel: ObservableObject {
             address: nil,
             favorite: nil,
             star: nil,
+            categories: nil,
             memo: nil,
             deleted: true
         ).receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
