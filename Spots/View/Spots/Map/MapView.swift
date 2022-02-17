@@ -7,7 +7,6 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
     @EnvironmentObject var spotsViewModel: SpotsViewModel
-    //    @Binding var category: [String]
     @State var spots: [Spot]
     @State var centerCoordinate: CLLocationCoordinate2D
     @Binding var showSpotListSheet: Bool
@@ -25,7 +24,6 @@ struct MapView: UIViewRepresentable {
         
         self.spots = spots
         self._showSpotListSheet = showSpotListSheet
-        //        self._category = category
     }
     
     func makeUIView(context: Context) -> MKMapView {
@@ -44,19 +42,24 @@ struct MapView: UIViewRepresentable {
         let viewAnnotations = view.annotations.filter { annotation in
             return annotation is CustomPointAnnotation
         }
+        
+        // Prevent update two times
+        var alreadyUpdated = false
 
         if viewAnnotations.count != annotations.count {
-            if viewAnnotations.count < annotations.count {
-                view.setRegion(spotsViewModel.region, animated: true)
-            }
             view.removeAnnotations(view.annotations)
             view.addAnnotations(annotations)
+            alreadyUpdated = true
         }
         
-        if spotsViewModel.updated {
+        if spotsViewModel.updated && !alreadyUpdated {
             view.removeAnnotations(view.annotations)
             view.addAnnotations(annotations)
             spotsViewModel.updated = false
+        }
+        
+        if spotsViewModel.added {
+            view.setRegion(spotsViewModel.region, animated: true)
         }
     }
     

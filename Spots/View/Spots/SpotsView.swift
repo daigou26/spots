@@ -8,15 +8,82 @@ struct SpotsView: View {
     @EnvironmentObject var viewModel: SpotsViewModel
     @State var showSpotListSheet: Bool = false
     @State var goDetailView: Bool = false
+    @State var showCategoriesFilter = false
     @State var spotId: String = ""
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .top) {
                 VStack {
-                    Button("Refresh") {
-                        viewModel.refreshSpots()
-                    }.buttonStyle(RefreshButtonStyle())
+                    ScrollView(.horizontal) {
+                        HStack {
+                            Button {
+                                viewModel.refreshSpots()
+                            } label: {
+                                Image(systemName: "arrow.clockwise").foregroundColor(.main).font(.system(size: 18, weight: .bold)).padding(.all, 10)
+                            }.buttonStyle(RefreshButtonStyle())
+                            
+                            Button {
+                                if viewModel.favoriteFilter {
+                                    viewModel.favoriteFilter = false
+                                    viewModel.updateSpots()
+                                } else {
+                                    viewModel.favoriteFilter = true
+                                    viewModel.updateSpots()
+                                }
+                            } label: {
+                                Text("お気に入り").padding(.all, 10)
+                            }
+                            .foregroundColor(viewModel.favoriteFilter ? .white : .main)
+                            .background(viewModel.favoriteFilter ? Color.main : Color.white)
+                            .cornerRadius(20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.main, lineWidth: 2)
+                            )
+                            .padding(.top, 20)
+                            
+                            Button {
+                                if viewModel.starFilter {
+                                    viewModel.starFilter = false
+                                    viewModel.updateSpots()
+                                } else {
+                                    viewModel.starFilter = true
+                                    viewModel.updateSpots()
+                                }
+                            } label: {
+                                Text("行きたい").padding(.all, 10)
+                            }
+                            .foregroundColor(viewModel.starFilter ? .white : .main)
+                            .background(viewModel.starFilter ? Color.main : Color.white)
+                            .cornerRadius(20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.main, lineWidth: 2)
+                            )
+                            .padding(.top, 20)
+                            
+                            if viewModel.categories.count > 0 {
+                                Button {
+                                    showCategoriesFilter = true
+                                } label: {
+                                    if viewModel.categoriesFilter.count > 0 {
+                                        Text(viewModel.categoriesFilter.count == 1 ? viewModel.categoriesFilter[0].name : "カテゴリー： \(viewModel.categoriesFilter.count)").padding(.all, 10)
+                                    } else {
+                                        Text("カテゴリー").padding(.all, 10)
+                                    }
+                                }
+                                .foregroundColor(viewModel.categoriesFilter.count > 0 ? .white : .main)
+                                .background(viewModel.categoriesFilter.count > 0 ? Color.main : Color.white)
+                                .cornerRadius(20)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .stroke(Color.main, lineWidth: 2)
+                                )
+                                .padding(.top, 20)
+                            }
+                        }
+                    }.padding(.horizontal, 20)
                     Spacer()
                     HStack {
                         Spacer()
@@ -34,8 +101,10 @@ struct SpotsView: View {
                     EmptyView()
                 }
                 
-                MapView(spots: viewModel.spots, showSpotListSheet: $showSpotListSheet).edgesIgnoringSafeArea(.top)
-            }.navigationBarHidden(true).partialSheet(isPresented: $showSpotListSheet, sheet: {
+                MapView(spots: viewModel.isFiltered() ? viewModel.filteredSpots : viewModel.spots, showSpotListSheet: $showSpotListSheet).edgesIgnoringSafeArea(.top)
+            }
+            .navigationBarHidden(true)
+            .partialSheet(isPresented: $showSpotListSheet, sheet: {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(alignment: .leading) {
                         Text("スポット\(viewModel.selectedAnnotations.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
@@ -56,20 +125,23 @@ struct SpotsView: View {
                     viewModel.getSpots()
                 }
             }
-        }.accentColor(.black) 
+            .partialSheet(isPresented: $showCategoriesFilter, sheet: {
+                CategoriesFilterView(showCategoriesFilter: $showCategoriesFilter).environmentObject(viewModel)
+            }, onEnd: {})
+        }.accentColor(.black)
     }
 }
 
 struct RefreshButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .foregroundColor(.white)
-            .padding()
-            .frame(maxWidth: 110, maxHeight: 45)
-            .background(Color.main)
+            .background(Color.white)
             .cornerRadius(20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.main, lineWidth: 2)
+            )
             .padding(.top, 20)
-            .shadow(radius: 7)
     }
 }
 
