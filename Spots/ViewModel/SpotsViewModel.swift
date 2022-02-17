@@ -11,10 +11,12 @@ import MapKit
 class SpotsViewModel: ObservableObject {
     let generator = UINotificationFeedbackGenerator()
     @Published var spots: [Spot] = []
+    @Published var filteredSpots: [Spot] = []
     @Published var showAddSpotSheet: Bool = false
     @Published var showSpotListSheet: Bool = false
     @Published var queried: Bool = false
-    @Published var updated: Bool = false
+    @Published var added: Bool = false // Use to set region
+    @Published var updated: Bool = false // Use to update MapView
     @Published var goSpotsView: Bool = false
     @Published var goSpotDetailView: Bool = false
     @Published var region = MKCoordinateRegion(
@@ -23,6 +25,11 @@ class SpotsViewModel: ObservableObject {
     )
     @Published var selectedAnnotations: [MKAnnotation] = []
     @Published var updating: Bool = false
+    
+    @Published var favoriteFilter = false
+    @Published var starFilter = false
+    @Published var categories = Account.shared.categories
+    @Published var categoriesFilter: [Category] = []
     
     private var spotUseCase: SpotUseCase
     var cancellables = [AnyCancellable]()
@@ -47,7 +54,11 @@ class SpotsViewModel: ObservableObject {
             return spots
         }
     }
-
+    
+    func isFiltered() -> Bool {
+        return favoriteFilter || starFilter || categoriesFilter.count > 0
+    }
+    
     func getSpots() {
         spotUseCase.getSpots().receive(on: DispatchQueue.main).sink(receiveCompletion: { completion in
             switch completion {
@@ -63,10 +74,6 @@ class SpotsViewModel: ObservableObject {
     
     func refreshSpots() {
         spots = []
-        region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 35.68154, longitude: 139.752498),
-            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
-        )
         getSpots()
     }
     
@@ -89,10 +96,12 @@ class SpotsViewModel: ObservableObject {
             }
         }, receiveValue: { spot in
             self.spots.insert(spot, at: 0)
+            self.updateSpots()
             self.region = MKCoordinateRegion(
                 center: CLLocationCoordinate2D(latitude: spot.latitude, longitude: spot.longitude),
                 span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
             )
+            self.added = true
             self.generator.notificationOccurred(.success)
         }).store(in: &cancellables)
     }
@@ -116,6 +125,7 @@ class SpotsViewModel: ObservableObject {
                 self.spots = self.spots.filter { spot in
                     return spot.id != spotId
                 }
+                self.updateSpots()
                 self.updating = false
                 self.goSpotDetailView = false
             }
@@ -134,6 +144,31 @@ class SpotsViewModel: ObservableObject {
             }
             return s
         }
+        updated = true
+    }
+    
+    func updateSpots() {
+        filteredSpots = spots.map { s in
+            if favoriteFilter, !s.favorite {
+                return nil
+            }
+            if starFilter, !s.star {
+                return nil
+            }
+            if categoriesFilter.count > 0 {
+                if let spotCategories = s.categories, spotCategories.count > 0 {
+                    if !spotCategories.contains(where: { c in
+                        categoriesFilter.map{ $0.id }.contains(c)
+                    }) {
+                        return nil
+                    }
+                } else {
+                    return nil
+                }
+            }
+            
+            return s
+        }.compactMap {$0}
         updated = true
     }
 }
