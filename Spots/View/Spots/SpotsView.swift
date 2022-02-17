@@ -20,7 +20,10 @@ struct SpotsView: View {
                             Button {
                                 viewModel.refreshSpots()
                             } label: {
-                                Image(systemName: "arrow.clockwise").foregroundColor(.main).font(.system(size: 18, weight: .bold)).padding(.all, 10)
+                                Image(systemName: "arrow.clockwise")
+                                    .foregroundColor(.textGray2)
+                                    .font(.system(size: 18, weight: .bold))
+                                    .padding(.all, 10)
                             }.buttonStyle(RefreshButtonStyle())
                             
                             Button {
@@ -34,13 +37,9 @@ struct SpotsView: View {
                             } label: {
                                 Text("お気に入り").padding(.all, 10)
                             }
-                            .foregroundColor(viewModel.favoriteFilter ? .white : .main)
+                            .foregroundColor(viewModel.favoriteFilter ? .white : .textGray2)
                             .background(viewModel.favoriteFilter ? Color.main : Color.white)
                             .cornerRadius(20)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.main, lineWidth: 2)
-                            )
                             .padding(.top, 20)
                             
                             Button {
@@ -54,13 +53,9 @@ struct SpotsView: View {
                             } label: {
                                 Text("行きたい").padding(.all, 10)
                             }
-                            .foregroundColor(viewModel.starFilter ? .white : .main)
+                            .foregroundColor(viewModel.starFilter ? .white : .textGray2)
                             .background(viewModel.starFilter ? Color.main : Color.white)
                             .cornerRadius(20)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.main, lineWidth: 2)
-                            )
                             .padding(.top, 20)
                             
                             if viewModel.categories.count > 0 {
@@ -73,13 +68,9 @@ struct SpotsView: View {
                                         Text("カテゴリー").padding(.all, 10)
                                     }
                                 }
-                                .foregroundColor(viewModel.categoriesFilter.count > 0 ? .white : .main)
+                                .foregroundColor(viewModel.categoriesFilter.count > 0 ? .white : .textGray2)
                                 .background(viewModel.categoriesFilter.count > 0 ? Color.main : Color.white)
                                 .cornerRadius(20)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .stroke(Color.main, lineWidth: 2)
-                                )
                                 .padding(.top, 20)
                             }
                         }
@@ -128,7 +119,7 @@ struct SpotsView: View {
             .partialSheet(isPresented: $showCategoriesFilter, sheet: {
                 CategoriesFilterView(showCategoriesFilter: $showCategoriesFilter).environmentObject(viewModel)
             }, onEnd: {})
-        }.accentColor(.black)
+        }
     }
 }
 
@@ -137,10 +128,6 @@ struct RefreshButtonStyle: ButtonStyle {
         configuration.label
             .background(Color.white)
             .cornerRadius(20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.main, lineWidth: 2)
-            )
             .padding(.top, 20)
     }
 }

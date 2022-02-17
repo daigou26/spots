@@ -36,6 +36,7 @@ struct UpdateSpotView: View {
             title = spotDetailViewModel.spot?.title ?? ""
             memo = spotDetailViewModel.spot?.memo ?? ""
         })
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading){
@@ -44,7 +45,7 @@ struct UpdateSpotView: View {
                     spotDetailViewModel.updatingMemo = false
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Image(systemName: "chevron.left").font(.system(size: 16).bold()).foregroundColor(.black)
+                    Image(systemName: "chevron.left").font(.system(size: 16).bold()).foregroundColor(.textGray)
                 }.disabled(spotDetailViewModel.updating)
             }
             ToolbarItem(placement: .navigationBarTrailing){
@@ -61,7 +62,9 @@ struct UpdateSpotView: View {
                             presentationMode.wrappedValue.dismiss()
                         }
                     }
-                }.disabled(spotDetailViewModel.updating)
+                }
+                .foregroundColor(.textGray)
+                .disabled(spotDetailViewModel.updating)
             }
         }
     }

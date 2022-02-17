@@ -40,12 +40,16 @@ struct SelectMainImageView: View {
                         EmptyView()
                     }
                 }
-            }.interactiveDismissDisabled(addSpotViewModel.loading).navigationTitle("メインの写真").navigationBarTitleDisplayMode(.inline).toolbar {
+            }
+            .interactiveDismissDisabled(addSpotViewModel.loading)
+            .navigationTitle("メインの写真")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
                 ToolbarItem(placement: .navigationBarLeading){
                     Button(action: {
                         spotsViewModel.showAddSpotSheet = false
                     }) {
-                        Image(systemName: "xmark").foregroundColor(.black)
+                        Image(systemName: "xmark").foregroundColor(.textGray)
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
@@ -55,7 +59,7 @@ struct SelectMainImageView: View {
                         }
                         goNext = true
                     }) {
-                        Text("次へ")
+                        Text("次へ").foregroundColor(.textGray)
                     }
                 }
             }.onAppear {
@@ -63,7 +67,7 @@ struct SelectMainImageView: View {
                     imagePickerViewModel.setUp(Int(width))
                 }
             }
-        }
+        }.accentColor(.textGray)
     }
 }
 

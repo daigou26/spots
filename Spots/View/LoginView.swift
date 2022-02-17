@@ -13,28 +13,17 @@ struct LoginView: View {
             Image("Login")
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-            
-            
-            Text("Welcome to Spots!")
-                .fontWeight(.black)
-                .foregroundColor(Color.main)
-                .font(.largeTitle)
-                .multilineTextAlignment(.center)
-            
-            Text("Let's spot your place and \n share with your friends!")
-                .fontWeight(.medium)
-                .multilineTextAlignment(.center)
-                .padding()
-            
+                .frame(height: 400)
             Spacer()
             
             Text(viewModel.errorMessage).foregroundColor(Color.red).frame(height: 50)
-            Button("Sign in with Google") {
+            Button(action: {
                 Task {
                     await viewModel.signIn()
                 }
-            }
-            .buttonStyle(AuthenticationButtonStyle())
+            }, label: {
+                Text("Googleアカウントでログイン").font(.system(size: 18, weight: .bold))
+            }).buttonStyle(AuthenticationButtonStyle())
         }.background(Color.base)
     }
 }
@@ -42,11 +31,15 @@ struct LoginView: View {
 struct AuthenticationButtonStyle: ButtonStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .foregroundColor(.white)
+            .foregroundColor(.textGray2)
             .padding()
             .frame(maxWidth: .infinity)
-            .background(Color.main)
-            .cornerRadius(12)
+            .background(Color.white)
+            .cornerRadius(20)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.textGray2, lineWidth: 1)
+            )
             .padding()
     }
 }

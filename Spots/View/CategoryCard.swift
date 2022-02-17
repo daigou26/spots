@@ -8,7 +8,7 @@ struct CategoryCard: View {
     @EnvironmentObject var categoriesViewModel: CategoriesViewModel
     @EnvironmentObject var spotDetailViewModel: SpotDetailViewModel
     @State var idx: Int
-    @State var editing: Bool = false // InputSpotInfoView or SpotDetailView
+    @State var editing: Bool = false
     @State var tempCategoryColor = Color.white
     @State var tempCategoryName = ""
     
@@ -22,7 +22,7 @@ struct CategoryCard: View {
                     Text(categoriesViewModel.categoryItems[idx].category.name)
                     Spacer()
                     if categoriesViewModel.categoryItems[idx].checked {
-                        Image(systemName: "checkmark").foregroundColor(.blue)
+                        Image(systemName: "checkmark").foregroundColor(.textGray)
                     }
                 } else {
                     ColorPicker("", selection: $tempCategoryColor).labelsHidden()
@@ -30,7 +30,7 @@ struct CategoryCard: View {
                     Button {
                         categoriesViewModel.categoryItems[idx].editMode = false
                     } label: {
-                        Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.background)
+                        Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.textGray)
                     }.disabled(categoriesViewModel.uploading)
                     Button {
                         Task {
@@ -47,8 +47,8 @@ struct CategoryCard: View {
                     .padding(.leading)
                     .disabled(categoriesViewModel.uploading || tempCategoryName == "")
                 }
-            }
-        }.background(Color.white)
+            }.frame(height: 30)
+        }.background()
     }
 }
 

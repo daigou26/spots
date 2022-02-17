@@ -11,7 +11,6 @@
 		C003D3C4273BA702009C790F /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003D3C3273BA702009C790F /* AuthViewModel.swift */; };
 		C003D3C8273BC8E8009C790F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C003D3C7273BC8E8009C790F /* GoogleService-Info.plist */; };
 		C003D3CA273BE83A009C790F /* ColorSet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C003D3C9273BE83A009C790F /* ColorSet.xcassets */; };
-		C003D3CC273BEA23009C790F /* ColorExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003D3CB273BEA23009C790F /* ColorExtention.swift */; };
 		C00AD64C2756A8B5006B575A /* ImagePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64B2756A8B5006B575A /* ImagePickerViewModel.swift */; };
 		C00AD64E2756AA41006B575A /* AuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64D2756AA41006B575A /* AuthStatus.swift */; };
 		C00AD6502756AA7E006B575A /* PhotoAuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64F2756AA7E006B575A /* PhotoAuthStatus.swift */; };
@@ -116,7 +115,6 @@
 		C003D3C3273BA702009C790F /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C003D3C7273BC8E8009C790F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C003D3C9273BE83A009C790F /* ColorSet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorSet.xcassets; sourceTree = "<group>"; };
-		C003D3CB273BEA23009C790F /* ColorExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtention.swift; sourceTree = "<group>"; };
 		C00AD64B2756A8B5006B575A /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
 		C00AD64D2756AA41006B575A /* AuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStatus.swift; sourceTree = "<group>"; };
 		C00AD64F2756AA7E006B575A /* PhotoAuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthStatus.swift; sourceTree = "<group>"; };
@@ -421,7 +419,6 @@
 				C07CCA6D273BF45200C32FE9 /* View */,
 				C07CCA6C273BF43C00C32FE9 /* ViewModel */,
 				C0FE76D127386D61000E4566 /* SpotsApp.swift */,
-				C003D3CB273BEA23009C790F /* ColorExtention.swift */,
 				C0FE76D527386D63000E4566 /* Assets.xcassets */,
 				C003D3C9273BE83A009C790F /* ColorSet.xcassets */,
 				C0FE76D727386D63000E4566 /* Preview Content */,
@@ -662,7 +659,6 @@
 				C05780CD27B857D5005CA36D /* CategoryUseCaseImpl.swift in Sources */,
 				C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */,
 				C0FE77112739144D000E4566 /* LoginView.swift in Sources */,
-				C003D3CC273BEA23009C790F /* ColorExtention.swift in Sources */,
 				C0B4CFF1276A3E82008F1394 /* ImageUseCaseImpl.swift in Sources */,
 				C05DD37A274FC3150071C163 /* CustomAnnotationView.swift in Sources */,
 				C05780D127BCAC17005CA36D /* CategoriesFilterView.swift in Sources */,

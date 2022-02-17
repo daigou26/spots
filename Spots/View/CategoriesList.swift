@@ -79,7 +79,7 @@ struct CategoriesList: View {
                         viewModel.resetTempData()
                         showAddCategoryForm = false
                     } label: {
-                        Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.background)
+                        Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.textGray)
                     }.disabled(viewModel.uploading)
                     Button {
                         Task {

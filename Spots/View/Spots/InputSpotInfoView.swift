@@ -32,7 +32,7 @@ struct InputSpotInfoView: View {
                             Button(action: {goInputLocationView = true}) {
                                 Text(addSpotViewModel.address).lineLimit(1).frame(maxWidth: UIScreen.main.bounds.width / 3, alignment: .trailing)
                                 Image(systemName: "chevron.right")
-                            }.foregroundColor(.black)
+                            }.foregroundColor(.textGray)
                         }
                         Divider().padding(.vertical, 18)
                     }
