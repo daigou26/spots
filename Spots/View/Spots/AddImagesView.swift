@@ -44,7 +44,7 @@ struct AddImagesView: View {
                     Button(action: {
                         spotDetailViewModel.showAddPhotosSheet = false
                     }) {
-                        Image(systemName: "xmark").font(.system(size: 16).bold()).foregroundColor(.black)
+                        Image(systemName: "xmark").font(.system(size: 16).bold()).foregroundColor(.textGray)
                     }.disabled(updating)
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
@@ -60,7 +60,7 @@ struct AddImagesView: View {
                                 }
                             }
                         }
-                    }.disabled(updating || imagePickerViewModel.selectedImages.count == 0)
+                    }.foregroundColor(.textGray).disabled(updating || imagePickerViewModel.selectedImages.count == 0)
                 }
             }
         }

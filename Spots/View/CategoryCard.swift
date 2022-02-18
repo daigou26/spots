@@ -8,29 +8,35 @@ struct CategoryCard: View {
     @EnvironmentObject var categoriesViewModel: CategoriesViewModel
     @EnvironmentObject var spotDetailViewModel: SpotDetailViewModel
     @State var idx: Int
-    @State var editing: Bool = false // InputSpotInfoView or SpotDetailView
+    @State var editing: Bool = false
     @State var tempCategoryColor = Color.white
     @State var tempCategoryName = ""
     
     var body: some View {
         VStack(spacing: 1) {
-            HStack {
-                if !categoriesViewModel.categoryItems[idx].editMode {
-                    Circle()
-                        .fill(Color(hex: categoriesViewModel.categoryItems[idx].category.color))
-                        .frame(width:22, height: 22)
-                    Text(categoriesViewModel.categoryItems[idx].category.name)
-                    Spacer()
-                    if categoriesViewModel.categoryItems[idx].checked {
-                        Image(systemName: "checkmark").foregroundColor(.blue)
-                    }
-                } else {
+            if !categoriesViewModel.categoryItems[idx].editMode {
+                Button {
+                    categoriesViewModel.categoryItems[idx].checked = !categoriesViewModel.categoryItems[idx].checked
+                } label: {
+                    HStack {
+                        Circle()
+                            .fill(Color(hex: categoriesViewModel.categoryItems[idx].category.color))
+                            .frame(width:22, height: 22)
+                        Text(categoriesViewModel.categoryItems[idx].category.name)
+                        Spacer()
+                        if categoriesViewModel.categoryItems[idx].checked {
+                            Image(systemName: "checkmark").foregroundColor(.textGray)
+                        }
+                    }.frame(height: 50)
+                }
+            } else {
+                HStack {
                     ColorPicker("", selection: $tempCategoryColor).labelsHidden()
                     TextField("カテゴリー", text: $tempCategoryName)
                     Button {
                         categoriesViewModel.categoryItems[idx].editMode = false
                     } label: {
-                        Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.background)
+                        Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.textGray)
                     }.disabled(categoriesViewModel.uploading)
                     Button {
                         Task {
@@ -46,9 +52,9 @@ struct CategoryCard: View {
                     }
                     .padding(.leading)
                     .disabled(categoriesViewModel.uploading || tempCategoryName == "")
-                }
+                }.frame(height: 50)
             }
-        }.background(Color.white)
+        }
     }
 }
 

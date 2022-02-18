@@ -14,17 +14,23 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            HStack {
+            HStack() {
                 if let imageUrl = profileViewModel.account.imageUrl {
-                    AsyncImage(url: URL(string: imageUrl)).clipShape(Circle())
-                        .overlay {
-                            Circle().stroke(.white, lineWidth: 4)
-                        }
-                        .shadow(radius: 7)
+                    AsyncImage(url: URL(string: imageUrl)){ image in
+                        image.resizable()
+                            .frame(width: 60, height: 60)
+                            .clipShape(Circle())
+                            .overlay {
+                                Circle().stroke(.white, lineWidth: 2)
+                            }
+                            .shadow(radius: 7)
+                    } placeholder: {
+                        RoundedRectangle(cornerSize: CGSize(width: 30, height: 30)).fill(Color.background).frame(width: 60, height: 60)
+                    }   
                 } else {
-                    Image(systemName: "Person").frame(width: 80, height: 80)
+                    Image(systemName: "Person").frame(width: 60, height: 60)
                         .overlay {
-                            Circle().stroke(.white, lineWidth: 4)
+                            Circle().stroke(.white, lineWidth: 2)
                         }
                         .shadow(radius: 7)
                 }
@@ -35,7 +41,7 @@ struct ProfileView: View {
             Spacer()
             Button("Sign out") {
                 authViewModel.signOut()
-            }.padding()
+            }.foregroundColor(.textGray).padding()
         }
     }
 }

@@ -14,10 +14,17 @@ struct ContentView: View {
             switch viewModel.state {
             case .SignedIn: TabView {
                 SpotsView().environmentObject(SpotsViewModel()).tabItem {
-                    Image(systemName: "mappin.and.ellipse")
+                    VStack {
+                        Image(systemName: "mappin.and.ellipse")
+                        Text("スポット")
+                    }
+                    
                 }
                 ProfileView().tabItem {
-                    Image(systemName: "person")
+                    VStack {
+                        Image(systemName: "person")
+                        Text("マイページ")
+                    }
                 }
             }
             case .SignedOut: LoginView()

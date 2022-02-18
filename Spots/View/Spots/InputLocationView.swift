@@ -28,13 +28,14 @@ struct InputLocationView: View {
                 Rectangle().fill(Color.black).opacity(0.4).edgesIgnoringSafeArea(.all)
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading){
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Image(systemName: "chevron.left").font(.system(size: 16).bold()).foregroundColor(.black)
+                    Image(systemName: "chevron.left").font(.system(size: 16).bold()).foregroundColor(.textGray)
                 }.disabled(editing ? spotDetailViewModel.updating : false)
             }
             ToolbarItem(placement: .navigationBarTrailing){
@@ -57,7 +58,9 @@ struct InputLocationView: View {
                             }
                         }
                     }
-                }.disabled(editing ? spotDetailViewModel.updating : false)
+                }
+                .foregroundColor(.textGray)
+                .disabled(editing ? spotDetailViewModel.updating : false)
             }
         }
         .onAppear {

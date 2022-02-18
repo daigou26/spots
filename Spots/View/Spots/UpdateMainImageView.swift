@@ -59,7 +59,7 @@ struct UpdateMainImageView: View {
                     imagePickerViewModel.selectedImagePreview = nil
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Image(systemName: "chevron.left").font(.system(size: 16).bold()).foregroundColor(.black)
+                    Image(systemName: "chevron.left").font(.system(size: 16).bold()).foregroundColor(.textGray)
                 }.disabled(updating)
             }
             ToolbarItem(placement: .navigationBarTrailing){
@@ -75,7 +75,7 @@ struct UpdateMainImageView: View {
                             presentationMode.wrappedValue.dismiss()
                         }
                     }
-                }.disabled(updating)
+                }.foregroundColor(.textGray).disabled(updating)
             }
         }.onAppear {
             if imagePickerViewModel.libraryStatus == .Denied {

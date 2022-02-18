@@ -53,10 +53,7 @@ struct CategoriesList: View {
                             }
                             
                         })
-                        .onTapGesture {
-                            viewModel.categoryItems[idx].checked = !viewModel.categoryItems[idx].checked
-                        }
-                        .listRowInsets(EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0))
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
             }
             .listStyle(.plain)
@@ -79,7 +76,7 @@ struct CategoriesList: View {
                         viewModel.resetTempData()
                         showAddCategoryForm = false
                     } label: {
-                        Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.background)
+                        Image(systemName: "xmark").font(.system(size: 18, weight: .bold)).foregroundColor(.textGray)
                     }.disabled(viewModel.uploading)
                     Button {
                         Task {

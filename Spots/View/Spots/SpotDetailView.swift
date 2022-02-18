@@ -67,7 +67,7 @@ struct SpotDetailView: View {
                                 Button(action: {
                                     goUpdateMainImageView = true
                                 }) {
-                                    Image(systemName: "photo").font(.system(size: 18).bold()).foregroundColor(.black).frame(width: 35, height: 35).background(Color.white).clipShape(Circle())
+                                    Image(systemName: "photo").font(.system(size: 18).bold()).foregroundColor(.textGray2).frame(width: 35, height: 35).background(Color.white).clipShape(Circle())
                                 }.padding()
                             }.frame(height: height / 4)
                             
@@ -186,7 +186,7 @@ struct SpotDetailView: View {
                                     spotsViewModel.updateSpot(spotId: id, spot: spot)
                                 }
                             }) {
-                                Image(systemName: "chevron.left").font(.system(size: 14).bold()).foregroundColor(.black).frame(width: 35, height: 35).background(Color.white).clipShape(Circle())
+                                Image(systemName: "chevron.left").font(.system(size: 14).bold()).foregroundColor(.textGray2).frame(width: 35, height: 35).background(Color.white).clipShape(Circle())
                             }.disabled(spotsViewModel.updating)
                         }
                         ToolbarItem(placement: .navigationBarTrailing){
@@ -207,7 +207,7 @@ struct SpotDetailView: View {
                             Button(action: {
                                 actionDialogEnable = true
                             }) {
-                                Image(systemName: "ellipsis").font(.system(size: 16).bold()).foregroundColor(.black).frame(width: 35, height: 35).background(Color.white).clipShape(Circle())
+                                Image(systemName: "ellipsis").font(.system(size: 16).bold()).foregroundColor(.textGray2).frame(width: 35, height: 35).background(Color.white).clipShape(Circle())
                             }.disabled(spotsViewModel.updating)
                         }
                     }
