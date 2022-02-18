@@ -14,17 +14,23 @@ struct CategoryCard: View {
     
     var body: some View {
         VStack(spacing: 1) {
-            HStack {
-                if !categoriesViewModel.categoryItems[idx].editMode {
-                    Circle()
-                        .fill(Color(hex: categoriesViewModel.categoryItems[idx].category.color))
-                        .frame(width:22, height: 22)
-                    Text(categoriesViewModel.categoryItems[idx].category.name)
-                    Spacer()
-                    if categoriesViewModel.categoryItems[idx].checked {
-                        Image(systemName: "checkmark").foregroundColor(.textGray)
-                    }
-                } else {
+            if !categoriesViewModel.categoryItems[idx].editMode {
+                Button {
+                    categoriesViewModel.categoryItems[idx].checked = !categoriesViewModel.categoryItems[idx].checked
+                } label: {
+                    HStack {
+                        Circle()
+                            .fill(Color(hex: categoriesViewModel.categoryItems[idx].category.color))
+                            .frame(width:22, height: 22)
+                        Text(categoriesViewModel.categoryItems[idx].category.name)
+                        Spacer()
+                        if categoriesViewModel.categoryItems[idx].checked {
+                            Image(systemName: "checkmark").foregroundColor(.textGray)
+                        }
+                    }.frame(height: 50)
+                }
+            } else {
+                HStack {
                     ColorPicker("", selection: $tempCategoryColor).labelsHidden()
                     TextField("カテゴリー", text: $tempCategoryName)
                     Button {
@@ -46,9 +52,9 @@ struct CategoryCard: View {
                     }
                     .padding(.leading)
                     .disabled(categoriesViewModel.uploading || tempCategoryName == "")
-                }
-            }.frame(height: 30)
-        }.background()
+                }.frame(height: 50)
+            }
+        }
     }
 }
 

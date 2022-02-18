@@ -53,10 +53,7 @@ struct CategoriesList: View {
                             }
                             
                         })
-                        .onTapGesture {
-                            viewModel.categoryItems[idx].checked = !viewModel.categoryItems[idx].checked
-                        }
-                        .listRowInsets(EdgeInsets(top: 16, leading: 0, bottom: 16, trailing: 0))
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
             }
             .listStyle(.plain)
