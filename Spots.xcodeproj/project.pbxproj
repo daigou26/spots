@@ -7,6 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C003D3BB27391E16009C790F /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C003D3BA27391E16009C790F /* GoogleSignIn */; };
+		C003D3C4273BA702009C790F /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003D3C3273BA702009C790F /* AuthViewModel.swift */; };
+		C003D3C8273BC8E8009C790F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C003D3C7273BC8E8009C790F /* GoogleService-Info.plist */; };
+		C003D3CA273BE83A009C790F /* ColorSet.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C003D3C9273BE83A009C790F /* ColorSet.xcassets */; };
+		C00AD64C2756A8B5006B575A /* ImagePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64B2756A8B5006B575A /* ImagePickerViewModel.swift */; };
+		C00AD64E2756AA41006B575A /* AuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64D2756AA41006B575A /* AuthStatus.swift */; };
+		C00AD6502756AA7E006B575A /* PhotoAuthStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD64F2756AA7E006B575A /* PhotoAuthStatus.swift */; };
+		C00AD6522756BAD0006B575A /* Asset.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD6512756BAD0006B575A /* Asset.swift */; };
+		C00AD6542756C23A006B575A /* ThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00AD6532756C23A006B575A /* ThumbnailView.swift */; };
+		C03CC9B72756622F00FB79FB /* SelectMainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03CC9B62756622F00FB79FB /* SelectMainImageView.swift */; };
+		C03F77E12760FF5900634036 /* LocationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F77E02760FF5900634036 /* LocationUseCase.swift */; };
+		C03F77E32760FFE600634036 /* LocationUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F77E22760FFE600634036 /* LocationUseCaseImpl.swift */; };
+		C03F77E627620AB000634036 /* SpotStorageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F77E527620AB000634036 /* SpotStorageRepository.swift */; };
+		C03F77E827620AFE00634036 /* SpotStorageRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03F77E727620AFE00634036 /* SpotStorageRepositoryImpl.swift */; };
+		C048372E273F076B0087AAFC /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048372D273F076B0087AAFC /* UserRepository.swift */; };
+		C0483730273F0E710087AAFC /* UserRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */; };
+		C0483732273F0F700087AAFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0483731273F0F700087AAFC /* User.swift */; };
+		C04837372740429A0087AAFC /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04837362740429A0087AAFC /* AuthViewModelTests.swift */; };
+		C05780BD27B692BD005CA36D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780BC27B692BD005CA36D /* Category.swift */; };
+		C05780BF27B6B067005CA36D /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780BE27B6B067005CA36D /* CategoryRepository.swift */; };
+		C05780C127B6B074005CA36D /* CategoryRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C027B6B074005CA36D /* CategoryRepositoryImpl.swift */; };
+		C05780C327B6C51B005CA36D /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C227B6C51B005CA36D /* CategoriesList.swift */; };
+		C05780C527B6C621005CA36D /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C427B6C621005CA36D /* CategoriesViewModel.swift */; };
+		C05780C727B6CC69005CA36D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780C627B6CC69005CA36D /* ColorExtension.swift */; };
+		C05780CB27B8576F005CA36D /* CategoryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CA27B8576F005CA36D /* CategoryUseCase.swift */; };
+		C05780CD27B857D5005CA36D /* CategoryUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CC27B857D5005CA36D /* CategoryUseCaseImpl.swift */; };
+		C05780CF27B91B2E005CA36D /* CategoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780CE27B91B2E005CA36D /* CategoryCard.swift */; };
+		C05780D127BCAC17005CA36D /* CategoriesFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05780D027BCAC17005CA36D /* CategoriesFilterView.swift */; };
+		C058DAFB275CE77A0068AF66 /* InputLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058DAFA275CE77A0068AF66 /* InputLocationView.swift */; };
+		C058DAFD275CF0C20068AF66 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */; };
+		C05DD3662740C1CC0071C163 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD3652740C1CC0071C163 /* ProfileView.swift */; };
+		C05DD3682740CA140071C163 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD3672740CA140071C163 /* Account.swift */; };
+		C05DD36A274157700071C163 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD369274157700071C163 /* ProfileViewModel.swift */; };
+		C05DD36C2741798C0071C163 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD36B2741798C0071C163 /* MapView.swift */; };
+		C05DD36E27417E0C0071C163 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD36D27417E0C0071C163 /* Spot.swift */; };
+		C05DD370274F2A860071C163 /* PartialSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD36F274F2A860071C163 /* PartialSheet.swift */; };
+		C05DD373274F74FB0071C163 /* SpotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD372274F74FB0071C163 /* SpotsView.swift */; };
+		C05DD375274F86BA0071C163 /* SpotCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD374274F86BA0071C163 /* SpotCard.swift */; };
+		C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD377274FBDE20071C163 /* CustomAnnotation.swift */; };
+		C05DD37A274FC3150071C163 /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD379274FC3150071C163 /* CustomAnnotationView.swift */; };
+		C05DD37E274FC5860071C163 /* SpotsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD37D274FC5860071C163 /* SpotsViewModel.swift */; };
+		C05DD380274FC65D0071C163 /* SpotRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD37F274FC65D0071C163 /* SpotRepository.swift */; };
+		C05DD382274FC6BC0071C163 /* SpotRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD381274FC6BC0071C163 /* SpotRepositoryImpl.swift */; };
+		C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD383274FD8FD0071C163 /* SpotUseCase.swift */; };
+		C05DD386274FD9270071C163 /* SpotUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD385274FD9270071C163 /* SpotUseCaseImpl.swift */; };
+		C05DD38827515EF50071C163 /* SpotsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD38727515EF50071C163 /* SpotsViewModelTests.swift */; };
+		C05DD38B275173DF0071C163 /* SpotUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C05DD38A275173DF0071C163 /* SpotUseCaseTests.swift */; };
+		C07CCA77273D948700C32FE9 /* AuthUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA76273D948700C32FE9 /* AuthUseCase.swift */; };
+		C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */; };
+		C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */; };
+		C0A19E0727AC41AF0065D39F /* UpdateSpotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */; };
+		C0A19E0B27B03D550065D39F /* UpdateMainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */; };
+		C0A19E0E27B1BCAC0065D39F /* GridImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0D27B1BCAC0065D39F /* GridImages.swift */; };
+		C0A19E1027B5197E0065D39F /* AddImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19E0F27B5197E0065D39F /* AddImagesView.swift */; };
+		C0B4CFEF276A3E2C008F1394 /* ImageUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */; };
+		C0B4CFF1276A3E82008F1394 /* ImageUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */; };
+		C0B4CFF52779F751008F1394 /* AddSpotViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */; };
+		C0B4CFF72779FAF2008F1394 /* LocationUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF62779FAF2008F1394 /* LocationUseCaseTests.swift */; };
+		C0B4CFF9277A2F3A008F1394 /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFF8277A2F3A008F1394 /* SpotDetailView.swift */; };
+		C0B4CFFB277A2F80008F1394 /* SpotDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFFA277A2F80008F1394 /* SpotDetailViewModel.swift */; };
+		C0B4CFFD277A35C4008F1394 /* LocationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFFC277A35C4008F1394 /* LocationError.swift */; };
+		C0B4CFFF277A35FB008F1394 /* QueryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4CFFE277A35FA008F1394 /* QueryError.swift */; };
+		C0B4D001277A3696008F1394 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D000277A3696008F1394 /* Photo.swift */; };
+		C0B4D0042787103D008F1394 /* CheckSpotDuplicationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D0032787103D008F1394 /* CheckSpotDuplicationResponse.swift */; };
+		C0B4D00927A3E8CA008F1394 /* SpotImageList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B4D00827A3E8CA008F1394 /* SpotImageList.swift */; };
+		C0D9C06A275773800052A5C0 /* AddSpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */; };
+		C0D9C06C275776FE0052A5C0 /* SelectImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */; };
+		C0D9C06E275A49980052A5C0 /* InputSpotInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */; };
 		C0FE76D227386D61000E4566 /* SpotsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE76D127386D61000E4566 /* SpotsApp.swift */; };
 		C0FE76D427386D61000E4566 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE76D327386D61000E4566 /* ContentView.swift */; };
 		C0FE76D627386D63000E4566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0FE76D527386D63000E4566 /* Assets.xcassets */; };
@@ -14,6 +82,15 @@
 		C0FE76E327386D63000E4566 /* SpotsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE76E227386D63000E4566 /* SpotsTests.swift */; };
 		C0FE76ED27386D63000E4566 /* SpotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE76EC27386D63000E4566 /* SpotsUITests.swift */; };
 		C0FE76EF27386D63000E4566 /* SpotsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE76EE27386D63000E4566 /* SpotsUITestsLaunchTests.swift */; };
+		C0FE76FF2738CAE3000E4566 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE76FE2738CAE3000E4566 /* FirebaseAnalytics */; };
+		C0FE77012738CAE3000E4566 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE77002738CAE3000E4566 /* FirebaseAnalyticsSwift-Beta */; };
+		C0FE77032738CAE3000E4566 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE77022738CAE3000E4566 /* FirebaseAuth */; };
+		C0FE77052738CAE3000E4566 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE77042738CAE3000E4566 /* FirebaseFirestore */; };
+		C0FE77072738CAE3000E4566 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE77062738CAE3000E4566 /* FirebaseFirestoreSwift-Beta */; };
+		C0FE77092738CAE3000E4566 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE77082738CAE3000E4566 /* FirebaseFunctions */; };
+		C0FE770B2738CAE3000E4566 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE770A2738CAE3000E4566 /* FirebaseStorage */; };
+		C0FE770D2738CAE3000E4566 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = C0FE770C2738CAE3000E4566 /* FirebaseStorageSwift-Beta */; };
+		C0FE77112739144D000E4566 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE77102739144D000E4566 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +111,74 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C003D3BC27391E36009C790F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C003D3C3273BA702009C790F /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		C003D3C7273BC8E8009C790F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C003D3C9273BE83A009C790F /* ColorSet.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ColorSet.xcassets; sourceTree = "<group>"; };
+		C00AD64B2756A8B5006B575A /* ImagePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerViewModel.swift; sourceTree = "<group>"; };
+		C00AD64D2756AA41006B575A /* AuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStatus.swift; sourceTree = "<group>"; };
+		C00AD64F2756AA7E006B575A /* PhotoAuthStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAuthStatus.swift; sourceTree = "<group>"; };
+		C00AD6512756BAD0006B575A /* Asset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asset.swift; sourceTree = "<group>"; };
+		C00AD6532756C23A006B575A /* ThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailView.swift; sourceTree = "<group>"; };
+		C03CC9B62756622F00FB79FB /* SelectMainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMainImageView.swift; sourceTree = "<group>"; };
+		C03F77E02760FF5900634036 /* LocationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCase.swift; sourceTree = "<group>"; };
+		C03F77E22760FFE600634036 /* LocationUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCaseImpl.swift; sourceTree = "<group>"; };
+		C03F77E527620AB000634036 /* SpotStorageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotStorageRepository.swift; sourceTree = "<group>"; };
+		C03F77E727620AFE00634036 /* SpotStorageRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotStorageRepositoryImpl.swift; sourceTree = "<group>"; };
+		C048372D273F076B0087AAFC /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryImpl.swift; sourceTree = "<group>"; };
+		C0483731273F0F700087AAFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C04837362740429A0087AAFC /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
+		C05780BC27B692BD005CA36D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		C05780BE27B6B067005CA36D /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		C05780C027B6B074005CA36D /* CategoryRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepositoryImpl.swift; sourceTree = "<group>"; };
+		C05780C227B6C51B005CA36D /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
+		C05780C427B6C621005CA36D /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
+		C05780C627B6CC69005CA36D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		C05780CA27B8576F005CA36D /* CategoryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCase.swift; sourceTree = "<group>"; };
+		C05780CC27B857D5005CA36D /* CategoryUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryUseCaseImpl.swift; sourceTree = "<group>"; };
+		C05780CE27B91B2E005CA36D /* CategoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCard.swift; sourceTree = "<group>"; };
+		C05780D027BCAC17005CA36D /* CategoriesFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesFilterView.swift; sourceTree = "<group>"; };
+		C058DAFA275CE77A0068AF66 /* InputLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputLocationView.swift; sourceTree = "<group>"; };
+		C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		C05DD3652740C1CC0071C163 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		C05DD3672740CA140071C163 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		C05DD369274157700071C163 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		C05DD36B2741798C0071C163 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		C05DD36D27417E0C0071C163 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
+		C05DD36F274F2A860071C163 /* PartialSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartialSheet.swift; sourceTree = "<group>"; };
+		C05DD372274F74FB0071C163 /* SpotsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsView.swift; sourceTree = "<group>"; };
+		C05DD374274F86BA0071C163 /* SpotCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCard.swift; sourceTree = "<group>"; };
+		C05DD377274FBDE20071C163 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		C05DD379274FC3150071C163 /* CustomAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		C05DD37D274FC5860071C163 /* SpotsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsViewModel.swift; sourceTree = "<group>"; };
+		C05DD37F274FC65D0071C163 /* SpotRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRepository.swift; sourceTree = "<group>"; };
+		C05DD381274FC6BC0071C163 /* SpotRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotRepositoryImpl.swift; sourceTree = "<group>"; };
+		C05DD383274FD8FD0071C163 /* SpotUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUseCase.swift; sourceTree = "<group>"; };
+		C05DD385274FD9270071C163 /* SpotUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUseCaseImpl.swift; sourceTree = "<group>"; };
+		C05DD38727515EF50071C163 /* SpotsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsViewModelTests.swift; sourceTree = "<group>"; };
+		C05DD38A275173DF0071C163 /* SpotUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotUseCaseTests.swift; sourceTree = "<group>"; };
+		C07CCA76273D948700C32FE9 /* AuthUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCase.swift; sourceTree = "<group>"; };
+		C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUseCaseImpl.swift; sourceTree = "<group>"; };
+		C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
+		C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSpotView.swift; sourceTree = "<group>"; };
+		C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateMainImageView.swift; sourceTree = "<group>"; };
+		C0A19E0D27B1BCAC0065D39F /* GridImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImages.swift; sourceTree = "<group>"; };
+		C0A19E0F27B5197E0065D39F /* AddImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddImagesView.swift; sourceTree = "<group>"; };
+		C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCase.swift; sourceTree = "<group>"; };
+		C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUseCaseImpl.swift; sourceTree = "<group>"; };
+		C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewModelTests.swift; sourceTree = "<group>"; };
+		C0B4CFF62779FAF2008F1394 /* LocationUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationUseCaseTests.swift; sourceTree = "<group>"; };
+		C0B4CFF8277A2F3A008F1394 /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
+		C0B4CFFA277A2F80008F1394 /* SpotDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewModel.swift; sourceTree = "<group>"; };
+		C0B4CFFC277A35C4008F1394 /* LocationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationError.swift; sourceTree = "<group>"; };
+		C0B4CFFE277A35FA008F1394 /* QueryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryError.swift; sourceTree = "<group>"; };
+		C0B4D000277A3696008F1394 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		C0B4D0032787103D008F1394 /* CheckSpotDuplicationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckSpotDuplicationResponse.swift; sourceTree = "<group>"; };
+		C0B4D00827A3E8CA008F1394 /* SpotImageList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotImageList.swift; sourceTree = "<group>"; };
+		C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewModel.swift; sourceTree = "<group>"; };
+		C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImagesView.swift; sourceTree = "<group>"; };
+		C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSpotInfoView.swift; sourceTree = "<group>"; };
 		C0FE76CE27386D61000E4566 /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0FE76D127386D61000E4566 /* SpotsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsApp.swift; sourceTree = "<group>"; };
 		C0FE76D327386D61000E4566 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +189,7 @@
 		C0FE76E827386D63000E4566 /* SpotsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpotsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0FE76EC27386D63000E4566 /* SpotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsUITests.swift; sourceTree = "<group>"; };
 		C0FE76EE27386D63000E4566 /* SpotsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C0FE77102739144D000E4566 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +197,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0FE77012738CAE3000E4566 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
+				C0FE77052738CAE3000E4566 /* FirebaseFirestore in Frameworks */,
+				C0FE77072738CAE3000E4566 /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				C0FE77092738CAE3000E4566 /* FirebaseFunctions in Frameworks */,
+				C0FE770B2738CAE3000E4566 /* FirebaseStorage in Frameworks */,
+				C0FE770D2738CAE3000E4566 /* FirebaseStorageSwift-Beta in Frameworks */,
+				C0FE77032738CAE3000E4566 /* FirebaseAuth in Frameworks */,
+				C0FE76FF2738CAE3000E4566 /* FirebaseAnalytics in Frameworks */,
+				C003D3BB27391E16009C790F /* GoogleSignIn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +226,168 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C03F77E427620A8900634036 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C03F77E527620AB000634036 /* SpotStorageRepository.swift */,
+				C03F77E727620AFE00634036 /* SpotStorageRepositoryImpl.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		C04837352740427E0087AAFC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C04837362740429A0087AAFC /* AuthViewModelTests.swift */,
+				C05DD38727515EF50071C163 /* SpotsViewModelTests.swift */,
+				C0B4CFF42779F751008F1394 /* AddSpotViewModelTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C05DD371274F73770071C163 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD36F274F2A860071C163 /* PartialSheet.swift */,
+				C05780C627B6CC69005CA36D /* ColorExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		C05DD376274FBDCB0071C163 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD36B2741798C0071C163 /* MapView.swift */,
+				C05DD377274FBDE20071C163 /* CustomAnnotation.swift */,
+				C05DD379274FC3150071C163 /* CustomAnnotationView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		C05DD37B274FC40E0071C163 /* Spots */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD376274FBDCB0071C163 /* Map */,
+				C05DD372274F74FB0071C163 /* SpotsView.swift */,
+				C05DD374274F86BA0071C163 /* SpotCard.swift */,
+				C03CC9B62756622F00FB79FB /* SelectMainImageView.swift */,
+				C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */,
+				C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */,
+				C058DAFA275CE77A0068AF66 /* InputLocationView.swift */,
+				C0B4CFF8277A2F3A008F1394 /* SpotDetailView.swift */,
+				C0B4D00827A3E8CA008F1394 /* SpotImageList.swift */,
+				C0A19E0627AC41AF0065D39F /* UpdateSpotView.swift */,
+				C0A19E0A27B03D550065D39F /* UpdateMainImageView.swift */,
+				C0A19E0F27B5197E0065D39F /* AddImagesView.swift */,
+			);
+			path = Spots;
+			sourceTree = "<group>";
+		};
+		C05DD389275173CA0071C163 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD38A275173DF0071C163 /* SpotUseCaseTests.swift */,
+				C0B4CFF62779FAF2008F1394 /* LocationUseCaseTests.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		C07CCA6C273BF43C00C32FE9 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C003D3C3273BA702009C790F /* AuthViewModel.swift */,
+				C05DD369274157700071C163 /* ProfileViewModel.swift */,
+				C05DD37D274FC5860071C163 /* SpotsViewModel.swift */,
+				C00AD64B2756A8B5006B575A /* ImagePickerViewModel.swift */,
+				C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */,
+				C058DAFC275CF0C20068AF66 /* LocationViewModel.swift */,
+				C0B4CFFA277A2F80008F1394 /* SpotDetailViewModel.swift */,
+				C05780C427B6C621005CA36D /* CategoriesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C07CCA6D273BF45200C32FE9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD37B274FC40E0071C163 /* Spots */,
+				C0FE76D327386D61000E4566 /* ContentView.swift */,
+				C0FE77102739144D000E4566 /* LoginView.swift */,
+				C05DD3652740C1CC0071C163 /* ProfileView.swift */,
+				C05780C227B6C51B005CA36D /* CategoriesList.swift */,
+				C05780CE27B91B2E005CA36D /* CategoryCard.swift */,
+				C05780D027BCAC17005CA36D /* CategoriesFilterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C07CCA71273D88A800C32FE9 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				C03F77E427620A8900634036 /* Storage */,
+				C048372D273F076B0087AAFC /* UserRepository.swift */,
+				C048372F273F0E710087AAFC /* UserRepositoryImpl.swift */,
+				C05DD37F274FC65D0071C163 /* SpotRepository.swift */,
+				C05DD381274FC6BC0071C163 /* SpotRepositoryImpl.swift */,
+				C05780BE27B6B067005CA36D /* CategoryRepository.swift */,
+				C05780C027B6B074005CA36D /* CategoryRepositoryImpl.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		C07CCA74273D93CC00C32FE9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C0B4D0022787100D008F1394 /* Spot */,
+				C07CCA7A273DAE3D00C32FE9 /* AuthError.swift */,
+				C0483731273F0F700087AAFC /* User.swift */,
+				C05DD3672740CA140071C163 /* Account.swift */,
+				C00AD64D2756AA41006B575A /* AuthStatus.swift */,
+				C00AD64F2756AA7E006B575A /* PhotoAuthStatus.swift */,
+				C00AD6512756BAD0006B575A /* Asset.swift */,
+				C0B4CFFC277A35C4008F1394 /* LocationError.swift */,
+				C0B4CFFE277A35FA008F1394 /* QueryError.swift */,
+				C0B4D000277A3696008F1394 /* Photo.swift */,
+				C05780BC27B692BD005CA36D /* Category.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C07CCA75273D941300C32FE9 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				C07CCA76273D948700C32FE9 /* AuthUseCase.swift */,
+				C07CCA78273D9FEE00C32FE9 /* AuthUseCaseImpl.swift */,
+				C05DD383274FD8FD0071C163 /* SpotUseCase.swift */,
+				C05DD385274FD9270071C163 /* SpotUseCaseImpl.swift */,
+				C03F77E02760FF5900634036 /* LocationUseCase.swift */,
+				C03F77E22760FFE600634036 /* LocationUseCaseImpl.swift */,
+				C0B4CFEE276A3E2C008F1394 /* ImageUseCase.swift */,
+				C0B4CFF0276A3E82008F1394 /* ImageUseCaseImpl.swift */,
+				C05780CA27B8576F005CA36D /* CategoryUseCase.swift */,
+				C05780CC27B857D5005CA36D /* CategoryUseCaseImpl.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		C0A19E0C27B1B9750065D39F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C00AD6532756C23A006B575A /* ThumbnailView.swift */,
+				C0A19E0D27B1BCAC0065D39F /* GridImages.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C0B4D0022787100D008F1394 /* Spot */ = {
+			isa = PBXGroup;
+			children = (
+				C05DD36D27417E0C0071C163 /* Spot.swift */,
+				C0B4D0032787103D008F1394 /* CheckSpotDuplicationResponse.swift */,
+			);
+			path = Spot;
+			sourceTree = "<group>";
+		};
 		C0FE76C527386D61000E4566 = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +411,19 @@
 		C0FE76D027386D61000E4566 /* Spots */ = {
 			isa = PBXGroup;
 			children = (
+				C05DD371274F73770071C163 /* Extension */,
+				C07CCA71273D88A800C32FE9 /* Repository */,
+				C07CCA75273D941300C32FE9 /* UseCase */,
+				C07CCA74273D93CC00C32FE9 /* Model */,
+				C0A19E0C27B1B9750065D39F /* Components */,
+				C07CCA6D273BF45200C32FE9 /* View */,
+				C07CCA6C273BF43C00C32FE9 /* ViewModel */,
 				C0FE76D127386D61000E4566 /* SpotsApp.swift */,
-				C0FE76D327386D61000E4566 /* ContentView.swift */,
 				C0FE76D527386D63000E4566 /* Assets.xcassets */,
+				C003D3C9273BE83A009C790F /* ColorSet.xcassets */,
 				C0FE76D727386D63000E4566 /* Preview Content */,
+				C003D3BC27391E36009C790F /* Info.plist */,
+				C003D3C7273BC8E8009C790F /* GoogleService-Info.plist */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -113,6 +439,8 @@
 		C0FE76E127386D63000E4566 /* SpotsTests */ = {
 			isa = PBXGroup;
 			children = (
+				C05DD389275173CA0071C163 /* UseCase */,
+				C04837352740427E0087AAFC /* ViewModel */,
 				C0FE76E227386D63000E4566 /* SpotsTests.swift */,
 			);
 			path = SpotsTests;
@@ -143,6 +471,17 @@
 			dependencies = (
 			);
 			name = Spots;
+			packageProductDependencies = (
+				C0FE76FE2738CAE3000E4566 /* FirebaseAnalytics */,
+				C0FE77002738CAE3000E4566 /* FirebaseAnalyticsSwift-Beta */,
+				C0FE77022738CAE3000E4566 /* FirebaseAuth */,
+				C0FE77042738CAE3000E4566 /* FirebaseFirestore */,
+				C0FE77062738CAE3000E4566 /* FirebaseFirestoreSwift-Beta */,
+				C0FE77082738CAE3000E4566 /* FirebaseFunctions */,
+				C0FE770A2738CAE3000E4566 /* FirebaseStorage */,
+				C0FE770C2738CAE3000E4566 /* FirebaseStorageSwift-Beta */,
+				C003D3BA27391E16009C790F /* GoogleSignIn */,
+			);
 			productName = Spots;
 			productReference = C0FE76CE27386D61000E4566 /* Spots.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +554,10 @@
 				Base,
 			);
 			mainGroup = C0FE76C527386D61000E4566;
+			packageReferences = (
+				C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C003D3B927391E16009C790F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = C0FE76CF27386D61000E4566 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -231,8 +574,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C003D3CA273BE83A009C790F /* ColorSet.xcassets in Resources */,
 				C0FE76D927386D63000E4566 /* Preview Assets.xcassets in Resources */,
 				C0FE76D627386D63000E4566 /* Assets.xcassets in Resources */,
+				C003D3C8273BC8E8009C790F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +602,69 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0B4D001277A3696008F1394 /* Photo.swift in Sources */,
+				C05DD375274F86BA0071C163 /* SpotCard.swift in Sources */,
+				C03F77E627620AB000634036 /* SpotStorageRepository.swift in Sources */,
+				C05780C327B6C51B005CA36D /* CategoriesList.swift in Sources */,
+				C003D3C4273BA702009C790F /* AuthViewModel.swift in Sources */,
+				C058DAFD275CF0C20068AF66 /* LocationViewModel.swift in Sources */,
+				C05DD3682740CA140071C163 /* Account.swift in Sources */,
+				C05780CB27B8576F005CA36D /* CategoryUseCase.swift in Sources */,
+				C05DD382274FC6BC0071C163 /* SpotRepositoryImpl.swift in Sources */,
+				C00AD64E2756AA41006B575A /* AuthStatus.swift in Sources */,
+				C03CC9B72756622F00FB79FB /* SelectMainImageView.swift in Sources */,
+				C07CCA77273D948700C32FE9 /* AuthUseCase.swift in Sources */,
+				C05DD37E274FC5860071C163 /* SpotsViewModel.swift in Sources */,
+				C00AD6522756BAD0006B575A /* Asset.swift in Sources */,
+				C0D9C06E275A49980052A5C0 /* InputSpotInfoView.swift in Sources */,
+				C058DAFB275CE77A0068AF66 /* InputLocationView.swift in Sources */,
+				C03F77E827620AFE00634036 /* SpotStorageRepositoryImpl.swift in Sources */,
+				C0A19E0E27B1BCAC0065D39F /* GridImages.swift in Sources */,
+				C05780C527B6C621005CA36D /* CategoriesViewModel.swift in Sources */,
+				C03F77E12760FF5900634036 /* LocationUseCase.swift in Sources */,
+				C00AD6502756AA7E006B575A /* PhotoAuthStatus.swift in Sources */,
+				C048372E273F076B0087AAFC /* UserRepository.swift in Sources */,
 				C0FE76D427386D61000E4566 /* ContentView.swift in Sources */,
+				C0D9C06A275773800052A5C0 /* AddSpotViewModel.swift in Sources */,
+				C05780BD27B692BD005CA36D /* Category.swift in Sources */,
+				C05780C127B6B074005CA36D /* CategoryRepositoryImpl.swift in Sources */,
+				C0B4CFFD277A35C4008F1394 /* LocationError.swift in Sources */,
+				C0B4CFF9277A2F3A008F1394 /* SpotDetailView.swift in Sources */,
+				C0B4CFFF277A35FB008F1394 /* QueryError.swift in Sources */,
+				C05780BF27B6B067005CA36D /* CategoryRepository.swift in Sources */,
+				C05DD3662740C1CC0071C163 /* ProfileView.swift in Sources */,
+				C0B4CFFB277A2F80008F1394 /* SpotDetailViewModel.swift in Sources */,
+				C00AD6542756C23A006B575A /* ThumbnailView.swift in Sources */,
+				C05DD378274FBDE20071C163 /* CustomAnnotation.swift in Sources */,
+				C05DD370274F2A860071C163 /* PartialSheet.swift in Sources */,
+				C0A19E0727AC41AF0065D39F /* UpdateSpotView.swift in Sources */,
+				C05780CF27B91B2E005CA36D /* CategoryCard.swift in Sources */,
+				C05DD36A274157700071C163 /* ProfileViewModel.swift in Sources */,
+				C05DD36C2741798C0071C163 /* MapView.swift in Sources */,
+				C00AD64C2756A8B5006B575A /* ImagePickerViewModel.swift in Sources */,
 				C0FE76D227386D61000E4566 /* SpotsApp.swift in Sources */,
+				C05780C727B6CC69005CA36D /* ColorExtension.swift in Sources */,
+				C05DD373274F74FB0071C163 /* SpotsView.swift in Sources */,
+				C05DD386274FD9270071C163 /* SpotUseCaseImpl.swift in Sources */,
+				C07CCA7B273DAE3D00C32FE9 /* AuthError.swift in Sources */,
+				C0483730273F0E710087AAFC /* UserRepositoryImpl.swift in Sources */,
+				C03F77E32760FFE600634036 /* LocationUseCaseImpl.swift in Sources */,
+				C0A19E0B27B03D550065D39F /* UpdateMainImageView.swift in Sources */,
+				C0B4D00927A3E8CA008F1394 /* SpotImageList.swift in Sources */,
+				C05DD380274FC65D0071C163 /* SpotRepository.swift in Sources */,
+				C0A19E1027B5197E0065D39F /* AddImagesView.swift in Sources */,
+				C05DD384274FD8FD0071C163 /* SpotUseCase.swift in Sources */,
+				C05DD36E27417E0C0071C163 /* Spot.swift in Sources */,
+				C0B4D0042787103D008F1394 /* CheckSpotDuplicationResponse.swift in Sources */,
+				C05780CD27B857D5005CA36D /* CategoryUseCaseImpl.swift in Sources */,
+				C07CCA79273D9FEE00C32FE9 /* AuthUseCaseImpl.swift in Sources */,
+				C0FE77112739144D000E4566 /* LoginView.swift in Sources */,
+				C0B4CFF1276A3E82008F1394 /* ImageUseCaseImpl.swift in Sources */,
+				C05DD37A274FC3150071C163 /* CustomAnnotationView.swift in Sources */,
+				C05780D127BCAC17005CA36D /* CategoriesFilterView.swift in Sources */,
+				C0B4CFEF276A3E2C008F1394 /* ImageUseCase.swift in Sources */,
+				C0D9C06C275776FE0052A5C0 /* SelectImagesView.swift in Sources */,
+				C0483732273F0F700087AAFC /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +672,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C05DD38827515EF50071C163 /* SpotsViewModelTests.swift in Sources */,
+				C04837372740429A0087AAFC /* AuthViewModelTests.swift in Sources */,
 				C0FE76E327386D63000E4566 /* SpotsTests.swift in Sources */,
+				C0B4CFF52779F751008F1394 /* AddSpotViewModelTests.swift in Sources */,
+				C0B4CFF72779FAF2008F1394 /* LocationUseCaseTests.swift in Sources */,
+				C05DD38B275173DF0071C163 /* SpotUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +741,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = G4WY3C4456;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -391,6 +803,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = G4WY3C4456;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -416,11 +829,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spots/Preview Content\"";
+				DEVELOPMENT_TEAM = G4WY3C4456;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Spots/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -431,8 +847,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Spots;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = com.d.Spots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -444,11 +862,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Spots/Preview Content\"";
+				DEVELOPMENT_TEAM = G4WY3C4456;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Spots/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -459,8 +880,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Spots;
+				"OTHER_LDFLAGS[arch=*]" = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.d.Spots;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -599,6 +1022,73 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C003D3B927391E16009C790F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+		C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C003D3BA27391E16009C790F /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C003D3B927391E16009C790F /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		C0FE76FE2738CAE3000E4566 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		C0FE77002738CAE3000E4566 /* FirebaseAnalyticsSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
+		};
+		C0FE77022738CAE3000E4566 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		C0FE77042738CAE3000E4566 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		C0FE77062738CAE3000E4566 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
+		};
+		C0FE77082738CAE3000E4566 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		C0FE770A2738CAE3000E4566 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		C0FE770C2738CAE3000E4566 /* FirebaseStorageSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0FE76FD2738CAE3000E4566 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageSwift-Beta";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0FE76C627386D61000E4566 /* Project object */;
 }

@@ -1,11 +1,11 @@
 //
-//  Created on 2021/11/08
+//  Created on 2021/12/27
 //
 
 import XCTest
 @testable import Spots
 
-class SpotsTests: XCTestCase {
+class LocationUseCaseTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -20,11 +20,10 @@ class SpotsTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testGeocode() async throws {
+        let locationUseCase = LocationUseCaseImpl()
+        let coordinate = try await locationUseCase.geocode(address: "TOKYO")
+        XCTAssertNotNil(coordinate)
     }
 
 }
