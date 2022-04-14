@@ -40,11 +40,20 @@ final class CustomAnnotationView: MKAnnotationView {
             spots.sort {
                 return  $0.createdAt.timeIntervalSince1970 > $1.createdAt.timeIntervalSince1970
             }
+            
+            var categoryColor = ""
+            if let category = spots[0].categories?.first {
+                categoryColor = getCategoryColor(categoryId: category)
+            }
 
-            vc = UIHostingController(rootView: CustomAnnotation(count: clusterAnnotation.memberAnnotations.count, imageUrl: spots[0].imageUrl ?? ""))
+            vc = UIHostingController(rootView: CustomAnnotation(count: clusterAnnotation.memberAnnotations.count, imageUrl: spots[0].imageUrl ?? "", categoryColor: categoryColor))
         } else {
             if let customAnnotation = annotation as? CustomPointAnnotation {
-                vc = UIHostingController(rootView: CustomAnnotation(count: 0, imageUrl: customAnnotation.spot.imageUrl ?? ""))
+                var categoryColor = ""
+                if let category = customAnnotation.spot.categories?[0] {
+                    categoryColor = getCategoryColor(categoryId: category)
+                }
+                vc = UIHostingController(rootView: CustomAnnotation(count: 0, imageUrl: customAnnotation.spot.imageUrl ?? "", categoryColor: categoryColor))
             } else {
                 return
             }
@@ -54,5 +63,17 @@ final class CustomAnnotationView: MKAnnotationView {
         vc.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         subview = vc.view
         addSubview(vc.view)
+    }
+    
+    func getCategoryColor(categoryId: String) -> String {
+        var categoryColor = ""
+        let filteredCategories = Account.shared.categories.filter { c in
+            return c.id == categoryId
+        }
+        
+        if !filteredCategories.isEmpty {
+            categoryColor = filteredCategories[0].color
+        }
+        return categoryColor
     }
 }
