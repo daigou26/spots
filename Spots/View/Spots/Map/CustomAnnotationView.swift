@@ -50,7 +50,7 @@ final class CustomAnnotationView: MKAnnotationView {
         } else {
             if let customAnnotation = annotation as? CustomPointAnnotation {
                 var categoryColor = ""
-                if let category = customAnnotation.spot.categories?[0] {
+                if let category = customAnnotation.spot.categories?.first {
                     categoryColor = getCategoryColor(categoryId: category)
                 }
                 vc = UIHostingController(rootView: CustomAnnotation(count: 0, imageUrl: customAnnotation.spot.imageUrl ?? "", categoryColor: categoryColor))

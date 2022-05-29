@@ -11,81 +11,110 @@ struct SpotsView: View {
     @State var showCategoriesFilter = false
     @State var spotId: String = ""
     
+    func filters() -> some View {
+        let refreshButton = Button {
+            viewModel.refreshSpots()
+        } label: {
+            Image(systemName: "arrow.clockwise")
+                .foregroundColor(.textGray2)
+                .font(.system(size: 18, weight: .bold))
+                .padding(.all, 10)
+        }.buttonStyle(RefreshButtonStyle())
+        
+        let favoriteButton = Button {
+            if viewModel.favoriteFilter {
+                viewModel.favoriteFilter = false
+                viewModel.updateSpots()
+            } else {
+                viewModel.favoriteFilter = true
+                viewModel.updateSpots()
+            }
+        } label: {
+            Text("お気に入り").padding(.all, 10)
+        }
+            .foregroundColor(viewModel.favoriteFilter ? .white : .textGray2)
+            .background(viewModel.favoriteFilter ? Color.main : Color.white)
+            .cornerRadius(20)
+            .padding(.top, 20)
+        
+        let starButton = Button {
+            if viewModel.starFilter {
+                viewModel.starFilter = false
+                viewModel.updateSpots()
+            } else {
+                viewModel.starFilter = true
+                viewModel.updateSpots()
+            }
+        } label: {
+            Text("行きたい").padding(.all, 10)
+        }
+            .foregroundColor(viewModel.starFilter ? .white : .textGray2)
+            .background(viewModel.starFilter ? Color.main : Color.white)
+            .cornerRadius(20)
+            .padding(.top, 20)
+        
+        return ScrollView(.horizontal) {
+            HStack {
+                refreshButton
+                favoriteButton
+                starButton
+                
+                if viewModel.categories.count > 0 {
+                    Button {
+                        showCategoriesFilter = true
+                    } label: {
+                        if viewModel.categoriesFilter.count > 0 {
+                            Text(viewModel.categoriesFilter.count == 1 ? viewModel.categoriesFilter[0].name : "カテゴリー： \(viewModel.categoriesFilter.count)").padding(.all, 10)
+                        } else {
+                            Text("カテゴリー").padding(.all, 10)
+                        }
+                    }
+                    .foregroundColor(viewModel.categoriesFilter.count > 0 ? .white : .textGray2)
+                    .background(viewModel.categoriesFilter.count > 0 ? Color.main : Color.white)
+                    .cornerRadius(20)
+                    .padding(.top, 20)
+                }
+            }
+        }.padding(.horizontal, 20)
+    }
+    
+    func spotSheet() -> some View {
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVStack(alignment: .leading) {
+                Text("スポット\(viewModel.selectedAnnotations.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
+                ForEach(viewModel.getSelectedSpots(), id: \.self) { spot in
+                    if let spotId = spot.id {
+                        SpotCard(spot: spot).padding(.bottom, 28).onTapGesture {
+                            self.showSpotListSheet = false
+                            self.spotId = spotId
+                            self.viewModel.goSpotDetailView = true
+                        }
+                    }
+                }
+            }.frame(maxWidth: .infinity, alignment: .leading)
+        }.frame(maxWidth: .infinity).padding(EdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20))
+    }
+    
+    func addSpotButton() -> some View {
+        HStack {
+            Spacer()
+            Button(action: {
+                viewModel.showAddSpotSheet = true
+            }) {
+                Image(systemName: "mappin.and.ellipse")
+            }.buttonStyle(AddButtonStyle()).sheet(isPresented: $viewModel.showAddSpotSheet) {
+                SelectMainImageView().environmentObject(AddSpotViewModel()).environmentObject(ImagePickerViewModel())
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .top) {
                 VStack {
-                    ScrollView(.horizontal) {
-                        HStack {
-                            Button {
-                                viewModel.refreshSpots()
-                            } label: {
-                                Image(systemName: "arrow.clockwise")
-                                    .foregroundColor(.textGray2)
-                                    .font(.system(size: 18, weight: .bold))
-                                    .padding(.all, 10)
-                            }.buttonStyle(RefreshButtonStyle())
-                            
-                            Button {
-                                if viewModel.favoriteFilter {
-                                    viewModel.favoriteFilter = false
-                                    viewModel.updateSpots()
-                                } else {
-                                    viewModel.favoriteFilter = true
-                                    viewModel.updateSpots()
-                                }
-                            } label: {
-                                Text("お気に入り").padding(.all, 10)
-                            }
-                            .foregroundColor(viewModel.favoriteFilter ? .white : .textGray2)
-                            .background(viewModel.favoriteFilter ? Color.main : Color.white)
-                            .cornerRadius(20)
-                            .padding(.top, 20)
-                            
-                            Button {
-                                if viewModel.starFilter {
-                                    viewModel.starFilter = false
-                                    viewModel.updateSpots()
-                                } else {
-                                    viewModel.starFilter = true
-                                    viewModel.updateSpots()
-                                }
-                            } label: {
-                                Text("行きたい").padding(.all, 10)
-                            }
-                            .foregroundColor(viewModel.starFilter ? .white : .textGray2)
-                            .background(viewModel.starFilter ? Color.main : Color.white)
-                            .cornerRadius(20)
-                            .padding(.top, 20)
-                            
-                            if viewModel.categories.count > 0 {
-                                Button {
-                                    showCategoriesFilter = true
-                                } label: {
-                                    if viewModel.categoriesFilter.count > 0 {
-                                        Text(viewModel.categoriesFilter.count == 1 ? viewModel.categoriesFilter[0].name : "カテゴリー： \(viewModel.categoriesFilter.count)").padding(.all, 10)
-                                    } else {
-                                        Text("カテゴリー").padding(.all, 10)
-                                    }
-                                }
-                                .foregroundColor(viewModel.categoriesFilter.count > 0 ? .white : .textGray2)
-                                .background(viewModel.categoriesFilter.count > 0 ? Color.main : Color.white)
-                                .cornerRadius(20)
-                                .padding(.top, 20)
-                            }
-                        }
-                    }.padding(.horizontal, 20)
+                    filters()
                     Spacer()
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            viewModel.showAddSpotSheet = true
-                        }) {
-                            Image(systemName: "mappin.and.ellipse")
-                        }.buttonStyle(AddButtonStyle()).sheet(isPresented: $viewModel.showAddSpotSheet) {
-                            SelectMainImageView().environmentObject(AddSpotViewModel()).environmentObject(ImagePickerViewModel())
-                        }
-                    }
+                    addSpotButton()
                 }.zIndex(1)
                 
                 NavigationLink(destination: SpotDetailView(id: spotId).environmentObject(SpotDetailViewModel()), isActive: $viewModel.goSpotDetailView) {
@@ -96,20 +125,7 @@ struct SpotsView: View {
             }
             .navigationBarHidden(true)
             .partialSheet(isPresented: $showSpotListSheet, sheet: {
-                ScrollView(.vertical, showsIndicators: false) {
-                    VStack(alignment: .leading) {
-                        Text("スポット\(viewModel.selectedAnnotations.count)件").font(.system(size: 20, weight: .bold)).padding(.bottom, 30)
-                        ForEach(viewModel.getSelectedSpots(), id: \.self) { spot in
-                            if let spotId = spot.id {
-                                SpotCard(spot: spot).padding(.bottom, 28).onTapGesture {
-                                    self.showSpotListSheet = false
-                                    self.spotId = spotId
-                                    self.viewModel.goSpotDetailView = true
-                                }
-                            }
-                        }
-                    }.frame(maxWidth: .infinity, alignment: .leading)
-                }.frame(maxWidth: .infinity).padding(EdgeInsets(top: 30, leading: 20, bottom: 30, trailing: 20))
+                spotSheet()
             }, onEnd: {}).onAppear {
                 // To query only one time
                 if !viewModel.queried {

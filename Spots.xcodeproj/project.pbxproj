@@ -179,7 +179,7 @@
 		C0D9C069275773800052A5C0 /* AddSpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpotViewModel.swift; sourceTree = "<group>"; };
 		C0D9C06B275776FE0052A5C0 /* SelectImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectImagesView.swift; sourceTree = "<group>"; };
 		C0D9C06D275A49970052A5C0 /* InputSpotInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputSpotInfoView.swift; sourceTree = "<group>"; };
-		C0FE76CE27386D61000E4566 /* Spots.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spots.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C0FE76CE27386D61000E4566 /* Spots DEV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spots DEV.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0FE76D127386D61000E4566 /* SpotsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsApp.swift; sourceTree = "<group>"; };
 		C0FE76D327386D61000E4566 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C0FE76D527386D63000E4566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -401,7 +401,7 @@
 		C0FE76CF27386D61000E4566 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C0FE76CE27386D61000E4566 /* Spots.app */,
+				C0FE76CE27386D61000E4566 /* Spots DEV.app */,
 				C0FE76DE27386D63000E4566 /* SpotsTests.xctest */,
 				C0FE76E827386D63000E4566 /* SpotsUITests.xctest */,
 			);
@@ -483,7 +483,7 @@
 				C003D3BA27391E16009C790F /* GoogleSignIn */,
 			);
 			productName = Spots;
-			productReference = C0FE76CE27386D61000E4566 /* Spots.app */;
+			productReference = C0FE76CE27386D61000E4566 /* Spots DEV.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C0FE76DD27386D63000E4566 /* SpotsTests */ = {
@@ -706,7 +706,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		C0FE76F027386D63000E4566 /* Debug */ = {
+		C0FE76F027386D63000E4566 /* Develop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -766,9 +766,9 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = Develop;
 		};
-		C0FE76F127386D63000E4566 /* Release */ = {
+		C0FE76F127386D63000E4566 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -822,12 +822,13 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Production;
 		};
-		C0FE76F327386D63000E4566 /* Debug */ = {
+		C0FE76F327386D63000E4566 /* Develop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "";
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -848,18 +849,20 @@
 				);
 				MARKETING_VERSION = 1.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.d.Spots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.d.Spots.develop;
+				PRODUCT_MODULE_NAME = Spots;
+				PRODUCT_NAME = "$(TARGET_NAME) DEV";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Develop;
 		};
-		C0FE76F427386D63000E4566 /* Release */ = {
+		C0FE76F427386D63000E4566 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -881,16 +884,16 @@
 				);
 				MARKETING_VERSION = 1.0;
 				"OTHER_LDFLAGS[arch=*]" = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.d.Spots;
+				PRODUCT_BUNDLE_IDENTIFIER = com.d.Spots.production;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Release;
+			name = Production;
 		};
-		C0FE76F627386D63000E4566 /* Debug */ = {
+		C0FE76F627386D63000E4566 /* Develop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -910,11 +913,11 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spots.app/Spots";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spots DEV.app/Spots DEV";
 			};
-			name = Debug;
+			name = Develop;
 		};
-		C0FE76F727386D63000E4566 /* Release */ = {
+		C0FE76F727386D63000E4566 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -934,11 +937,11 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spots.app/Spots";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Spots DEV.app/Spots DEV";
 			};
-			name = Release;
+			name = Production;
 		};
-		C0FE76F927386D63000E4566 /* Debug */ = {
+		C0FE76F927386D63000E4566 /* Develop */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -958,9 +961,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Spots;
 			};
-			name = Debug;
+			name = Develop;
 		};
-		C0FE76FA27386D63000E4566 /* Release */ = {
+		C0FE76FA27386D63000E4566 /* Production */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -980,7 +983,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Spots;
 			};
-			name = Release;
+			name = Production;
 		};
 /* End XCBuildConfiguration section */
 
@@ -988,38 +991,38 @@
 		C0FE76C927386D61000E4566 /* Build configuration list for PBXProject "Spots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0FE76F027386D63000E4566 /* Debug */,
-				C0FE76F127386D63000E4566 /* Release */,
+				C0FE76F027386D63000E4566 /* Develop */,
+				C0FE76F127386D63000E4566 /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Production;
 		};
 		C0FE76F227386D63000E4566 /* Build configuration list for PBXNativeTarget "Spots" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0FE76F327386D63000E4566 /* Debug */,
-				C0FE76F427386D63000E4566 /* Release */,
+				C0FE76F327386D63000E4566 /* Develop */,
+				C0FE76F427386D63000E4566 /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Production;
 		};
 		C0FE76F527386D63000E4566 /* Build configuration list for PBXNativeTarget "SpotsTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0FE76F627386D63000E4566 /* Debug */,
-				C0FE76F727386D63000E4566 /* Release */,
+				C0FE76F627386D63000E4566 /* Develop */,
+				C0FE76F727386D63000E4566 /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Production;
 		};
 		C0FE76F827386D63000E4566 /* Build configuration list for PBXNativeTarget "SpotsUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C0FE76F927386D63000E4566 /* Debug */,
-				C0FE76FA27386D63000E4566 /* Release */,
+				C0FE76F927386D63000E4566 /* Develop */,
+				C0FE76FA27386D63000E4566 /* Production */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Production;
 		};
 /* End XCConfigurationList section */
 
